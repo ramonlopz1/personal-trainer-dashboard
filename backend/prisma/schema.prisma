@@ -24,4 +24,5 @@ model raffledCodes {
   raffleCode String @unique
   owner      User   @relation(fields: [ownerId], references: [id])
   ownerId    String @db.ObjectId
+  date DateTime
 }
