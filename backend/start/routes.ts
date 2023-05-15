@@ -36,3 +36,5 @@ Route.get('/raffledcodes/:id', 'RaffledCodesController.showMany')
 Route.get('/raffledcode/:id', 'RaffledCodesController.show')
 Route.put('/raffledcode/:id', 'RaffledCodesController.update')
 Route.delete('/raffledcode/:id', 'RaffledCodesController.destroy')
+
+Route.get('/generateRaffleCode', 'GenerateRaffleCodesController.generate')
