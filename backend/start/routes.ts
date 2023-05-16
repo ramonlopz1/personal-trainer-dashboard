@@ -24,6 +24,8 @@ Route.get('/', async () => {
   return { hello: 'world' }
 })
 
+Route.post('/auth', 'SessionsController.login')
+
 Route.post('/user', 'UsersController.store')
 Route.get('/users', 'UsersController.index')
 Route.get('/user/raffledcodes/:id', 'RaffledCodesController.showById')

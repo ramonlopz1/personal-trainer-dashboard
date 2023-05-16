@@ -11,22 +11,31 @@ datasource db {
 }
 
 model Users {
-  id           String         @id @default(auto()) @map("_id") @db.ObjectId
-  name         String
-  email        String         @unique
-  password     String
-  phone        String         @unique
-  role         Role           @default(USER)
-  raffledCodes RaffledCodes[]
-  createdAt    DateTime       @default(now())
+  id              String         @id @default(auto()) @map("_id") @db.ObjectId
+  name            String
+  email           String         @unique
+  password        String
+  rememberMeToken String?
+  phone           String         @unique
+  role            Role           @default(USER)
+  raffledCodes    RaffledCodes[]
+  createdAt       DateTime       @default(now())
+  ApiTokens       ApiTokens[]
 }
 
 model RaffledCodes {
   id         String   @id @default(auto()) @map("_id") @db.ObjectId
   raffleCode String   @unique
-  owner      Users     @relation(fields: [ownerId], references: [id])
+  owner      Users    @relation(fields: [ownerId], references: [id])
   ownerId    String   @db.ObjectId
   createdAt  DateTime @default(now())
+}
+
+model ApiTokens {
+  id      String @id @default(auto()) @map("_id") @db.ObjectId
+  token   String
+  owner   Users  @relation(fields: [ownerId], references: [id])
+  ownerId String @db.ObjectId
 }
 
 enum Role {
