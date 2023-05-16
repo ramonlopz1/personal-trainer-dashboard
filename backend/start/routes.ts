@@ -26,13 +26,14 @@ Route.get('/', async () => {
 
 Route.post('/user', 'UsersController.store')
 Route.get('/users', 'UsersController.index')
+Route.get('/user/raffledcodes/:id', 'RaffledCodesController.showById')
 Route.get('/user/:id', 'UsersController.show')
 Route.put('/user/:id', 'UsersController.update')
 Route.delete('/user/:id', 'UsersController.destroy')
 
 Route.post('/raffledcode', 'RaffledCodesController.store')
 Route.get('/raffledcodes', 'RaffledCodesController.index')
-Route.get('/raffledcodes/:id', 'RaffledCodesController.showMany')
+
 Route.get('/raffledcode/:id', 'RaffledCodesController.show')
 Route.put('/raffledcode/:id', 'RaffledCodesController.update')
 Route.delete('/raffledcode/:id', 'RaffledCodesController.destroy')

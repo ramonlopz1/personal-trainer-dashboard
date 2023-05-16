@@ -34,7 +34,9 @@ export default class UsersController {
     const { id } = params;
 
     const get = await prisma.user.findUnique({
+      // retorna o usuário e o dados relacionados da tabela raffledCodes
       where: { id },
+      include: { raffledCodes: true }
     });
     return get;
   }
