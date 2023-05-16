@@ -1,0 +1,42 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model Users {
+  id              String         @id @default(auto()) @map("_id") @db.ObjectId
+  name            String
+  email           String         @unique
+  password        String
+  rememberMeToken String?
+  phone           String         @unique
+  role            Role           @default(USER)
+  raffledCodes    RaffledCodes[]
+  createdAt       DateTime       @default(now())
+}
+
+model RaffledCodes {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  raffleCode String   @unique
+  owner      Users    @relation(fields: [ownerId], references: [id])
+  ownerId    String   @db.ObjectId
+  createdAt  DateTime @default(now())
+}
+
+model GeneratedCodes {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  code String
+  createdAt  DateTime @default(now())
+}
+
+enum Role {
+  USER
+  ADMIN
+}
