@@ -14,7 +14,7 @@ export default class RaffledCodesController {
     });
 
     if (Object.keys(checkIfExists || {}).length > 0)
-      throw new BadRequestException("Código já cadastrado.", 404);
+      throw new BadRequestException("Código já cadastrado.", 401);
 
     const item = await prisma.raffledCodes.create({
       data: request.only(["raffleCode", "ownerId"]),
@@ -43,18 +43,18 @@ export default class RaffledCodesController {
       where: { ownerId: id },
     });
 
-    if(!Object.keys(raffledCodes || {}).length) throw new BadRequestException("Códigos não encontrado.", 500)
+    if(!Object.keys(raffledCodes || {}).length) throw new BadRequestException("Códigos não encontrados.", 500)
 
     response.status(200).json({ raffledCodes })
   }
 
-  public async index({ request, params }: HttpContextContract) {
-    const { id } = params;
+  // public async index({ request, params }: HttpContextContract) {
+  //   const { id } = params;
 
-    const get = await prisma.raffledCodes.findMany();
+  //   const get = await prisma.raffledCodes.findMany();
 
-    return get;
-  }
+  //   return get;
+  // }
 
   // public async update({ request, params }: HttpContextContract) {
   //   const { id } = params;
@@ -67,13 +67,13 @@ export default class RaffledCodesController {
   //   return get;
   // }
 
-  public async destroy({ request, params }: HttpContextContract) {
-    const { id } = params;
+  // public async destroy({ request, params }: HttpContextContract) {
+  //   const { id } = params;
 
-    const get = await prisma.raffledCodes.delete({
-      where: { id },
-    });
+  //   const get = await prisma.raffledCodes.delete({
+  //     where: { id },
+  //   });
 
-    return get;
-  }
+  //   return get;
+  // }
 }

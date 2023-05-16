@@ -10,7 +10,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
+model Users {
   id           String         @id @default(auto()) @map("_id") @db.ObjectId
   name         String
   email        String         @unique
@@ -24,7 +24,7 @@ model User {
 model RaffledCodes {
   id         String   @id @default(auto()) @map("_id") @db.ObjectId
   raffleCode String   @unique
-  owner      User     @relation(fields: [ownerId], references: [id])
+  owner      Users     @relation(fields: [ownerId], references: [id])
   ownerId    String   @db.ObjectId
   createdAt  DateTime @default(now())
 }
