@@ -32,7 +32,7 @@ model RaffledCodes {
 
 model GeneratedCodes {
   id String @id @default(auto()) @map("_id") @db.ObjectId
-  code String
+  code String @unique
   createdAt  DateTime @default(now())
 }
 
