@@ -1,9 +1,8 @@
-import { signIn, useSession } from "next-auth/react";
+import { signIn } from "next-auth/react";
 import Router from "next/router";
 import { useState } from "react";
 
 export default function useLogin() {
-  const { data: session } = useSession();
 
   const [userInfo, setUserInfo] = useState({ email: "", password: "" });
 
@@ -30,7 +29,6 @@ export default function useLogin() {
   };
 
   return {
-    session,
     userInfo,
     setEmail,
     setPassword,

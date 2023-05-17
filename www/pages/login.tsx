@@ -1,6 +1,6 @@
 import Head from "next/head";
+import LoginPage from "@/components/login/LoginPage";
 import Page from "@/components/layout/Page";
-import Link from "next/link";
 
 export default function Home() {
   return (
@@ -13,8 +13,7 @@ export default function Home() {
       </Head>
       <main>
         <Page extern>
-          <h1>HOME</h1>
-          <Link href='/login'>Login</Link>
+          <LoginPage />
         </Page>
       </main>
     </>

@@ -18,6 +18,41 @@ export const authOptions = {
       type: "credentials",
       credentials: {},
       async authorize(credentials, req) {
+        // try
+        // {   
+        //     const user = await prisma.user.findFirst({
+        //         where: {
+        //             email: credentials.email
+        //         }
+        //     });
+
+        //     if (user !== null)
+        //     {
+        //         const res = await confirmPasswordHash(credentials.password, user.password);
+        //         if (res === true)
+        //         {
+                   
+              
+        //             return user;
+        //         }
+        //         else
+        //         {
+        //             console.log("Hash not matched logging in");
+        //             return null;
+        //         }
+        //     }
+        //     else {
+        //         return null;
+        //     }
+        // }
+        // catch (err)
+        // {
+        //     console.log("Authorize error:", err);
+        // }
+
+
+
+        
         // credentials contém os dados vindos do frontend
         const { email, password } = credentials;
 
