@@ -1,5 +1,5 @@
-import ServiceUser from "@/logic/core/user/ServiceUsers";
-import { NextApiRequest, NextApiResponse, NextApiHandler } from "next";
+import ServiceUser from "@/logic/services/user/ServiceUsers";
+import { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(
   req: NextApiRequest,

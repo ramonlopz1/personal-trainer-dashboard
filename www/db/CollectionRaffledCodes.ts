@@ -1,57 +1,38 @@
-import { IUser } from "@/logic/core/user/ServiceUsers";
 import { PrismaClient } from "@prisma/client";
-import argon2 from "argon2";
+import { IRaffledCode } from "@/logic/services/raffledcodes/ServiceRaffledCodes";
 
-export default class CollectionRaffledCodes {
+interface ICollectionRaffledCodes {
+  activateCode: (data: IRaffledCode) => Promise<IRaffledCode>;
+  isActive: (code: string) => Promise<any>;
+  isValidCode: (code: string) => Promise<any>;
+  listCodes: () => Promise<IRaffledCode[]>;
+}
+
+export default class CollectionRaffledCodes implements ICollectionRaffledCodes {
   constructor(private readonly prisma = new PrismaClient()) {}
 
-  async activeCode(data: any) {
-    const { raffleCode, ownerId } = data;
-
-    const checkIfExists = await this.prisma.raffledCodes.findUnique({
-      where: { raffleCode },
-    });
-
-    if (Object.keys(checkIfExists || {}).length > 0) {
-      throw new Error("Código já cadastrado.");
-    }
-
-    const isValidCode = await this.prisma.generatedCodes.findUnique({
-      where: { code: raffleCode },
-    });
-
-    if (!Object.keys(isValidCode || {}).length) {
-      throw new Error("Código inválido.");
-    }
-
-    const activedCode = await this.prisma.raffledCodes.create({
+  async activateCode(data: any): Promise<IRaffledCode> {
+    return await this.prisma.raffledCodes.create({
       data: {
-        raffleCode,
-        ownerId,
+        raffleCode: data.raffleCode,
+        ownerId: data.ownerId,
       },
     });
-
-    return activedCode;
   }
 
-  async listCodes() {
-    const codes = await this.prisma.raffledCodes.findMany();
-
-    if (!Object.keys(codes || {}).length)
-      throw new Error("Códigos não encontrados.");
-
-    return codes;
-  }
-
-  async getCodeById(id: any) {
-    const code = await this.prisma.raffledCodes.findUnique({
-      // retorna o usuário e o dados relacionados da tabela raffledCodes
-      where: { id },
+  async isActive(code: string): Promise<any> {
+    return await this.prisma.raffledCodes.findUnique({
+      where: { raffleCode: code },
     });
+  }
 
-    if (!Object.keys(code || {}).length)
-      throw new Error("Código não encontrado");
+  async isValidCode(code: string): Promise<any> {
+    return await this.prisma.generatedCodes.findUnique({
+      where: { code },
+    });
+  }
 
-    return code;
+  async listCodes(): Promise<IRaffledCode[]> {
+    return await this.prisma.raffledCodes.findMany();
   }
 }

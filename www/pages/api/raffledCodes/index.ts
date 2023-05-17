@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse, NextApiHandler } from "next";
-import ServiceRaffledCodes from "@/logic/core/raffledcodes/ServiceRaffledCodes";
+import ServiceRaffledCodes from "@/logic/services/raffledcodes/ServiceRaffledCodes";
 
 export default async function handler(
   req: NextApiRequest,
@@ -12,13 +12,6 @@ export default async function handler(
     try {
       const users = await service.list();
       return res.status(200).send(users);
-    } catch (err: any) {
-      return res.status(404).send({ Mensagem: err["message"] });
-    }
-  } else if (req.method === "GET" && req.query.id) {
-    try {
-      const user = await service.get(id);
-      return res.status(200).send(user);
     } catch (err: any) {
       return res.status(404).send({ Mensagem: err["message"] });
     }
