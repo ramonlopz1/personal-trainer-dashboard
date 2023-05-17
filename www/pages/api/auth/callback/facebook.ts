@@ -7,9 +7,8 @@ const callbackHandler: NextApiHandler = async (req, res) => {
     res.status(401).end("Unauthorized");
     return;
   }
-  
-  return res.status(200).redirect('/')
 
+  return res.status(200).redirect("/");
   // Custom callback logic
   // ...
 };
