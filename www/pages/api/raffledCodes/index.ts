@@ -1,12 +1,12 @@
 import { NextApiRequest, NextApiResponse, NextApiHandler } from "next";
-import ServiceRaffledCodes from "@/logic/services/raffledcodes/ServiceRaffledCodes";
+import ServiceRaffledCodes, { IServiceRaffledCodes } from "@/logic/services/raffledcodes/ServiceRaffledCodes";
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
   const { id } = req.query;
-  const service = new ServiceRaffledCodes();
+  const service: IServiceRaffledCodes = new ServiceRaffledCodes();
 
   if (req.method === "GET" && !req.query.id) {
     try {

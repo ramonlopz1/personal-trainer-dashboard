@@ -5,16 +5,16 @@ export interface IRaffledCode {
   ownerId: string;
 }
 
-interface IServiceRaffledCodes {
-  
+export interface IServiceRaffledCodes {
+    active: (data: IRaffledCode) => Promise<IRaffledCode>
+    list: () => Promise<IRaffledCode[]>
 }
 
-export default class ServiceRaffledCodes {
+export default class ServiceRaffledCodes implements IServiceRaffledCodes{
   private _collection = new CollectionRaffledCodes();
 
   async active(data: IRaffledCode) {
     const { raffleCode } = data;
-    console.log(data)
     const isActive = await this._collection.isActive(raffleCode);
     const isValidCode = await this._collection.isValidCode(raffleCode);
 
