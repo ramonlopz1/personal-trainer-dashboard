@@ -1,5 +1,4 @@
 import CollectionUser from "@/db/CollectionUsers";
-import { IRaffledCode } from "../raffledcodes/ServiceRaffledCodes";
 
 export interface IUser {
   name: string;

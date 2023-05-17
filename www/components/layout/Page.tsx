@@ -1,7 +1,7 @@
 import ForceAuthentication from "../authentication/ForceAuthentication"
 
 interface PageProps {
-    externa?: boolean
+    extern?: boolean
     children: any
     className?: string
 }
@@ -19,7 +19,7 @@ export default function Page(props: PageProps) {
         )
     }
 
-    return props.externa ? render() : (
+    return props.extern ? render() : (
         <ForceAuthentication>
             {render()}
         </ForceAuthentication>

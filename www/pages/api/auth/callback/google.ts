@@ -8,7 +8,7 @@ const callbackHandler: NextApiHandler = async (req, res) => {
     return;
   }
   
-  return res.status(200).redirect('/')
+  return res.status(200).redirect('/protected')
 
   // Custom callback logic
   // ...
