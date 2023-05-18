@@ -3,9 +3,8 @@ import Router from "next/router";
 import { useState } from "react";
 
 export default function useLogin() {
-
   const [userInfo, setUserInfo] = useState({ email: "", password: "" });
-
+  const [showForm, setShowForm] = useState(false);
   const setEmail = (email: string) => {
     setUserInfo({ ...userInfo, email });
   };
@@ -25,10 +24,12 @@ export default function useLogin() {
     });
 
     if (res?.error) Router.push("/");
-    else Router.push("/protected")
+    else Router.push("/protected");
   };
 
   return {
+    showForm,
+    setShowForm,
     userInfo,
     setEmail,
     setPassword,

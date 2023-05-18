@@ -118,7 +118,7 @@ export const authOptions = {
   },
   secret: process.env.SECRET,
   pages: {
-    signIn: "/index",
+    signIn: "/login",
     // error: '/auth/error',
     // signOut: '/auth/signout'
   },
