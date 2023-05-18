@@ -79,6 +79,9 @@ export const authOptions = {
         }
 
         if (!isAuth) {
+          res.status(401).json({
+            Message: "Error nas credenciais..."
+          })
           throw new Error("Invalid credentials");
         }
         const user = {

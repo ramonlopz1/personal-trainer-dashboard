@@ -1,18 +1,28 @@
 import { signIn } from "next-auth/react";
 import { ImFacebook2, ImGoogle, ImMail4 } from "react-icons/im";
 import styles from "./LoginPage.module.css";
-import useLogin from "@/data/hooks/useLogin";
+import useFormLogin from "@/data/hooks/useFormLogin";
 import Form from "./organisms/Form";
 
 export default function LoginPage() {
-  const { showForm, setShowForm, userInfo, setEmail, setPassword, login } =
-    useLogin();
+  const {
+    showFormLogin,
+    setShowFormLogin,
+    setShowFormRegister,
+    showFormRegister,
+    userData,
+    appendUserData,
+    login,
+    loginErrorMsg,
+    register,
+    registerErrorMsg,
+  } = useFormLogin();
 
   return (
     <div className={styles.container}>
-      <h1>Bem vindo ao PedeMais</h1>
-      <h4>Acesse sua conta</h4>
-      {showForm ? (
+      <h1 className={styles.title}>Bem vindo ao PedeMais</h1>
+      <h4 className={styles.subtitle}>Acesse sua conta</h4>
+      {showFormLogin ? (
         false
       ) : (
         <div className={styles.socialLogin}>
@@ -28,20 +38,26 @@ export default function LoginPage() {
             <span>Facebook</span>
           </button>
 
-          <button className={styles.email} onClick={() => setShowForm(true)}>
+          <button
+            className={styles.email}
+            onClick={() => setShowFormLogin(true)}
+          >
             <ImMail4 />
             <span>E-mail</span>
           </button>
         </div>
       )}
-      {showForm ? (
+      {showFormLogin ? (
         <Form
-          onSubmit={login}
-          email={userInfo.email}
-          password={userInfo.password}
-          setEmail={setEmail}
-          setPassword={setPassword}
-          setShowForm={setShowForm}
+          login={login}
+          register={register}
+          userData={userData}
+          loginErrorMsg={loginErrorMsg}
+          registerErrorMsg={registerErrorMsg}
+          appendUserData={appendUserData}
+          setShowFormLogin={setShowFormLogin}
+          setShowFormRegister={setShowFormRegister}
+          showFormRegister={showFormRegister}
         />
       ) : (
         false

@@ -29,7 +29,12 @@
 }
 
 .input label {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  font-size: 15px;
   padding: 0px 10px;
+  width: 100px;
   border-radius: 6px 0px 0px 6px;
 }
 
@@ -41,17 +46,40 @@
   border-radius: 0px 6px 6px 0px;
 }
 
-.form .submit {
+.form .btns {
+  display: flex;
+  justify-content: space-between;
+  gap: 5px;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.form .btns .submit,
+.form .btns .btnSignUp {
   height: 40px;
   outline: none;
   border: none;
   border-radius: 6px;
-  background-color: var(--lightColor);
-  width: 50%;
+  color: white;
+  font-weight: bold;
+  width: 48%;
   cursor: pointer;
 }
 
-.form .submit:hover {
+.form .btns .submit {
+  background-color: var(--darkColor);
+}
+
+.form .btns .submit:hover {
+  background-color: #323ad4;
+}
+
+.form .btns .btnSignUp {
+  background-color: #38bdff;
+}
+
+.form .btns .btnSignUp:hover {
+  background-color: #69cafa;
 }
 
 .form .btnBack {

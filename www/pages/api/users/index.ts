@@ -25,9 +25,9 @@ export default async function handler(
   } else if (req.method === "POST") {
     try {
       const user: IUser = await service.add(req.body);
-      return res.status(200).send(user);
+      return res.status(200).send("Usuário criado com sucesso");
     } catch (err: any) {
-      return res.status(404).send({ Mensagem: err["message"] });
+      return res.status(404).send("Erro inesperado");
     }
   } else if (req.method === "PUT" && id) {
     try {
