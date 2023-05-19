@@ -4,8 +4,8 @@ import argon2 from "argon2";
 
 interface ICollectionUser {
   createUser: (user: IUser) => Promise<IUser>;
-  emailIsUsed: (email: string) => Promise<IUser>;
-  phoneIsUsed: (phone: string) => Promise<IUser>;
+  getUserByEmail: (email: string) => Promise<IUser>;
+  getUserByPhone: (phone: string) => Promise<IUser>;
   getUserById: (id: string) => Promise<IUser>;
   listUsers: () => Promise<IUser[]>;
   updateUser: (id: string, user: any) => Promise<IUser>;
@@ -27,13 +27,13 @@ export default class CollectionUser implements ICollectionUser {
     return data;
   }
 
-  async emailIsUsed(email: string): Promise<any> {
+  async getUserByEmail(email: string): Promise<any> {
     return await this.prisma.users.findUnique({
       where: { email },
     });
   }
 
-  async phoneIsUsed(phone: string): Promise<any> {
+  async getUserByPhone(phone: string): Promise<any> {
     return await this.prisma.users.findUnique({
       where: { phone },
     });
@@ -55,7 +55,7 @@ export default class CollectionUser implements ICollectionUser {
       include: { raffledCodes: true },
     });
 
-    const resp = users.map((user) => {
+    const resp = users.map((user: IUser) => {
       const { password, ...rest } = user;
       return rest;
     });

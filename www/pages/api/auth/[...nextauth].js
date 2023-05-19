@@ -1,7 +1,9 @@
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
-import FacebookProvider from 'next-auth/providers/facebook'
+import FacebookProvider from "next-auth/providers/facebook";
 import CredentialsProvider from "next-auth/providers/credentials";
+import ServiceUser from "@/logic/services/user/ServiceUsers";
+
 export const authOptions = {
   // Configure one or more authentication providers
   providers: [
@@ -18,78 +20,13 @@ export const authOptions = {
       type: "credentials",
       credentials: {},
       async authorize(credentials, req) {
-        // try
-        // {   
-        //     const user = await prisma.user.findFirst({
-        //         where: {
-        //             email: credentials.email
-        //         }
-        //     });
-
-        //     if (user !== null)
-        //     {
-        //         const res = await confirmPasswordHash(credentials.password, user.password);
-        //         if (res === true)
-        //         {
-                   
-              
-        //             return user;
-        //         }
-        //         else
-        //         {
-        //             console.log("Hash not matched logging in");
-        //             return null;
-        //         }
-        //     }
-        //     else {
-        //         return null;
-        //     }
-        // }
-        // catch (err)
-        // {
-        //     console.log("Authorize error:", err);
-        // }
-
-
-
-        
-        // credentials contém os dados vindos do frontend
-        const { email, password } = credentials;
-
-        // // getUsers contém os dados vindos do backend
-        // // const users = await getUsers();
-        // const users = [{email: "rmnlpz1", password: "123", role: "admin"}]
-        let isAuth;
-        // let idx;
-
-        // for (let i = 0; i < users.length; i++) {
-        //     const user = users[i];
-
-        //     if (user.email === email && user.password === password) {
-        //         isAuth = true;
-        //         idx = i;
-        //         break;
-        //     }
-
-        //     isAuth = false;
-        // }
-
-        if (email === "ramon123" && password === "123") {
-          isAuth = true;
+        try {
+          const service = new ServiceUser();
+          const user = await service.auth(credentials);
+          return user ? user : null;
+        } catch (err) {
+          console.log("Authorize error:", err);
         }
-
-        if (!isAuth) {
-          res.status(401).json({
-            Message: "Error nas credenciais..."
-          })
-          throw new Error("Invalid credentials");
-        }
-        const user = {
-          nome: "ramon lopes",
-          idade: "123",
-        };
-
-        return user;
       },
     }),
   ],

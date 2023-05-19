@@ -1,4 +1,5 @@
 import CollectionUser from "@/db/CollectionUsers";
+import argon2 from "argon2";
 
 export interface IUser {
   name: string;
@@ -8,17 +9,17 @@ export interface IUser {
 }
 
 export interface IServiceUser {
-  add: (user: IUser) => Promise<IUser>
-  getOne: (id: string | string[]) => Promise<IUser>
-  list: () => Promise<IUser[]>
-  update: (id: string | string[], user: any) => Promise<IUser>
+  add: (user: IUser) => Promise<IUser>;
+  getOne: (id: string | string[]) => Promise<IUser>;
+  list: () => Promise<IUser[]>;
+  update: (id: string | string[], user: any) => Promise<IUser>;
 }
 
 export default class ServiceUser implements IServiceUser {
   private _collection = new CollectionUser();
   async add(user: IUser) {
-    const emailIsUsed = await this._collection.emailIsUsed(user.email);
-    const phoneIsUsed = await this._collection.phoneIsUsed(user.phone);
+    const emailIsUsed = await this._collection.getUserByEmail(user.email);
+    const phoneIsUsed = await this._collection.getUserByPhone(user.phone);
     if (emailIsUsed) {
       throw new Error("E-mail já cadastrado.");
     } else if (phoneIsUsed) {
@@ -45,5 +46,14 @@ export default class ServiceUser implements IServiceUser {
     if (!updatedUser) throw new Error("Usuário não encontrado");
 
     return updatedUser;
+  }
+
+  async auth(credentials: any) {
+    const user = await this._collection.getUserByEmail(credentials.email);
+    if (!user) throw new Error("Usuário não encontrado");
+
+    const checkPass = await argon2.verify(user.password, credentials.password);
+
+    if (checkPass) return user;
   }
 }

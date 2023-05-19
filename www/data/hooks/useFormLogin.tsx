@@ -8,28 +8,27 @@ interface IUserFormData {
   email: string;
   password: string;
   passwordConfirmation?: string;
-  role: string
+  role: string;
 }
 
 export default function useFormLogin() {
   const [userData, setUserInfo] = useState<IUserFormData>({
     email: "",
     password: "",
-    role: "USER"
+    role: "USER",
   });
-  const [showFormLogin, setShowFormLogin] = useState(false);
-  const [showFormRegister, setShowFormRegister] = useState(false);
-  const [loginErrorMsg, setLoginErrorMsg] = useState("");
-  const [registerErrorMsg, setRegisterErrorMsg] = useState("");
+  const [showFormLogin, setShowFormLogin] = useState<boolean>(false);
+  const [showFormRegister, setShowFormRegister] = useState<boolean>(false);
+  const [loginErrorMsg, setLoginErrorMsg] = useState<string>("");
+  const [registerErrorMsg, setRegisterErrorMsg] = useState<string>("");
 
   const appendUserData = (event: ChangeEvent<HTMLInputElement>) => {
-    const propName = event.target.name;
-    const propValue = event.target.value;
-    setUserInfo({ ...userData, [propName]: propValue });
+    setUserInfo({ ...userData, [event.target.name]: event.target.value });
   };
 
   const login = async (e: any) => {
     e.preventDefault();
+
     // pass the input values to credentials variable that will be utilized in auth.js (backend)
     const res = await signIn("credentials", {
       email: userData.email,
@@ -37,7 +36,7 @@ export default function useFormLogin() {
       redirect: false,
     });
 
-    if (res?.error) setLoginErrorMsg("Credenciais inválidas");
+    if (!res || res?.error) setLoginErrorMsg("Credenciais inválidas");
     else Router.push("/protected");
   };
 
@@ -49,6 +48,9 @@ export default function useFormLogin() {
   }: IUserFormData) => {
     if (!name || !email || !password || !passwordConfirmation) {
       setRegisterErrorMsg("Campos pendentes...");
+      return;
+    } else if (password !== passwordConfirmation) {
+      setRegisterErrorMsg("Senhas não correspondem.");
       return;
     }
 

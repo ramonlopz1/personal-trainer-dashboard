@@ -8,15 +8,15 @@ import {
   IoCalendarNumberSharp,
   IoCallSharp,
 } from "react-icons/io5";
+import InputMask from "react-input-mask";
 import styles from "./Form.module.css";
 
 interface FormProps {
   userData: any;
   loginErrorMsg: string;
-  registerErrorMsg: string
+  registerErrorMsg: string;
   setShowFormLogin: Dispatch<SetStateAction<boolean>>;
   setShowFormRegister: Dispatch<SetStateAction<boolean>>;
-
   showFormRegister: boolean;
   appendUserData: (event: ChangeEvent<HTMLInputElement>) => void;
   login: (e: any) => Promise<void>;
@@ -32,8 +32,10 @@ export default function Form({
   showFormRegister,
   appendUserData,
   login,
-  register
+  register,
 }: FormProps): JSX.Element {
+
+  const emailRegex = '/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/'
 
   return (
     <form onSubmit={login} className={styles.form}>
@@ -46,7 +48,7 @@ export default function Form({
       {showFormRegister ? (
         <div className={styles.inputs}>
           <div className={styles.input}>
-            <label htmlFor="user">
+            <label htmlFor="name">
               <IoPersonSharp />
             </label>
             <input
@@ -64,20 +66,21 @@ export default function Form({
       )}
       <div className={styles.inputs}>
         <div className={styles.input}>
-          <label htmlFor="user">
+          <label htmlFor="email">
             <IoMailUnreadSharp />
           </label>
           <input
-            type="text"
+            type="email"
             name="email"
             required
+            pattern={emailRegex}
             value={userData.email}
             onChange={appendUserData}
-            placeholder="Insira o seu e-mail"
+            placeholder="email@email.com"
           />
         </div>
         <div className={styles.input}>
-          <label htmlFor="pass">
+          <label htmlFor="password">
             <IoKey />
           </label>
           <input
@@ -93,7 +96,7 @@ export default function Form({
       {showFormRegister ? (
         <div className={styles.inputs}>
           <div className={styles.input}>
-            <label htmlFor="user">
+            <label htmlFor="passwordConfirmation">
               <IoKeyOutline />
             </label>
             <input
@@ -112,7 +115,7 @@ export default function Form({
       {showFormRegister ? (
         <div className={styles.inputs}>
           <div className={styles.input}>
-            <label htmlFor="user">
+            <label htmlFor="date">
               <IoCalendarNumberSharp />
             </label>
             <input
@@ -131,16 +134,17 @@ export default function Form({
       {showFormRegister ? (
         <div className={styles.inputs}>
           <div className={styles.input}>
-            <label htmlFor="user">
+            <label htmlFor="tel">
               <IoCallSharp />
             </label>
-            <input
+            <InputMask
               type="tel"
               name="phone"
               required
               value={userData.phone}
               onChange={appendUserData}
-              placeholder="Informe seu telefone"
+              mask="(99) 99999-9999"
+              placeholder="(   ) _____-____"
             />
           </div>
         </div>
@@ -149,9 +153,11 @@ export default function Form({
       )}
       {loginErrorMsg && !showFormRegister ? (
         <span>{loginErrorMsg}</span>
-      ) : registerErrorMsg && showFormRegister ? ( 
+      ) : registerErrorMsg && showFormRegister ? (
         <span>{registerErrorMsg}</span>
-      ) : false}
+      ) : (
+        false
+      )}
       <div className={styles.btns}>
         {showFormRegister ? (
           <button
