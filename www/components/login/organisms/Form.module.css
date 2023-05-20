@@ -4,7 +4,7 @@
   justify-content: space-evenly;
   align-items: center;
   width: 80%;
-  height: 70%;
+  height: 85%;
 }
 
 .form .inputs {
@@ -15,8 +15,7 @@
   justify-content: center;
   display: flex;
   align-items: center;
-  height: 50px;
-  margin-top: 5px;
+  height: 40px;
   width: 100%;
 }
 
@@ -26,6 +25,13 @@
   display: flex;
   height: 100%;
   border: 1px solid rgb(177, 177, 177);
+}
+
+.inputErrorMsg {
+  color: red;
+  align-self: flex-start;
+  margin-left: 5px;
+  font-size: 12px;
 }
 
 .input label {

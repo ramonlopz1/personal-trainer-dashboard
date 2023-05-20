@@ -1,4 +1,4 @@
-import { ChangeEvent, Dispatch, SetStateAction } from "react";
+import { ChangeEvent, Dispatch, SetStateAction, useState } from "react";
 import {
   IoArrowBack,
   IoPersonSharp,
@@ -10,11 +10,13 @@ import {
 } from "react-icons/io5";
 import InputMask from "react-input-mask";
 import styles from "./Form.module.css";
+import ValidatorFormLogin from "@/logic/validators/ValidatorFormLogin";
 
 interface FormProps {
   userData: any;
   loginErrorMsg: string;
   registerErrorMsg: string;
+  registerValidationMsg: any;
   setShowFormLogin: Dispatch<SetStateAction<boolean>>;
   setShowFormRegister: Dispatch<SetStateAction<boolean>>;
   showFormRegister: boolean;
@@ -27,6 +29,7 @@ export default function Form({
   userData,
   loginErrorMsg,
   registerErrorMsg,
+  registerValidationMsg,
   setShowFormLogin,
   setShowFormRegister,
   showFormRegister,
@@ -34,9 +37,6 @@ export default function Form({
   login,
   register,
 }: FormProps): JSX.Element {
-
-  const emailRegex = '/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/'
-
   return (
     <form onSubmit={login} className={styles.form}>
       <button
@@ -46,21 +46,26 @@ export default function Form({
         <IoArrowBack />
       </button>
       {showFormRegister ? (
-        <div className={styles.inputs}>
-          <div className={styles.input}>
-            <label htmlFor="name">
-              <IoPersonSharp />
-            </label>
-            <input
-              type="text"
-              name="name"
-              required
-              value={userData.name}
-              onChange={appendUserData}
-              placeholder="Insira o seu nome"
-            />
+        <>
+          <div className={styles.inputs}>
+            <div className={styles.input}>
+              <label htmlFor="name">
+                <IoPersonSharp />
+              </label>
+              <input
+                type="text"
+                name="name"
+                required
+                value={userData.name}
+                onChange={appendUserData}
+                placeholder="Insira o seu nome"
+              />
+            </div>
           </div>
-        </div>
+          <span className={styles.inputErrorMsg}>
+            {registerValidationMsg.name}
+          </span>
+        </>
       ) : (
         false
       )}
@@ -73,12 +78,14 @@ export default function Form({
             type="email"
             name="email"
             required
-            pattern={emailRegex}
             value={userData.email}
             onChange={appendUserData}
             placeholder="email@email.com"
           />
         </div>
+        <span className={styles.inputErrorMsg}>
+          {registerValidationMsg.email}
+        </span>
         <div className={styles.input}>
           <label htmlFor="password">
             <IoKey />
@@ -92,6 +99,11 @@ export default function Form({
             placeholder="Insira a sua senha"
           />
         </div>
+        <span className={styles.inputErrorMsg}>
+          <span className={styles.inputErrorMsg}>
+            {registerValidationMsg.password}
+          </span>
+        </span>
       </div>
       {showFormRegister ? (
         <div className={styles.inputs}>
@@ -108,6 +120,9 @@ export default function Form({
               placeholder="Confirme a sua senha"
             />
           </div>
+          <span className={styles.inputErrorMsg}>
+            {registerValidationMsg.passwordConfirmation}
+          </span>
         </div>
       ) : (
         false
@@ -127,6 +142,11 @@ export default function Form({
               placeholder="Informe a data de nascimento"
             />
           </div>
+          <span className={styles.inputErrorMsg}>
+            <span className={styles.inputErrorMsg}>
+              {registerValidationMsg.birthDate}
+            </span>
+          </span>
         </div>
       ) : (
         false
@@ -147,6 +167,9 @@ export default function Form({
               placeholder="(   ) _____-____"
             />
           </div>
+          <span className={styles.inputErrorMsg}>
+            {registerValidationMsg.phone}
+          </span>
         </div>
       ) : (
         false

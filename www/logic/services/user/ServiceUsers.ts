@@ -5,7 +5,8 @@ export interface IUser {
   name: string;
   email: string;
   password?: string;
-  phone: string;
+  passwordConfirmation?: string | null;
+  phone?: string | null;
 }
 
 export interface IServiceUser {
@@ -19,7 +20,7 @@ export default class ServiceUser implements IServiceUser {
   private _collection = new CollectionUser();
   async add(user: IUser) {
     const emailIsUsed = await this._collection.getUserByEmail(user.email);
-    const phoneIsUsed = await this._collection.getUserByPhone(user.phone);
+    const phoneIsUsed = user.phone && await this._collection.getUserByPhone(user.phone);
     if (emailIsUsed) {
       throw new Error("E-mail já cadastrado.");
     } else if (phoneIsUsed) {

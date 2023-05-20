@@ -15,11 +15,12 @@ export default class CollectionUser implements ICollectionUser {
   constructor(private readonly prisma = new PrismaClient()) {}
 
   async createUser(user: IUser): Promise<IUser> {
-    const { password, ...data } = user;
+    const { password, passwordConfirmation, ...data } = user;
 
     await this.prisma.users.create({
       data: {
         password: await argon2.hash(password!),
+        passwordConfirmation: await argon2.hash(passwordConfirmation!),
         ...data,
       },
     });

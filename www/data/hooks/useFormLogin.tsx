@@ -1,3 +1,4 @@
+import ValidatorFormLogin from "@/logic/validators/ValidatorFormLogin";
 import { signIn } from "next-auth/react";
 import Router from "next/router";
 import { ChangeEvent, useState } from "react";
@@ -21,10 +22,42 @@ export default function useFormLogin() {
   const [showFormRegister, setShowFormRegister] = useState<boolean>(false);
   const [loginErrorMsg, setLoginErrorMsg] = useState<string>("");
   const [registerErrorMsg, setRegisterErrorMsg] = useState<string>("");
+  const [registerValidationMsg, setRegisterValidationMsg] = useState({
+    name: "",
+    email: "",
+    password: "",
+    passwordConfirmation: "",
+    birthDate: "",
+    phone: ""
+  });
+
+ 
 
   const appendUserData = (event: ChangeEvent<HTMLInputElement>) => {
+    validator(event)
     setUserInfo({ ...userData, [event.target.name]: event.target.value });
   };
+
+  const validator = (event: ChangeEvent<HTMLInputElement>) => {
+    const validator = new ValidatorFormLogin()
+    const inputName = event.target.name
+    const inputValue = event.target.value
+
+    if(inputName === 'name') {
+      setRegisterValidationMsg({...registerValidationMsg, name: validator.name(inputValue)})
+     
+    } else if (inputName === 'email') {
+      setRegisterValidationMsg({...registerValidationMsg, email: validator.email(inputValue)})
+    } else if (inputName === 'password') {
+      setRegisterValidationMsg({...registerValidationMsg, password: validator.password(inputValue)})
+    } else if (inputName === 'passwordConfirmation') {
+      setRegisterValidationMsg({...registerValidationMsg, passwordConfirmation: validator.password(inputValue)})
+    } else if (inputName === 'date') {
+      setRegisterValidationMsg({...registerValidationMsg, birthDate: validator.birthDate(inputValue)})
+    }  else if (inputName === 'phone') {
+      setRegisterValidationMsg({...registerValidationMsg, phone: validator.phone(inputValue)})
+    }
+  }
 
   const login = async (e: any) => {
     e.preventDefault();
@@ -41,18 +74,7 @@ export default function useFormLogin() {
   };
 
   const register = ({
-    name,
-    email,
-    password,
-    passwordConfirmation,
   }: IUserFormData) => {
-    if (!name || !email || !password || !passwordConfirmation) {
-      setRegisterErrorMsg("Campos pendentes...");
-      return;
-    } else if (password !== passwordConfirmation) {
-      setRegisterErrorMsg("Senhas não correspondem.");
-      return;
-    }
 
     fetch("/api/users", {
       method: "POST",
@@ -66,6 +88,7 @@ export default function useFormLogin() {
 
   return {
     showFormLogin,
+    registerValidationMsg,
     setShowFormLogin,
     showFormRegister,
     setShowFormRegister,

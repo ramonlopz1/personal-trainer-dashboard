@@ -17,7 +17,7 @@ model Users {
   password             String
   passwordConfirmation String?
   rememberMeToken      String?
-  phone                String         @unique
+  phone                String?         @unique
   role                 Role           @default(USER)
   raffledCodes         RaffledCodes[]
   createdAt            DateTime       @default(now())
