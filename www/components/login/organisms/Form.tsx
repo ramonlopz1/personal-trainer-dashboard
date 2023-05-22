@@ -10,7 +10,6 @@ import {
 } from "react-icons/io5";
 import InputMask from "react-input-mask";
 import styles from "./Form.module.css";
-import ValidatorFormLogin from "@/logic/validators/ValidatorFormLogin";
 
 interface FormProps {
   userData: any;
@@ -22,7 +21,8 @@ interface FormProps {
   showFormRegister: boolean;
   appendUserData: (event: ChangeEvent<HTMLInputElement>) => void;
   login: (e: any) => Promise<void>;
-  register: (e: any) => Promise<void>;
+  register: (e: any) => void;
+  enableBtnRegister: () => boolean;
 }
 
 export default function Form({
@@ -36,6 +36,7 @@ export default function Form({
   appendUserData,
   login,
   register,
+  enableBtnRegister,
 }: FormProps): JSX.Element {
   return (
     <form onSubmit={login} className={styles.form}>
@@ -130,14 +131,14 @@ export default function Form({
       {showFormRegister ? (
         <div className={styles.inputs}>
           <div className={styles.input}>
-            <label htmlFor="date">
+            <label htmlFor="birthDate">
               <IoCalendarNumberSharp />
             </label>
             <input
               type="date"
-              name="passwordConfirmation"
+              name="birthDate"
               required
-              value={userData.passwordConfirmation}
+              value={userData.birthDate}
               onChange={appendUserData}
               placeholder="Informe a data de nascimento"
             />
@@ -164,7 +165,7 @@ export default function Form({
               value={userData.phone}
               onChange={appendUserData}
               mask="(99) 99999-9999"
-              placeholder="(   ) _____-____"
+              placeholder="(  ) _____-____"
             />
           </div>
           <span className={styles.inputErrorMsg}>
@@ -212,6 +213,7 @@ export default function Form({
               register(userData);
             }}
             className={styles.btnSignUp}
+            disabled={enableBtnRegister()}
           >
             Cadastrar
           </button>

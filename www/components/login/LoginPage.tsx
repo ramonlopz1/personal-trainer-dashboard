@@ -17,6 +17,7 @@ export default function LoginPage() {
     register,
     registerErrorMsg,
     registerValidationMsg,
+    enableBtnRegister,
   } = useFormLogin();
 
   return (
@@ -60,6 +61,7 @@ export default function LoginPage() {
           setShowFormLogin={setShowFormLogin}
           setShowFormRegister={setShowFormRegister}
           showFormRegister={showFormRegister}
+          enableBtnRegister={enableBtnRegister}
         />
       ) : (
         false

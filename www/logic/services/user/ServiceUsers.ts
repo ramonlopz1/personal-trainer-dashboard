@@ -27,11 +27,11 @@ export default class ServiceUser implements IServiceUser {
       throw new Error("Telefone já cadastrado.");
     }
 
-    return this._collection.createUser(user);
+    return await this._collection.createUser(user)
   }
 
   async getOne(id: string | string[]) {
-    const user = this._collection.getUserById(id);
+    const user = await this._collection.getUserById(id);
     if (!user) throw new Error("Usuário não encontrado");
     return user;
   }

@@ -84,6 +84,15 @@
   background-color: #38bdff;
 }
 
+.form .btns .btnSignUp:disabled {
+  background-color: gray;
+  cursor: default;
+}
+
+.form .btns .btnSignUp:disabled:hover {
+  background-color: gray;
+}
+
 .form .btns .btnSignUp:hover {
   background-color: #69cafa;
 }

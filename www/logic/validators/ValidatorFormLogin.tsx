@@ -5,7 +5,7 @@ export default class ValidatorFormLogin {
     } else if (name.length > 200) {
       return "Nome deve ter no máximo 200 caracteres.";
     } else if (name.split(" ").length === 1) {
-      return "Mínimo nome e sobrenome"
+      return "Mínimo nome e sobrenome";
     }
 
     return "";
@@ -31,18 +31,31 @@ export default class ValidatorFormLogin {
     return "";
   }
 
-  phone(phone: string): string {
-    const regex = /^:?[2-5]\d?\d{6}$/;
-    if (!regex.test(phone)) return "Telefone inválido.";
+  passwordConfirmation(password: string, passwordConfirmation: string): string {
+    if (password !== passwordConfirmation) return "Senhas divergentes.";
     return "";
   }
 
-  // ajustar
+  phone(phone: string): string {
+    const formatted = phone
+      .replace(" ", "")
+      .replace("(", "")
+      .replace(")", "")
+      .replace("_", "")
+      .replace("-", "");
+
+    console.log(formatted);
+    const regexPhone = /^\d{10,11}$/;
+
+    if (!regexPhone.test(formatted)) return "Telefone inválido.";
+    return "";
+  }
+
   birthDate(date: string): string {
     const d = new Date();
-    var currDate = Date.parse(date);
-    var minimumDate = Date.parse("1990-01-01T00:00:00.142Z");
-    var btDate = Date.parse(date);
+    const currDate = Date.parse(d);
+    const minimumDate = Date.parse("1990-01-01T00:00:00.142Z");
+    const btDate = Date.parse(date);
 
     if (btDate < minimumDate || btDate > currDate) {
       return "Insira uma data entre 1900 e a data atual.";
