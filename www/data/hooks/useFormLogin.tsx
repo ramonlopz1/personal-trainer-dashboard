@@ -2,7 +2,7 @@ import ValidatorFormLogin from "@/logic/validators/ValidatorFormLogin";
 import { signIn } from "next-auth/react";
 import Router from "next/router";
 import { ChangeEvent, useState } from "react";
-import { constUser, constRegisterValidationMsg } from "../constants/constants";
+import { constUser, constRegisterValidationMsgs } from "../constants/constants";
 
 interface IUserFormData {
   name?: string;
@@ -17,6 +17,9 @@ export default function useFormLogin() {
   // set up the values inserted in the inputs, to an object
   const [userData, setUserInfo] = useState<IUserFormData>(constUser);
 
+  // flag to enable or disable register btn
+  const [enableBtn, setEnableBtn] = useState<boolean>(true);
+
   // flag to show or hide the form login
   const [showFormLogin, setShowFormLogin] = useState<boolean>(false);
 
@@ -27,16 +30,17 @@ export default function useFormLogin() {
   const [loginErrorMsg, setLoginErrorMsg] = useState<string>("");
 
   // set the api error to the form register
-  const [registerErrorMsg, setRegisterErrorMsg] = useState<string>("");
+  const [registerErrorMsgs, setRegisterErrorMsgs] = useState<string>("");
 
   // create an object to retrieve each input validation msg, based on inputname
-  const [registerValidationMsg, setRegisterValidationMsg] = useState(
-    constRegisterValidationMsg
+  const [registerValidationMsgs, setRegisterValidationMsgs] = useState(
+    constRegisterValidationMsgs
   );
 
-  // setup the validator msgs and setup the object that contains the values inputted by user
+  // setup the validator msgs, setup activation of btnRegister and setup the object that contains the values inputted by user
   const appendUserData = (event: ChangeEvent<HTMLInputElement>) => {
     validator(event);
+    enableBtnRegister();
     setUserInfo({ ...userData, [event.target.name]: event.target.value });
   };
 
@@ -47,36 +51,36 @@ export default function useFormLogin() {
     const inputValue = event.target.value;
 
     if (inputName === "name") {
-      setRegisterValidationMsg({
-        ...registerValidationMsg,
+      setRegisterValidationMsgs({
+        ...registerValidationMsgs,
         name: validator[inputName](inputValue),
       });
     } else if (inputName === "email") {
-      setRegisterValidationMsg({
-        ...registerValidationMsg,
+      setRegisterValidationMsgs({
+        ...registerValidationMsgs,
         email: validator.email(inputValue),
       });
     } else if (inputName === "password") {
-      setRegisterValidationMsg({
-        ...registerValidationMsg,
+      setRegisterValidationMsgs({
+        ...registerValidationMsgs,
         password: validator.password(inputValue),
       });
     } else if (inputName === "passwordConfirmation") {
-      setRegisterValidationMsg({
-        ...registerValidationMsg,
+      setRegisterValidationMsgs({
+        ...registerValidationMsgs,
         passwordConfirmation: validator.passwordConfirmation(
           userData.password,
           inputValue
         ),
       });
-    } else if (inputName === "date") {
-      setRegisterValidationMsg({
-        ...registerValidationMsg,
+    } else if (inputName === "birthDate") {
+      setRegisterValidationMsgs({
+        ...registerValidationMsgs,
         birthDate: validator.birthDate(inputValue),
       });
     } else if (inputName === "phone") {
-      setRegisterValidationMsg({
-        ...registerValidationMsg,
+      setRegisterValidationMsgs({
+        ...registerValidationMsgs,
         phone: validator.phone(inputValue),
       });
     }
@@ -105,25 +109,23 @@ export default function useFormLogin() {
       body: JSON.stringify(user),
     })
       .then((data) => data.text())
-      .then(setRegisterErrorMsg)
-      .catch(setRegisterErrorMsg);
+      .then(setRegisterErrorMsgs)
+      .catch(setRegisterErrorMsgs);
   };
 
-
   const enableBtnRegister = () => {
-    const msgs = Object.values(registerValidationMsg)
-
-    const errors = msgs.filter(msg => msg.length > 0)
-    console.log(errors)
-    if(errors.length > 0) {
-      return false
+    const validationMsgs = Object.values(registerValidationMsgs);
+    const errors = validationMsgs.filter((msg) => msg.length > 1);
+    if (errors.length > 0) {
+      setEnableBtn(true);
+    } else {
+      setEnableBtn(false);
     }
+  };
 
-    return true
-  }
   return {
     showFormLogin,
-    registerValidationMsg,
+    registerValidationMsgs,
     setShowFormLogin,
     showFormRegister,
     setShowFormRegister,
@@ -132,7 +134,7 @@ export default function useFormLogin() {
     login,
     loginErrorMsg,
     register,
-    registerErrorMsg,
-    enableBtnRegister
+    registerErrorMsgs,
+    enableBtn,
   };
 }

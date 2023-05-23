@@ -15,9 +15,9 @@ export default function LoginPage() {
     login,
     loginErrorMsg,
     register,
-    registerErrorMsg,
-    registerValidationMsg,
-    enableBtnRegister,
+    registerErrorMsgs,
+    registerValidationMsgs,
+    enableBtn
   } = useFormLogin();
 
   return (
@@ -55,13 +55,13 @@ export default function LoginPage() {
           register={register}
           userData={userData}
           loginErrorMsg={loginErrorMsg}
-          registerErrorMsg={registerErrorMsg}
-          registerValidationMsg={registerValidationMsg}
+          registerErrorMsgs={registerErrorMsgs}
+          registerValidationMsgs={registerValidationMsgs}
           appendUserData={appendUserData}
           setShowFormLogin={setShowFormLogin}
           setShowFormRegister={setShowFormRegister}
           showFormRegister={showFormRegister}
-          enableBtnRegister={enableBtnRegister}
+          enableBtn={enableBtn}
         />
       ) : (
         false

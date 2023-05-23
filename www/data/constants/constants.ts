@@ -4,13 +4,13 @@ export const constUser = {
   role: "USER"
 }
 
-export const constRegisterValidationMsg = {
-    name: "",
-    email: "",
-    password: "",
-    passwordConfirmation: "",
-    birthDate: "",
-    phone: "",
+export const constRegisterValidationMsgs = {
+    name: " ",
+    email: " ",
+    password: " ",
+    passwordConfirmation: " ",
+    birthDate: " ",
+    phone: " ",
 }
 
 

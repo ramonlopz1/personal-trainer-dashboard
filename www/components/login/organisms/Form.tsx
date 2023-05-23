@@ -14,30 +14,31 @@ import styles from "./Form.module.css";
 interface FormProps {
   userData: any;
   loginErrorMsg: string;
-  registerErrorMsg: string;
-  registerValidationMsg: any;
+  registerErrorMsgs: string;
+  registerValidationMsgs: any;
   setShowFormLogin: Dispatch<SetStateAction<boolean>>;
   setShowFormRegister: Dispatch<SetStateAction<boolean>>;
   showFormRegister: boolean;
   appendUserData: (event: ChangeEvent<HTMLInputElement>) => void;
   login: (e: any) => Promise<void>;
   register: (e: any) => void;
-  enableBtnRegister: () => boolean;
+  enableBtn: boolean;
 }
 
 export default function Form({
   userData,
   loginErrorMsg,
-  registerErrorMsg,
-  registerValidationMsg,
+  registerErrorMsgs,
+  registerValidationMsgs,
   setShowFormLogin,
   setShowFormRegister,
   showFormRegister,
   appendUserData,
   login,
   register,
-  enableBtnRegister,
+  enableBtn,
 }: FormProps): JSX.Element {
+  console.log(enableBtn)
   return (
     <form onSubmit={login} className={styles.form}>
       <button
@@ -64,7 +65,7 @@ export default function Form({
             </div>
           </div>
           <span className={styles.inputErrorMsg}>
-            {registerValidationMsg.name}
+            {registerValidationMsgs.name}
           </span>
         </>
       ) : (
@@ -78,6 +79,7 @@ export default function Form({
           <input
             type="email"
             name="email"
+            autoComplete="false"
             required
             value={userData.email}
             onChange={appendUserData}
@@ -85,7 +87,7 @@ export default function Form({
           />
         </div>
         <span className={styles.inputErrorMsg}>
-          {registerValidationMsg.email}
+          {registerValidationMsgs.email}
         </span>
         <div className={styles.input}>
           <label htmlFor="password">
@@ -102,7 +104,7 @@ export default function Form({
         </div>
         <span className={styles.inputErrorMsg}>
           <span className={styles.inputErrorMsg}>
-            {registerValidationMsg.password}
+            {registerValidationMsgs.password}
           </span>
         </span>
       </div>
@@ -122,7 +124,7 @@ export default function Form({
             />
           </div>
           <span className={styles.inputErrorMsg}>
-            {registerValidationMsg.passwordConfirmation}
+            {registerValidationMsgs.passwordConfirmation}
           </span>
         </div>
       ) : (
@@ -145,7 +147,7 @@ export default function Form({
           </div>
           <span className={styles.inputErrorMsg}>
             <span className={styles.inputErrorMsg}>
-              {registerValidationMsg.birthDate}
+              {registerValidationMsgs.birthDate}
             </span>
           </span>
         </div>
@@ -169,7 +171,7 @@ export default function Form({
             />
           </div>
           <span className={styles.inputErrorMsg}>
-            {registerValidationMsg.phone}
+            {registerValidationMsgs.phone}
           </span>
         </div>
       ) : (
@@ -177,8 +179,8 @@ export default function Form({
       )}
       {loginErrorMsg && !showFormRegister ? (
         <span>{loginErrorMsg}</span>
-      ) : registerErrorMsg && showFormRegister ? (
-        <span>{registerErrorMsg}</span>
+      ) : registerErrorMsgs && showFormRegister ? (
+        <span>{registerErrorMsgs}</span>
       ) : (
         false
       )}
@@ -213,7 +215,7 @@ export default function Form({
               register(userData);
             }}
             className={styles.btnSignUp}
-            disabled={enableBtnRegister()}
+            disabled={true}
           >
             Cadastrar
           </button>

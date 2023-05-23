@@ -26,7 +26,7 @@ export default class ValidatorFormLogin {
     const regex =
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
-    if (!regex.test(password)) return "Senha inválida";
+    if (!regex.test(password)) return "Senha inválida.";
 
     return "";
   }
@@ -44,7 +44,6 @@ export default class ValidatorFormLogin {
       .replace("_", "")
       .replace("-", "");
 
-    console.log(formatted);
     const regexPhone = /^\d{10,11}$/;
 
     if (!regexPhone.test(formatted)) return "Telefone inválido.";
