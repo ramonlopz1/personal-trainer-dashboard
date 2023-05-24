@@ -38,7 +38,6 @@ export default function Form({
   register,
   enableBtn,
 }: FormProps): JSX.Element {
-  console.log(enableBtn)
   return (
     <form onSubmit={login} className={styles.form}>
       <button
@@ -215,7 +214,7 @@ export default function Form({
               register(userData);
             }}
             className={styles.btnSignUp}
-            disabled={true}
+            disabled={enableBtn}
           >
             Cadastrar
           </button>

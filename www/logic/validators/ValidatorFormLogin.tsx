@@ -1,4 +1,13 @@
-export default class ValidatorFormLogin {
+export interface IValidatorFormLogin {
+  name: (name: string) => string
+  email: (email: string) => string
+  password: (password: string, passwordConfirmation: string) => string
+  phone: (phone: string) => string
+  birthDate: (date: string) => string
+
+}
+
+export default class ValidatorFormLogin implements IValidatorFormLogin {
   name(name: string): string {
     if (name.length <= 0) {
       return "Informe o nome.";
@@ -22,17 +31,13 @@ export default class ValidatorFormLogin {
     return "";
   }
 
-  password(password: string): string {
+  password(password: string, passwordConfirmation: string): string {
     const regex =
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
     if (!regex.test(password)) return "Senha inválida.";
-
-    return "";
-  }
-
-  passwordConfirmation(password: string, passwordConfirmation: string): string {
     if (password !== passwordConfirmation) return "Senhas divergentes.";
+
     return "";
   }
 
@@ -51,7 +56,7 @@ export default class ValidatorFormLogin {
   }
 
   birthDate(date: string): string {
-    const d = new Date();
+    const d: any = new Date();
     const currDate = Date.parse(d);
     const minimumDate = Date.parse("1990-01-01T00:00:00.142Z");
     const btDate = Date.parse(date);

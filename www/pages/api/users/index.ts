@@ -1,4 +1,7 @@
-import ServiceUser, { IServiceUser, IUser } from "@/logic/services/user/ServiceUsers";
+import ServiceUser, {
+  IServiceUser,
+  IUser,
+} from "@/logic/services/user/ServiceUsers";
 import { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(
@@ -13,28 +16,28 @@ export default async function handler(
       const users: IUser[] = await service.list();
       return res.status(200).send(users);
     } catch (err: any) {
-      return res.status(404).send({ message: err["message"] });
+      return res.status(404).send(err["message"]);
     }
   } else if (req.method === "GET" && id) {
     try {
       const user: IUser = await service.getOne(id);
       return res.status(200).send(user);
     } catch (err: any) {
-      return res.status(404).send({ message: err["message"] });
+      return res.status(404).send(err["message"]);
     }
   } else if (req.method === "POST") {
     try {
       await service.add(req.body);
       return res.status(200).send("Usuário criado com sucesso");
     } catch (err: any) {
-      return res.status(404).send({ message: err["message"] });
+      return res.status(404).send(err["message"]);
     }
   } else if (req.method === "PUT" && id) {
     try {
       const user: IUser = await service.update(id, req.body);
       return res.status(200).send(user);
     } catch (err: any) {
-      return res.status(404).send({ message: err["message"] });
+      return res.status(404).send(err["message"]);
     }
   }
 }

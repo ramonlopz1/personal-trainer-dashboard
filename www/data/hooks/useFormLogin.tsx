@@ -1,16 +1,25 @@
 import ValidatorFormLogin from "@/logic/validators/ValidatorFormLogin";
 import { signIn } from "next-auth/react";
 import Router from "next/router";
-import { ChangeEvent, useState } from "react";
-import { constUser, constRegisterValidationMsgs } from "../constants/constants";
+import { ChangeEvent, useEffect, useState } from "react";
+import { constUser } from "../constants/constants";
 
 interface IUserFormData {
   name?: string;
-  birthDate?: Date;
+  birthDate?: string;
   email: string;
   password: string;
   passwordConfirmation?: string;
   role: string;
+}
+
+interface IValidationMsgs {
+  name?: string;
+  email?: string;
+  password?: string;
+  passwordConfirmation?: string;
+  birthDate?: string;
+  phone?: string;
 }
 
 export default function useFormLogin() {
@@ -33,14 +42,13 @@ export default function useFormLogin() {
   const [registerErrorMsgs, setRegisterErrorMsgs] = useState<string>("");
 
   // create an object to retrieve each input validation msg, based on inputname
-  const [registerValidationMsgs, setRegisterValidationMsgs] = useState(
-    constRegisterValidationMsgs
-  );
+  const [registerValidationMsgs, setRegisterValidationMsgs] =
+    useState<IValidationMsgs>({});
+
 
   // setup the validator msgs, setup activation of btnRegister and setup the object that contains the values inputted by user
   const appendUserData = (event: ChangeEvent<HTMLInputElement>) => {
     validator(event);
-    enableBtnRegister();
     setUserInfo({ ...userData, [event.target.name]: event.target.value });
   };
 
@@ -49,39 +57,17 @@ export default function useFormLogin() {
     const validator = new ValidatorFormLogin();
     const inputName = event.target.name;
     const inputValue = event.target.value;
+    
 
-    if (inputName === "name") {
+    if (inputName === "passwordConfirmation" || inputName === "password") {
       setRegisterValidationMsgs({
         ...registerValidationMsgs,
-        name: validator[inputName](inputValue),
+        passwordConfirmation: validator.password(userData.password, inputValue),
       });
-    } else if (inputName === "email") {
+    } else {
       setRegisterValidationMsgs({
         ...registerValidationMsgs,
-        email: validator.email(inputValue),
-      });
-    } else if (inputName === "password") {
-      setRegisterValidationMsgs({
-        ...registerValidationMsgs,
-        password: validator.password(inputValue),
-      });
-    } else if (inputName === "passwordConfirmation") {
-      setRegisterValidationMsgs({
-        ...registerValidationMsgs,
-        passwordConfirmation: validator.passwordConfirmation(
-          userData.password,
-          inputValue
-        ),
-      });
-    } else if (inputName === "birthDate") {
-      setRegisterValidationMsgs({
-        ...registerValidationMsgs,
-        birthDate: validator.birthDate(inputValue),
-      });
-    } else if (inputName === "phone") {
-      setRegisterValidationMsgs({
-        ...registerValidationMsgs,
-        phone: validator.phone(inputValue),
+        [inputName]: validator[inputName](inputValue),
       });
     }
   };
@@ -113,10 +99,22 @@ export default function useFormLogin() {
       .catch(setRegisterErrorMsgs);
   };
 
+  useEffect(() => {
+    enableBtnRegister();
+  }, [userData]);
+
   const enableBtnRegister = () => {
+    const inputtedValues = Object.values(userData);
+    console.log(userData);
+    const inputsNotFilled = inputtedValues.filter(
+      (value) => value.length === 0
+    );
+
     const validationMsgs = Object.values(registerValidationMsgs);
     const errors = validationMsgs.filter((msg) => msg.length > 1);
     if (errors.length > 0) {
+      setEnableBtn(true);
+    } else if (inputsNotFilled.length !== 0) {
       setEnableBtn(true);
     } else {
       setEnableBtn(false);
