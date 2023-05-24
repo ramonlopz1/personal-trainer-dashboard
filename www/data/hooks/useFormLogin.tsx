@@ -2,6 +2,7 @@ import ValidatorFormLogin from "@/logic/validators/ValidatorFormLogin";
 import { signIn } from "next-auth/react";
 import Router from "next/router";
 import { ChangeEvent, useEffect, useState } from "react";
+import { useSession } from "next-auth/react";
 import { constUser } from "../constants/constants";
 
 interface IUserFormData {
@@ -23,6 +24,7 @@ interface IValidationMsgs {
 }
 
 export default function useFormLogin() {
+  const { data: session } = useSession();
   // set up the values inserted in the inputs, to an object
   const [userData, setUserInfo] = useState<IUserFormData>(constUser);
 
@@ -45,7 +47,6 @@ export default function useFormLogin() {
   const [registerValidationMsgs, setRegisterValidationMsgs] =
     useState<IValidationMsgs>({});
 
-
   // setup the validator msgs, setup activation of btnRegister and setup the object that contains the values inputted by user
   const appendUserData = (event: ChangeEvent<HTMLInputElement>) => {
     validator(event);
@@ -57,7 +58,6 @@ export default function useFormLogin() {
     const validator = new ValidatorFormLogin();
     const inputName = event.target.name;
     const inputValue = event.target.value;
-    
 
     if (inputName === "passwordConfirmation" || inputName === "password") {
       setRegisterValidationMsgs({
@@ -83,7 +83,7 @@ export default function useFormLogin() {
     });
 
     if (!res || res?.error) setLoginErrorMsg("Credenciais inválidas");
-    else Router.push("/protected");
+    else Router.push(`/profile?id=${session?.user?.id}`);
   };
 
   const register = (userData: IUserFormData) => {
@@ -105,7 +105,6 @@ export default function useFormLogin() {
 
   const enableBtnRegister = () => {
     const inputtedValues = Object.values(userData);
-    console.log(userData);
     const inputsNotFilled = inputtedValues.filter(
       (value) => value.length === 0
     );

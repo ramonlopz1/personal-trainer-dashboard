@@ -1,7 +1,10 @@
 import Head from "next/head";
 import Page from "@/components/layout/Page";
+import Profile from "@/components/profile/Profile";
+import { GetServerSideProps } from "next";
+import { IUser } from "@/logic/services/user/ServiceUsers";
 
-export default function Protected() {
+export default function ProfilePage() {
   return (
     <>
       <Head>
@@ -11,7 +14,7 @@ export default function Protected() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Page>
-        <h1>Protected</h1>
+        <Profile />
       </Page>
     </>
   );

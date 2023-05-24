@@ -1,0 +1,18 @@
+import { NextApiHandler } from "next";
+import { getServerSession } from "next-auth";
+import { NextAuthHandler, getSession } from "next-auth/react";
+import { authOptions } from "../[...nextauth]";
+
+const callbackHandler: NextApiHandler = async (req, res) => {
+  const session = await getServerSession(req, res, authOptions);
+  if (!session) {
+    return res.status(401).end("Unauthorized");
+  }
+
+  return res.status(200).redirect("/protected");
+
+  // Custom callback logic
+  // ...
+};
+
+export default callbackHandler as NextAuthHandler;

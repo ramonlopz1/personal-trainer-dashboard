@@ -11,8 +11,11 @@ export default async function handler(
   res: NextApiResponse
 ) {
   const session = await getServerSession(req, res, authOptions);
-  console.log(session)
-  if (!session) res.status(401).json({ Message: "Unauthorized" });
+  // if (session?.user?.role !== "ADMIN") {
+  //   return res.status(401).send("Não autorizado.");
+  // }
+
+  if (!session) res.status(401).json({ Message: "Não autorizado." });
 
   const code = uuid().split("-")[0].toUpperCase();
   try {

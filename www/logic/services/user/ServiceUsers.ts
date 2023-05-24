@@ -1,5 +1,6 @@
 import CollectionUser from "@/db/CollectionUsers";
 import argon2 from "argon2";
+import { IRaffledCode } from "../raffledcodes/ServiceRaffledCodes";
 
 export interface IUser {
   name: string;
@@ -7,6 +8,7 @@ export interface IUser {
   password?: string;
   passwordConfirmation?: string | null;
   phone?: string | null;
+  role?: string
 }
 
 export interface IServiceUser {
@@ -54,7 +56,7 @@ export default class ServiceUser implements IServiceUser {
     if (!user) throw new Error("Usuário não encontrado");
 
     const checkPass = await argon2.verify(user.password, credentials.password);
-
+    
     if (checkPass) return user;
   }
 }

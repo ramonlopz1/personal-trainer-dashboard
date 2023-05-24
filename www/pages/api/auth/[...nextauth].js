@@ -37,7 +37,7 @@ export const authOptions = {
     secret: process.env.SECRET,
   },
   callbacks: {
-    async jwt({ token, user, account, profile, isNewUser }) {
+    async jwt({ token, user }) {
       if (user) {
         // pass the role of user to token
         token.user = user;
@@ -54,7 +54,7 @@ export const authOptions = {
       }
 
       return session;
-    },
+    }
   },
   secret: process.env.SECRET,
   pages: {

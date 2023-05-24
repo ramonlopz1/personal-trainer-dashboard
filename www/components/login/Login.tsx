@@ -1,10 +1,10 @@
 import { signIn } from "next-auth/react";
 import { ImFacebook2, ImGoogle, ImMail4 } from "react-icons/im";
-import styles from "./LoginPage.module.css";
+import styles from "./Login.module.css";
 import useFormLogin from "@/data/hooks/useFormLogin";
 import Form from "./organisms/Form";
 
-export default function LoginPage() {
+export default function Login() {
   const {
     showFormLogin,
     setShowFormLogin,
