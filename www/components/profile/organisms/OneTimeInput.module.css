@@ -1,0 +1,16 @@
+.inputs {
+    display: flex;
+    gap: 5px;
+}
+
+.input {
+    font-size: 18px;
+    text-align: center;
+    height: 40px;
+    text-transform: capitalize;
+    background-color: rgb(226, 226, 226);
+    outline: none;
+    border: none;
+    border: 1px solid rgb(168, 168, 168);
+    border-radius: 4px;
+}

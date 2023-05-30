@@ -1,0 +1,75 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+    justify-content: space-evenly;
+    border-radius: 8px;
+    height: 600px;
+    width: 500px;
+    box-shadow: var(--shadow);
+    padding: 20px 20px;
+}
+
+.title {
+    margin: 0px;
+}
+
+.subtitle {
+    margin: 0px;
+}
+
+.socialLogin {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 80%;
+}
+
+.socialLogin 
+    .google, .facebook, .email {
+        margin-top: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: left;
+        gap: 120px;
+        padding-left: 20px;
+        font-weight: bold;
+        color: white;
+        height: 50px;
+        border: none;
+        font-size: 17px;
+        outline: none;
+        border-radius: 6px;
+        cursor: pointer;
+}
+
+.socialLogin
+    .google {
+        background-color: #DB4437;
+    }
+
+    .google:hover {
+        background-color: #dd5b4f;
+    }
+
+    .facebook {
+        background-color: #4267B2;
+    }
+
+    .facebook:hover {
+        background-color: #597cc2;
+    }
+
+    .email {
+        background-color: rgb(221, 221, 221);
+        color: black;
+    }
+
+    .email:hover {
+        background-color: rgb(201, 201, 201);
+    }
+
+    .form {
+        transition: .4s;
+    }

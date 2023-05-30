@@ -54,7 +54,7 @@ export default class ServiceUser implements IServiceUser {
   async auth(credentials: any) {
     const user = await this._collection.getUserByEmail(credentials.email);
     if (!user) throw new Error("Usuário não encontrado");
-
+    console.log("ok")
     const checkPass = await argon2.verify(user.password, credentials.password);
     
     if (checkPass) return user;

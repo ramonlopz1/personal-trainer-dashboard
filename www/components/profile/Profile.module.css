@@ -1,5 +1,33 @@
-.container {
-    background-color: red;
-    height: 100%;
-    width: 100%;
+.section {
+  background-color: white;
+  border-radius: 6px;
+  height: 95%;
+  width: 100%;
+  box-shadow: var(--shadow);
+  padding: 10px;
+}
+
+.title {
+  font-size: 15px;
+}
+
+.containers {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  gap: 15px;
+}
+
+.subContainer {
+  height: 100%;
+  background-color: lightgray;
+  padding: 10px;
+}
+
+.subContainer:nth-of-type(1) {
+  width: 35%;
+}
+
+.subContainer:nth-of-type(2) {
+  width: 62%;
 }

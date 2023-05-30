@@ -1,27 +1,28 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { v4 as uuid } from "uuid";
 import { PrismaClient } from "@prisma/client";
-import { getServerSession } from "next-auth/next";
-import { authOptions } from "../../auth/[...nextauth]";
-
+import { getToken } from "next-auth/jwt";
 const prisma = new PrismaClient();
+
+const secret = process.env.SECRET
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const session = await getServerSession(req, res, authOptions);
-  // if (session?.user?.role !== "ADMIN") {
+  const token = await getToken({ req, secret });
+  const tokenId = token?.sub;
+  // if (token?.role !== "ADMIN") 
   //   return res.status(401).send("Não autorizado.");
-  // }
-
-  if (!session) res.status(401).json({ Message: "Não autorizado." });
+ console.log("oi")
+  if (!token) res.status(401).json({ Message: "Não autorizado." });
 
   const code = uuid().split("-")[0].toUpperCase();
   try {
     const store = await prisma.generatedCodes.create({
       data: {
         code,
+        createdBy: token?.name!
       },
     });
     return res.status(200).json(store);

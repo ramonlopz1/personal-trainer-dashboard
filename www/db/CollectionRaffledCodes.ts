@@ -16,6 +16,7 @@ export default class CollectionRaffledCodes implements ICollectionRaffledCodes {
       data: {
         raffleCode: data.raffleCode,
         ownerId: data.ownerId,
+        createdBy: data.createdBy
       },
     });
   }
@@ -33,6 +34,10 @@ export default class CollectionRaffledCodes implements ICollectionRaffledCodes {
   }
 
   async listCodes(): Promise<IRaffledCode[]> {
-    return await this.prisma.raffledCodes.findMany();
+    return await this.prisma.raffledCodes.findMany({
+      include: {
+        owner: true
+      }
+    });
   }
 }
