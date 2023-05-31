@@ -1,0 +1,44 @@
+.providerList {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.provider {
+    display: flex;
+    justify-content: flex-start;
+    height: 130px;
+    gap: 10px;
+    width: 100%;
+}
+
+.providerInfo {
+    border-radius: 6px 0px 0px 6px;
+    height: 100%;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo {
+    height: 70px;
+    width: 70px;
+    background-color: black;
+    border-radius: 35px;
+}
+
+.name {
+    font-size: 15px;
+    margin-top: 5px;
+    text-align: center;
+}
+
+.codeList {
+    border-radius: 0px 6px 6px 0px;
+    background-color: white;
+    height: 100%;
+    width: 90%;
+}
