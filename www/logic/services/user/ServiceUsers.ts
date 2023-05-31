@@ -7,8 +7,10 @@ export interface IUser {
   email: string;
   password?: string;
   passwordConfirmation?: string | null;
+  birthDate?: string
   phone?: string | null;
   role?: string
+  raffledCodes: IRaffledCode[]
 }
 
 export interface IServiceUser {

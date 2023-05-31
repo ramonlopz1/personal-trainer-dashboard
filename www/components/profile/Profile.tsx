@@ -3,13 +3,22 @@ import styles from "./Profile.module.css";
 import { IUser } from "@/logic/services/user/ServiceUsers";
 import { useEffect, useState } from "react";
 import CodeActivation from "./organisms/CodeActivation";
+import CodeList from "./organisms/CodeList";
+import { useRouter } from "next/router";
+import { constUser } from "@/data/constants/constants";
 
 export default function Profile() {
-  const { data: session } = useSession();
-  const [user, setUser] = useState(session?.user);
+  const [user, setUser] = useState<IUser>(constUser);
 
-  const id = user?.id;
-  useEffect(() => {}, []);
+  const {
+    query: { id },
+  } = useRouter();
+
+  useEffect(() => {
+    fetch(`/api/users?id=${id}`)
+      .then((data) => data.json())
+      .then(setUser);
+  }, [user]);
 
   return (
     <div className={styles.section}>
@@ -18,7 +27,9 @@ export default function Profile() {
         <div className={styles.subContainer}>
           <CodeActivation />
         </div>
-        <div className={styles.subContainer}>Lista de códigos</div>
+        <div className={styles.subContainer}>
+          <CodeList user={user} />
+        </div>
       </div>
     </div>
   );

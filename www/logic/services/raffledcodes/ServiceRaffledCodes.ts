@@ -3,6 +3,7 @@ import CollectionRaffledCodes from "@/db/CollectionRaffledCodes";
 export interface IRaffledCode {
   raffleCode: string;
   ownerId: string;
+  createdBy: string
 }
 
 export interface IServiceRaffledCodes {
