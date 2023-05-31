@@ -2,7 +2,7 @@ import { IUser } from "@/logic/services/user/ServiceUsers"
 
 import { IRaffledCode } from "@/logic/services/raffledcodes/ServiceRaffledCodes"
 
-export const constUser: IUser = {
+export const constUser = {
   name: "",
   email: "",
   password: "",
@@ -10,11 +10,6 @@ export const constUser: IUser = {
   birthDate: "",
   phone: "",
   role: "USER",
-  raffledCodes: [{
-    ownerId: "",
-    raffleCode: "",
-    createdBy: ""
-  }]
 }
 
 export const constRegisterValidationMsgs = {

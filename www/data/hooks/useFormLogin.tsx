@@ -83,7 +83,7 @@ export default function useFormLogin() {
     });
 
     if (!res || res?.error) setLoginErrorMsg("Credenciais inválidas");
-    else Router.push(`/profile?id=${session?.user?.id}`);
+    else if (session?.user?.id) Router.push(`/profile?id=${session?.user?.id}`);
   };
 
   const register = (userData: IUserFormData) => {
