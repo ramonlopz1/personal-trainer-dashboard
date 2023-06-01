@@ -16,7 +16,7 @@ export default class CollectionRaffledCodes implements ICollectionRaffledCodes {
       data: {
         raffleCode: data.raffleCode,
         ownerId: data.ownerId,
-        createdBy: data.createdBy
+        provider: data.provider
       },
     });
   }

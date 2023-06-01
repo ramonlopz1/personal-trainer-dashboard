@@ -22,7 +22,7 @@ export default async function handler(
     const store = await prisma.generatedCodes.create({
       data: {
         code,
-        createdBy: token?.name!
+        provider: token?.name!
       },
     });
     return res.status(200).json(store);

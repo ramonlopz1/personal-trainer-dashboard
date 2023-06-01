@@ -3,7 +3,7 @@ import CollectionRaffledCodes from "@/db/CollectionRaffledCodes";
 export interface IRaffledCode {
   raffleCode: string;
   ownerId: string;
-  createdBy: string
+  provider: string
 }
 
 export interface IServiceRaffledCodes {
@@ -27,7 +27,7 @@ export default class ServiceRaffledCodes implements IServiceRaffledCodes {
 
     return this._collection.activateCode({
       ...data,
-      createdBy: isValidCode.createdBy,
+      provider: isValidCode.provider,
     });
   }
 

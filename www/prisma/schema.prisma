@@ -24,18 +24,18 @@ model Users {
 }
 
 model RaffledCodes {
-  id         String @id @default(auto()) @map("_id") @db.ObjectId
-  raffleCode String @unique
-  owner      Users  @relation(fields: [ownerId], references: [id])
-  ownerId    String @db.ObjectId
-  createdBy String
-  createdAt DateTime @default(now())
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  raffleCode String   @unique
+  owner      Users    @relation(fields: [ownerId], references: [id])
+  ownerId    String   @db.ObjectId
+  provider   String
+  createdAt  DateTime @default(now())
 }
 
 model GeneratedCodes {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
   code      String   @unique
-  createdBy String
+  provider  String
   createdAt DateTime @default(now())
 }
 

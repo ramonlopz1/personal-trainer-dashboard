@@ -9,6 +9,7 @@ import Loading from "../templates/Loading";
 
 export default function Profile() {
   const [user, setUser] = useState<IUser>();
+  const [activationStatus, setActivationStatus] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(true);
 
   const {
@@ -20,7 +21,7 @@ export default function Profile() {
       .then((data) => data.json())
       .then(setUser)
       .then(() => setLoading(false));
-  }, [user]);
+  }, [activationStatus]);
 
   return (
     <div className={styles.section}>
@@ -31,7 +32,7 @@ export default function Profile() {
           <h3>Olá, {user?.name}</h3>
           <div className={styles.containers}>
             <div className={styles.subContainer}>
-              <CodeActivation />
+              <CodeActivation setActivationStatus={setActivationStatus} activationStatus={activationStatus}/>
             </div>
             <div className={styles.subContainer}>
               <CodeList user={user} />

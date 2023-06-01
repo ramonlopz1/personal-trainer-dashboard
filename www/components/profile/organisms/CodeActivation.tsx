@@ -1,11 +1,16 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, Dispatch, SetStateAction } from "react";
 import OneTimeInput from "./OneTimeInput";
 import styles from "./CodeActivation.module.css";
 import { useSession, getSession } from "next-auth/react";
 
-export default function CodeActivation() {
+interface CodeActivationProps {
+  setActivationStatus: Dispatch<SetStateAction<string>>
+  activationStatus: string
+}
+
+export default function CodeActivation({ activationStatus, setActivationStatus }: CodeActivationProps) {
   const [code, setCode] = useState<string>("");
-  const [status, setStatus] = useState<string>("");
+
 
   // session was implemented in this way to remove an typescript error when using useSession hook
   const [session, setSession] = useState<any>();
@@ -14,7 +19,7 @@ export default function CodeActivation() {
   }, []);
 
   const onSubmitHandler = (code: string) => {
-    setStatus("Verificando código...");
+    setActivationStatus("Verificando código...");
     fetch("/api/raffledCodes", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -24,7 +29,7 @@ export default function CodeActivation() {
       }),
     })
       .then((res) => res.text())
-      .then(setStatus)
+      .then(setActivationStatus)
       
 
     
@@ -39,7 +44,7 @@ export default function CodeActivation() {
         type="submit"
         value="Ativar"
       />
-      <span>{status}</span>
+      <span>{activationStatus}</span>
     </div>
   );
 }
