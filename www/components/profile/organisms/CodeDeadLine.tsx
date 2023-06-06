@@ -55,11 +55,21 @@ const CodeDeadLine: React.FC<CodeDeadLineProps> = ({ startDate }) => {
     };
   }, [startDate]);
 
+  if (
+    countdown.days === 0 &&
+    countdown.hours === 0 &&
+    countdown.minutes === 0 &&
+    countdown.seconds === 0
+  ) {
+
+    //delete all codes
+  }
+
   return (
     <div>
       {countdown.days > 0 && (
         <p>
-          Product expires in {countdown.days} dias,
+          {countdown.days} dias,
           {countdown.hours}h:{countdown.minutes}m:{countdown.seconds}s
         </p>
       )}

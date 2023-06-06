@@ -1,6 +1,5 @@
 import { groupByProvider } from "@/logic/utils/array";
 import styles from "./CodeList.module.css";
-import { IRaffledCode } from "@/logic/services/raffledcodes/ServiceRaffledCodes";
 import CodeDeadLine from "./CodeDeadLine";
 
 interface CodeListProps {
@@ -12,7 +11,7 @@ export default function CodeList(props: CodeListProps) {
 
   const renderCards = () => {
     const list = groupByProvider(raffledCodes);
-    console.log(list);
+    const formatDate = list[0].codes[0].createdAt.split("T")[0];
 
     return list.map((item: any, i: any) => {
       return (
@@ -22,16 +21,21 @@ export default function CodeList(props: CodeListProps) {
             <span className={styles.name}>{item.provider}</span>
           </div>
           <div className={styles.codeList}>
-            {item.codes.map((code: any, i: any) => {
-              const formatDate = code.createdAt.split("T")[0];
+            <CodeDeadLine startDate={formatDate} />
+            <div className={styles.codes}>
+              {item.codes.map((code: any, i: any) => {
+                const localeDate = new Date(
+                  code.createdAt
+                ).toLocaleDateString();
 
-              return (
-                <div key={i}>
-                  <span>{code.code}</span>
-                  <CodeDeadLine startDate={formatDate} />
-                </div>
-              );
-            })}
+                return (
+                  <div className={styles.codeBox} key={i}>
+                    <span className={styles.code}>{code.code}</span>
+                    <span className={styles.createdAt}>{localeDate}</span>
+                  </div>
+                );
+              })}
+            </div>
           </div>
         </div>
       );

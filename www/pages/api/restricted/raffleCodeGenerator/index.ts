@@ -4,7 +4,7 @@ import { PrismaClient } from "@prisma/client";
 import { getToken } from "next-auth/jwt";
 const prisma = new PrismaClient();
 
-const secret = process.env.SECRET
+const secret = process.env.SECRET;
 
 export default async function handler(
   req: NextApiRequest,
@@ -12,9 +12,9 @@ export default async function handler(
 ) {
   const token = await getToken({ req, secret });
   const tokenId = token?.sub;
-  // if (token?.role !== "ADMIN") 
+  // if (token?.role !== "ADMIN")
   //   return res.status(401).send("Não autorizado.");
- console.log("oi")
+
   if (!token) res.status(401).json({ Message: "Não autorizado." });
 
   const code = uuid().split("-")[0].toUpperCase();
@@ -22,7 +22,7 @@ export default async function handler(
     const store = await prisma.generatedCodes.create({
       data: {
         code,
-        provider: token?.name!
+        provider: token?.name!,
       },
     });
     return res.status(200).json(store);

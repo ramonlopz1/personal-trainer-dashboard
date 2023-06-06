@@ -16,7 +16,6 @@ export default class ServiceRaffledCodes implements IServiceRaffledCodes {
 
   async active(data: IRaffledCode) {
     const { raffleCode } = data;
-    console.log("service: ", raffleCode);
     const isActive = await this._collection.isActive(raffleCode);
     const isValidCode = await this._collection.isValidCode(raffleCode);
     if (isActive) {
