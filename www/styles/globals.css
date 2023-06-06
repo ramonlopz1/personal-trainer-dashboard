@@ -1,10 +1,10 @@
 @import "react-alice-carousel/lib/alice-carousel.css";
 
 :root {
-
-  --darkColor: #060FBF;
-  --lightColor: #38BDFF;
+  --darkColor: #060fbf;
+  --lightColor: #38bdff;
   --veryLightColor: #c7ecff;
+  --shadow: 0 1px 4px rgba(0,0,0,.05), 0 4px 16px rgba(0,0,0,.06)
 }
 
 * {

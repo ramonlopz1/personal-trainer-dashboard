@@ -17,7 +17,7 @@ export default function Page(props: PageProps) {
           {props.extern ? (
             false
           ) : (
-            <button onClick={() => signOut()}>Sair</button>
+            <button className={styles.signOut} onClick={() => signOut()}>Sair</button>
           )}
         </header>
         <Boxed>

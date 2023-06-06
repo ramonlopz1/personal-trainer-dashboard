@@ -56,17 +56,18 @@
     justify-content: flex-start;
     flex-direction: column;
     gap: 5px;
+    overflow: hidden;
     padding: 15px;
     border-radius: 0px 6px 6px 0px;
     background-color: white;
     height: 100%;
-    width: 86%;
+    width: 95%;
 }
 
 .codes {
     display: flex;
     justify-content: flex-start;
-    gap: 10px;
+    gap: 5px;
     height: 80%;
     width: 100%;    
 }
