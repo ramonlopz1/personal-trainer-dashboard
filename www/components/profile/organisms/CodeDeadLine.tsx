@@ -66,10 +66,13 @@ const CodeDeadLine: React.FC<CodeDeadLineProps> = ({ startDate }) => {
   }
 
   return (
-    <div>
+    <div style={{
+      fontSize: '15px',
+      marginLeft: '5px'
+    }}>
       {countdown.days > 0 && (
         <p>
-          {countdown.days} dias,
+          {countdown.days} dias, <span> </span>
           {countdown.hours}h:{countdown.minutes}m:{countdown.seconds}s
         </p>
       )}
