@@ -2,8 +2,13 @@ import Head from "next/head";
 import Page from "@/components/layout/Page";
 import Profile from "@/components/profile/Profile";
 import { GetServerSideProps } from "next";
+import useAppData from "@/data/hooks/useAppContext";
 
 export default function ProfilePage() {
+  const ctx = useAppData()
+  
+  console.log(ctx)
+
   return (
     <>
       <Head>
