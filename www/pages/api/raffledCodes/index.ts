@@ -30,5 +30,13 @@ export default async function handler(
     } catch (err: any) {
       return res.status(404).send("Código inválido.");
     }
+  } else if(req.method === 'DELETE' && req.query.id) {
+    try {
+      await service.deleteAll(req.query.id)
+      return res.status(200).send('Códigos expirados.')
+    } catch (err: any) {
+      return res.status(404).send('Erro inesperado.')
+    }
+    
   }
 }

@@ -40,4 +40,10 @@ export default class CollectionRaffledCodes implements ICollectionRaffledCodes {
       }
     });
   }
+
+  async deleteAll(ownerId: string) {
+    return await this.prisma.raffledCodes.deleteMany({
+      where: { ownerId }
+    })
+  }
 }

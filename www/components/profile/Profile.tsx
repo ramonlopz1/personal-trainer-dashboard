@@ -32,7 +32,10 @@ export default function Profile() {
           <h3>Olá, {user?.name}</h3>
           <div className={styles.containers}>
             <div className={styles.subContainer}>
-              <CodeActivation setActivationStatus={setActivationStatus} activationStatus={activationStatus}/>
+              <CodeActivation
+                setActivationStatus={setActivationStatus}
+                activationStatus={activationStatus}
+              />
             </div>
             <div className={styles.subContainer}>
               <CodeList user={user} />

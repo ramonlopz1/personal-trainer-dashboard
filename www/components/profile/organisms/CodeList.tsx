@@ -34,7 +34,7 @@ export default function CodeList(props: CodeListProps) {
             <span className={styles.name}>{item.provider}</span>
             <span
               className={styles.activatedQuantity}
-              style={{ backgroundColor: activatedQuantity !== 10 ? "red" : "green" }}
+              style={{ backgroundColor: activatedQuantity > 10 ? "green" : "red" }}
             >
               {activatedQuantity} / 10
             </span>

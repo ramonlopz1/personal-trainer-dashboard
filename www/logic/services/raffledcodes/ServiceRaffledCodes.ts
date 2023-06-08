@@ -9,6 +9,7 @@ export interface IRaffledCode {
 export interface IServiceRaffledCodes {
   active: (data: IRaffledCode) => Promise<IRaffledCode>;
   list: () => Promise<IRaffledCode[]>;
+  deleteAll: (ownerId: string) => any
 }
 
 export default class ServiceRaffledCodes implements IServiceRaffledCodes {
@@ -18,7 +19,7 @@ export default class ServiceRaffledCodes implements IServiceRaffledCodes {
     const { raffleCode } = data;
     const isActive = await this._collection.isActive(raffleCode);
     const isValidCode = await this._collection.isValidCode(raffleCode);
-    if (isActive) {
+    if (isActive) { 
       throw new Error("Código informado já foi ativado.");
     } else if (!isValidCode) {
       throw new Error("Código inválido.");
@@ -35,5 +36,9 @@ export default class ServiceRaffledCodes implements IServiceRaffledCodes {
     if (!Object.keys(codes || {}).length)
       throw new Error("Códigos não encontrados.");
     return codes;
+  }
+
+  async deleteAll(ownerId: string) {
+    return await this._collection.deleteAll(ownerId)
   }
 }
