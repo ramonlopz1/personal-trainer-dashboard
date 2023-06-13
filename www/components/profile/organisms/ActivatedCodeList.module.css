@@ -80,7 +80,7 @@
     height: 80%;
     padding: 10px;
     width: 100px;
-    background-color: lightgray;
+    background-color: var(--veryLightColor);
     border-radius: 6px;
 }
 

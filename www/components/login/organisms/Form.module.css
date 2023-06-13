@@ -85,12 +85,12 @@
 }
 
 .form .btns .btnSignUp:disabled {
-  background-color: gray;
+  background-color: var(--veryLightColor);
   cursor: default;
 }
 
 .form .btns .btnSignUp:disabled:hover {
-  background-color: gray;
+  background-color: var(--veryLightColor);
 }
 
 .form .btns .btnSignUp:hover {
@@ -107,5 +107,5 @@
 }
 
 .form .btnBack:hover {
-  color: gray;
+  color: var(--veryLightColor);
 }

@@ -1,13 +1,13 @@
 import { groupByProvider } from "@/logic/utils/array";
-import styles from "./CodeList.module.css";
+import styles from "./ActivatedCodeList.module.css";
 import CodeDeadLine from "./CodeDeadLine";
 import AliceCarousel from "react-alice-carousel";
 
-interface CodeListProps {
+interface ActivatedCodeListProps {
   user: any;
 }
 
-export default function CodeList(props: CodeListProps) {
+export default function CodeList(props: ActivatedCodeListProps) {
   const { raffledCodes } = props.user;
 
   const renderCards = () => {

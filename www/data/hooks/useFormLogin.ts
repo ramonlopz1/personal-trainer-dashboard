@@ -47,7 +47,7 @@ export default function useFormLogin() {
   const [registerValidationMsgs, setRegisterValidationMsgs] =
     useState<IValidationMsgs>({});
 
-  // setup the validator msgs, setup activation of btnRegister and setup the object that contains the values inputted by user
+  // setup the validator msgs and setup the object that contains the values inputted by user
   const appendUserData = (event: ChangeEvent<HTMLInputElement>) => {
     validator(event);
     setUserInfo({ ...userData, [event.target.name]: event.target.value });
@@ -67,7 +67,7 @@ export default function useFormLogin() {
     } else {
       setRegisterValidationMsgs({
         ...registerValidationMsgs,
-        [inputName]: validator[inputName](inputValue),
+        [inputName]: (validator as any)[inputName](inputValue),
       });
     }
   };
@@ -75,7 +75,7 @@ export default function useFormLogin() {
   const login = async (e: any) => {
     e.preventDefault();
 
-    // pass the input values to credentials variable that will be utilized in auth.js (backend)
+    // pass the input values to credentials variable that will be utilized in next-auth.js (backend)
     const res = await signIn("credentials", {
       email: userData.email,
       password: userData.password,

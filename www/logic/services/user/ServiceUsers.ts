@@ -3,6 +3,7 @@ import argon2 from "argon2";
 import { IRaffledCode } from "../raffledcodes/ServiceRaffledCodes";
 
 export interface IUser {
+  id?: string
   name: string;
   email: string;
   password?: string;

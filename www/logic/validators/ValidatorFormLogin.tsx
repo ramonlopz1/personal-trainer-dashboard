@@ -1,10 +1,9 @@
 export interface IValidatorFormLogin {
-  name: (name: string) => string
-  email: (email: string) => string
-  password: (password: string, passwordConfirmation: string) => string
-  phone: (phone: string) => string
-  birthDate: (date: string) => string
-
+  name: (name: string) => string;
+  email: (email: string) => string;
+  password: (password: string, passwordConfirmation: string) => string;
+  phone: (phone: string) => string;
+  birthDate: (date: string) => string;
 }
 
 export default class ValidatorFormLogin implements IValidatorFormLogin {
