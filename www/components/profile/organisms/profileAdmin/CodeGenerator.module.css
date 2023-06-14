@@ -12,6 +12,13 @@
 }
 
 .generatedCode {
+    display: flex;
+    justify-content: center;
+    border-radius: 4px;
+    align-items: center;
+    height: 50px;
+    width: 250px;
+    background-color: white;
     font-size: 35px;
     font-weight: bold;
 }

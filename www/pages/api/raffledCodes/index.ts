@@ -23,6 +23,16 @@ export default async function handler(
     } catch (err: any) {
       return res.status(404).send({ Mensagem: err["message"] });
     }
+  } else if (req.method === "GET" && req.query.id) {
+    // if (token?.role !== "ADMIN") {
+    //   return res.status(401).send("Não autorizado");
+    // }
+    try {
+      const codes = await service.listByProvider(req.query.id);
+      return res.status(200).send(codes);
+    } catch (err: any) {
+      return res.status(404).send({ Mensagem: err["message"] });
+    }
   } else if (req.method === "POST") {
     try {
       await service.active(req.body);
@@ -30,13 +40,12 @@ export default async function handler(
     } catch (err: any) {
       return res.status(404).send("Código inválido.");
     }
-  } else if(req.method === 'DELETE' && req.query.id) {
+  } else if (req.method === "DELETE" && req.query.id) {
     try {
-      await service.deleteAll(req.query.id)
-      return res.status(200).send('Códigos expirados.')
+      await service.deleteAll(req.query.id);
+      return res.status(200).send("Códigos expirados.");
     } catch (err: any) {
-      return res.status(404).send('Erro inesperado.')
+      return res.status(404).send("Erro inesperado.");
     }
-    
   }
 }

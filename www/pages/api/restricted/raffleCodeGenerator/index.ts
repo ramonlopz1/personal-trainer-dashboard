@@ -23,6 +23,7 @@ export default async function handler(
       data: {
         code,
         provider: token?.name!,
+        providerId: tokenId,
       },
     });
     return res.status(200).json(store);

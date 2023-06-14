@@ -1,10 +1,10 @@
 import { useSession } from "next-auth/react";
 import styles from "./Profile.module.css";
 import { IUser } from "@/logic/services/user/ServiceUsers";
-import ActivatedCodeList from "./organisms/ActivatedCodeList";
+import ActivatedCodeList from "./organisms/profile/ActivatedCodeList";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import CodeActivation from "./organisms/CodeActivation";
+import CodeActivation from "./organisms/profile/CodeActivation";
 import Loading from "../templates/Loading";
 
 export default function Profile() {

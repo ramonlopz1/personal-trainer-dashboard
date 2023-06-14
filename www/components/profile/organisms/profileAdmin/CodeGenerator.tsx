@@ -1,11 +1,16 @@
 import styles from "./CodeGenerator.module.css";
-import { useState } from "react";
+import { Dispatch, useState } from "react";
 
-export default function CodeGenerator(): JSX.Element {
-  const [generatedCode, setGeneratedCode] = useState<any>();
+interface CodeGeneratorProps {
+  generatedCode: string;
+  setGeneratedCode: Dispatch<string | JSX.Element>
+}
+
+export default function CodeGenerator(props: CodeGeneratorProps): JSX.Element {
+  const { generatedCode, setGeneratedCode } = props;
 
   const loadJSX = <span className={styles.loading}>Carregando...</span>;
-  
+
   const onClickHandler = async () => {
     setGeneratedCode(loadJSX);
     const fetched = await fetch("/api/restricted/raffleCodeGenerator");

@@ -12,11 +12,18 @@ export default class CollectionRaffledCodes implements ICollectionRaffledCodes {
   constructor(private readonly prisma = new PrismaClient()) {}
 
   async activateCode(data: any): Promise<IRaffledCode> {
+    await this.prisma.generatedCodes.update({
+      where: { code: data.raffleCode },
+      data: {
+        isActive: true,
+      },
+    });
+
     return await this.prisma.raffledCodes.create({
       data: {
         raffleCode: data.raffleCode,
         ownerId: data.ownerId,
-        provider: data.provider
+        provider: data.provider,
       },
     });
   }
@@ -36,14 +43,21 @@ export default class CollectionRaffledCodes implements ICollectionRaffledCodes {
   async listCodes(): Promise<IRaffledCode[]> {
     return await this.prisma.raffledCodes.findMany({
       include: {
-        owner: true
-      }
+        owner: true,
+      },
     });
   }
 
   async deleteAll(ownerId: string) {
     return await this.prisma.raffledCodes.deleteMany({
-      where: { ownerId }
-    })
+      where: { ownerId },
+    });
+  }
+
+  async listCodesByProviderId(providerId: string) {
+    return await this.prisma.generatedCodes.findMany({
+      where: { providerId },
+      take: 15,
+    });
   }
 }
