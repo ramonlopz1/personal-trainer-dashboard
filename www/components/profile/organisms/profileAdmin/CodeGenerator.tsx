@@ -21,7 +21,7 @@ export default function CodeGenerator(props: CodeGeneratorProps): JSX.Element {
   return (
     <div className={styles.codeGenerator}>
       <h4>Gerar novo código</h4>
-      <span className={styles.generatedCode}>{generatedCode}</span>
+      <span className={styles.generatedCode}>{generatedCode ? generatedCode : "- - - - - - - -"}</span>
       <button onClick={onClickHandler} className={styles.btnGenerator}>
         Novo
       </button>

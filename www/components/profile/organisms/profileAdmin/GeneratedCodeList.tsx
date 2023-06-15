@@ -1,7 +1,6 @@
 import styles from "./GeneratedCodeList.module.css";
 import { GeneratedCodes } from "@prisma/client";
 
-
 interface GeneratedCodeListProps {
   generatedCodeList: GeneratedCodes[] | undefined;
 }
@@ -13,11 +12,21 @@ export default function GeneratedCodeList(
 
   const renderList = () => {
     return codeList?.map((item, i) => {
-      return( <div className={styles.listItem}>
-        <div>Criado em: {item.createdAt.toLocaleString()}</div>
-        <div>código em: {item.code}</div>
-        <div>Ativo?: {item.isActive ? "ativo" : "inativo"}</div>
-      </div>)
+      const localeDate = new Date(item.createdAt).toLocaleDateString();
+      return (
+        <div className={styles.listItem}>
+          <div>{localeDate}</div>
+          <div>{item.code}</div>
+          <div
+            style={{
+              color: item.isActive ? "green" : "red",
+              fontWeight: "bold",
+            }}
+          >
+            {item.isActive ? "Ativo" : "Inativo"}
+          </div>
+        </div>
+      );
     });
   };
 
