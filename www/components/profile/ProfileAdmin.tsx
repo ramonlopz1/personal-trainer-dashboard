@@ -1,4 +1,4 @@
-import styles from "./Profile.module.css";
+import styles from "./ProfileAdmin.module.css";
 import { IUser } from "@/logic/services/user/ServiceUsers";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -13,6 +13,8 @@ export default function Profile() {
   const [generatedCode, setGeneratedCode] = useState<any>();
   const [generatedCodeList, setGeneratedCodeList] =
     useState<GeneratedCodes[]>();
+  const [refresh, setRefresh] = useState<boolean>(false);
+  
   const {
     query: { id },
   } = useRouter();

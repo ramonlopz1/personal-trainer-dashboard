@@ -1,1 +1,1 @@
- - retornar códigos agrupados pelo fornecedor
+- criar lista de melhores clientes (com mais códigos) e exibir no perfil do fornecedor

@@ -4,14 +4,29 @@ import { IUser } from "@/logic/services/user/ServiceUsers";
 import ActivatedCodeList from "./organisms/profile/ActivatedCodeList";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import CodeActivation from "./organisms/profile/CodeActivation";
 import Loading from "../templates/Loading";
 import Link from "next/link";
+import UserInfo from "./organisms/providerView/UserInfo";
+
+const backBtnStyle = {
+  textDecoration: "none",
+  textAlign: "center" as const,
+  fontWeight: "bold",
+  borderRadius: "4px",
+  color: "white",
+  backgroundColor: "var(--lightColor)",
+  cursor: "pointer",
+  width: "80px",
+  display: "inline-block",
+  padding: '5px',
+  alignSelf: 'flex-end'
+};
 
 export default function UserCodesProviderView() {
   const [user, setUser] = useState<IUser>();
   const [loading, setLoading] = useState<boolean>(true);
 
+  
   const {
     query: { id, providerId },
   } = useRouter();
@@ -23,6 +38,7 @@ export default function UserCodesProviderView() {
       .then(() => setLoading(false));
   }, []);
 
+  
   return (
     <div className={styles.section}>
       {loading ? (
@@ -30,12 +46,14 @@ export default function UserCodesProviderView() {
       ) : (
         <>
           <div className={styles.containers}>
-            <Link href={`/profile?id=${providerId}`}>Voltar</Link>
+            <Link
+              style={{ ...backBtnStyle }}
+              href={`/profile?id=${providerId}`}
+            >
+              Voltar
+            </Link>
             <div className={styles.subContainer}>
-              <div>data nasc {user?.birthDate}</div>
-              <div>email {user?.email}</div>
-              <div>nome {user?.name}</div>
-              <div>fone {user?.phone}</div>
+              <UserInfo user={user} />
             </div>
             <div className={styles.subContainer}>
               <ActivatedCodeList user={user} />

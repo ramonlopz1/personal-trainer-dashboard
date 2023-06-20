@@ -1,0 +1,27 @@
+.userInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 100%;
+}
+
+.boxInfo {
+    
+}
+
+.label {
+    display: inline-block;
+    width: 150px;
+    font-size: 15px;
+    background-color: white;
+    padding: 5px;
+    font-weight: bold;
+}
+
+.value {
+    background-color: white;
+    display: inline-block;
+    padding: 5px;
+    margin-left: 5px;
+    width: calc(100% - 155px);
+}

@@ -1,8 +1,5 @@
 import Head from "next/head";
 import Page from "@/components/layout/Page";
-import Profile from "@/components/profile/Profile";
-import ProfileAdmin from "@/components/profile/ProfileAdmin"
-import useAppData from "@/data/hooks/useAppContext";
 import { useSession } from "next-auth/react";
 import UserCodesProviderView from "@/components/profile/UserCodesProviderView";
 
@@ -10,8 +7,8 @@ export default function ProfilePage() {
   // const ctx = useAppData()
   // console.log(ctx)'
 
-  const { data: session } = useSession()
-  const role = session?.role
+  const { data: session } = useSession();
+  const role = session?.role;
 
   return (
     <>
@@ -22,7 +19,11 @@ export default function ProfilePage() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Page>
-        {role === 'ADMIN' ? <UserCodesProviderView /> : <div>Erro.....</div>}
+        {role === "ADMIN" ? (
+          <UserCodesProviderView />
+        ) : (
+          <div>Não autorizado!</div>
+        )}
       </Page>
     </>
   );

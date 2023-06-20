@@ -29,11 +29,11 @@ export default function GeneratedCodeList(
           >
             {item.isActive ? "Ativo" : "Inativo"}
           </td>
-          <td>
+          <td className={styles.tdCustomerProfile}>
             {item.isActive ? (
-              <Link href={`/userByProvider?id=${item.ownerId}&providerId=${item.providerId}`}>Ver cliente</Link>
+              <Link className={styles.customerBtn} href={`/userByProvider?id=${item.ownerId}&providerId=${item.providerId}`}>Ver cliente</Link>
             ) : (
-              <button>-</button>
+              <span>Aguardando</span>
             )}
           </td>
         </tr>
