@@ -14,7 +14,7 @@ export default async function handler(
   const token = await getToken({ req, secret });
   const tokenId = token?.sub;
 
-  const { id: queryId } = req.query;
+  const { id: queryId, providerId: queryProviderId } = req.query;
   const service: IServiceUser = new ServiceUser();
 
   if (req.method === "GET" && !queryId) {
@@ -28,10 +28,20 @@ export default async function handler(
     } catch (err: any) {
       return res.status(404).send(err["message"]);
     }
-  } else if (req.method === "GET" && queryId) {
+  } else if (req.method === "GET" && queryId && !queryProviderId) {
     try {
       if (queryId !== tokenId) return res.status(401).send("Não autorizado");
       const user: IUser = await service.getOne(queryId);
+      return res.status(200).send(user);
+    } catch (err: any) {
+      return res.status(404).send(err["message"]);
+    }
+  } else if (req.method === "GET" && queryId && queryProviderId) {
+    try {
+      console.log(token?.role);
+      if (token?.role !== "ADMIN")
+        return res.status(401).send("Não autorizado");
+      const user: IUser = await service.getOne(queryId, queryProviderId);
       return res.status(200).send(user);
     } catch (err: any) {
       return res.status(404).send(err["message"]);

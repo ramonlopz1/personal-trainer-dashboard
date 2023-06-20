@@ -5,6 +5,7 @@ export interface IRaffledCode {
   raffleCode: string;
   ownerId: string;
   provider: string;
+  providerId?: string;
 }
 
 export interface IServiceRaffledCodes {
@@ -31,6 +32,7 @@ export default class ServiceRaffledCodes implements IServiceRaffledCodes {
     return this._collection.activateCode({
       ...data,
       provider: isValidCode.provider,
+      providerId: isValidCode.providerId,
     });
   }
 

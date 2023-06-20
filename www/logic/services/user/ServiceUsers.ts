@@ -3,20 +3,23 @@ import argon2 from "argon2";
 import { IRaffledCode } from "../raffledcodes/ServiceRaffledCodes";
 
 export interface IUser {
-  id?: string
+  id?: string;
   name: string;
   email: string;
   password?: string;
   passwordConfirmation?: string | null;
-  birthDate?: string | null
+  birthDate?: string | null;
   phone?: string | null;
-  role?: string
-  raffledCodes?: IRaffledCode[]
+  role?: string;
+  raffledCodes?: IRaffledCode[];
 }
 
 export interface IServiceUser {
   add: (user: IUser) => Promise<IUser>;
-  getOne: (id: string | string[]) => Promise<IUser>;
+  getOne: (
+    id: string | string[],
+    providerId?: string | string[]
+  ) => Promise<IUser>;
   list: () => Promise<IUser[]>;
   update: (id: string | string[], user: any) => Promise<IUser>;
 }
@@ -25,18 +28,25 @@ export default class ServiceUser implements IServiceUser {
   private _collection = new CollectionUser();
   async add(user: IUser) {
     const emailIsUsed = await this._collection.getUserByEmail(user.email);
-    const phoneIsUsed = user.phone && await this._collection.getUserByPhone(user.phone);
+    const phoneIsUsed =
+      user.phone && (await this._collection.getUserByPhone(user.phone));
     if (emailIsUsed) {
       throw new Error("E-mail já cadastrado.");
     } else if (phoneIsUsed) {
       throw new Error("Telefone já cadastrado.");
     }
 
-    return await this._collection.createUser(user)
+    return await this._collection.createUser(user);
   }
 
-  async getOne(id: string | string[]) {
-    const user = await this._collection.getUserById(id);
+  async getOne(id: string | string[], providerId?: string | string[]) {
+    let user;
+    if (!providerId) {
+      user = await this._collection.getUserById(id);
+    } else {
+      user = await this._collection.getUserByProvider(id, providerId);
+    }
+
     if (!user) throw new Error("Usuário não encontrado");
     return user;
   }

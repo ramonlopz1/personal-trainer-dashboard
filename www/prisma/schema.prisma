@@ -29,6 +29,7 @@ model RaffledCodes {
   owner      Users    @relation(fields: [ownerId], references: [id])
   ownerId    String   @db.ObjectId
   provider   String
+  providerId String   @db.ObjectId
   createdAt  DateTime @default(now())
 }
 
@@ -39,6 +40,7 @@ model GeneratedCodes {
   providerId String   @db.ObjectId
   createdAt  DateTime @default(now())
   isActive   Boolean  @default(false)
+  ownerId    String   @default("")
 }
 
 enum Role {

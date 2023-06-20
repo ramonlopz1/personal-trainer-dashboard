@@ -16,6 +16,7 @@ export default class CollectionRaffledCodes implements ICollectionRaffledCodes {
       where: { code: data.raffleCode },
       data: {
         isActive: true,
+        ownerId: data.ownerId,
       },
     });
 
@@ -24,6 +25,7 @@ export default class CollectionRaffledCodes implements ICollectionRaffledCodes {
         raffleCode: data.raffleCode,
         ownerId: data.ownerId,
         provider: data.provider,
+        providerId: data.providerId
       },
     });
   }

@@ -11,7 +11,8 @@ export default function Profile() {
   const [user, setUser] = useState<IUser>();
   const [loading, setLoading] = useState<boolean>(true);
   const [generatedCode, setGeneratedCode] = useState<any>();
-  const [generatedCodeList, setGeneratedCodeList] = useState<GeneratedCodes[]>();
+  const [generatedCodeList, setGeneratedCodeList] =
+    useState<GeneratedCodes[]>();
   const {
     query: { id },
   } = useRouter();
@@ -44,7 +45,7 @@ export default function Profile() {
               />
             </div>
             <div className={styles.subContainer}>
-              <GeneratedCodeList generatedCodeList={generatedCodeList}/>
+              <GeneratedCodeList generatedCodeList={generatedCodeList} />
             </div>
           </div>
         </>

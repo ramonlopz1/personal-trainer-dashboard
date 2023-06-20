@@ -28,6 +28,7 @@ export default function CodeActivation({
       body: JSON.stringify({
         raffleCode: code,
         ownerId: session?.user?.id,
+        
       }),
     })
       .then((res) => res.text())

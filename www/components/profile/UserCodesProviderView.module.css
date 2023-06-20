@@ -1,0 +1,32 @@
+.section {
+  background-color: white;
+  border-radius: 6px;
+  height: 95%;
+  width: 100%;
+  box-shadow: var(--shadow);
+  padding: 10px;
+}
+
+.title {
+  font-size: 15px;
+}
+
+.containers {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  gap: 15px;
+  
+}
+
+.subContainer {
+  border-radius: 6px;
+  background-color: whitesmoke;
+  padding: 10px;
+  width: 100%;
+}
+
+.subContainer {
+  
+}

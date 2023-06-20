@@ -9,6 +9,7 @@ interface ICollectionUser {
   getUserById: (id: string) => Promise<IUser>;
   listUsers: () => Promise<IUser[]>;
   updateUser: (id: string, user: any) => Promise<IUser>;
+  getUserByProvider: (id: any, providerId: any) => Promise<IUser>;
 }
 
 export default class CollectionUser implements ICollectionUser {
@@ -44,6 +45,17 @@ export default class CollectionUser implements ICollectionUser {
       // retorna o usuário e o dados relacionados da tabela raffledCodes
       where: { id },
       include: { raffledCodes: true },
+    });
+
+    const { password, ...res } = user!;
+    return res;
+  }
+
+  async getUserByProvider(id: any, providerId: any): Promise<IUser> {
+    const user = await this.prisma.users.findUnique({
+      // retorna o usuário e o dados relacionados da tabela raffledCodes
+      where: { id },
+      include: { raffledCodes: { where: { providerId: providerId } } },
     });
 
     const { password, ...res } = user!;
