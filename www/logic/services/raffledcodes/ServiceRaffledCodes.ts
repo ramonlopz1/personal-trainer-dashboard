@@ -5,7 +5,7 @@ export interface IRaffledCode {
   raffleCode: string;
   ownerId: string;
   provider: string;
-  providerId?: string;
+  providerId: string;
 }
 
 export interface IServiceRaffledCodes {

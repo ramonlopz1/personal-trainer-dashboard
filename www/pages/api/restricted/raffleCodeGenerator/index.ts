@@ -11,11 +11,11 @@ export default async function handler(
   res: NextApiResponse
 ) {
   const token = await getToken({ req, secret });
-  const tokenId = token?.sub;
+  const providerId = token?.sub;
   // if (token?.role !== "ADMIN")
   //   return res.status(401).send("Não autorizado.");
 
-  if (!token) res.status(401).json({ Message: "Não autorizado." });
+  if (!token) return res.status(401).json({ Message: "Não autorizado." });
 
   const code = uuid().split("-")[0].toUpperCase();
   try {
@@ -23,7 +23,7 @@ export default async function handler(
       data: {
         code,
         provider: token?.name!,
-        providerId: tokenId,
+        providerId: providerId!,
       },
     });
     return res.status(200).json(store);
@@ -31,6 +31,4 @@ export default async function handler(
     console.error(err);
     return res.status(500).json({ Message: "Erro inesperado." });
   }
-
-  // if(!code) throw new BadRequestException("Erro inesperado.", 500)
 }
