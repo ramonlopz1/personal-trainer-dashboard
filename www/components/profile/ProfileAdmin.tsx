@@ -13,6 +13,7 @@ export default function Profile() {
   const [generatedCode, setGeneratedCode] = useState<any>();
   const [generatedCodeList, setGeneratedCodeList] =
     useState<GeneratedCodes[]>();
+
   const [refresh, setRefresh] = useState<boolean>(false);
   
   const {
@@ -21,6 +22,7 @@ export default function Profile() {
 
   useEffect(() => {
     fetch(`/api/users?id=${id}`)
+    
       .then((data) => data.json())
       .then(setUser)
       .then(() => setLoading(false));
@@ -30,7 +32,7 @@ export default function Profile() {
     fetch(`/api/raffledCodes?id=${id}`)
       .then((data) => data.json())
       .then(setGeneratedCodeList);
-  }, [generatedCode]);
+  }, [generatedCode, refresh]);
 
   return (
     <div className={styles.section}>
@@ -47,7 +49,7 @@ export default function Profile() {
               />
             </div>
             <div className={styles.subContainer}>
-              <GeneratedCodeList generatedCodeList={generatedCodeList} />
+              <GeneratedCodeList generatedCodeList={generatedCodeList} setRefresh={setRefresh} refresh={refresh} />
             </div>
           </div>
         </>

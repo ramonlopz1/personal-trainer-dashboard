@@ -1,8 +1,29 @@
+.topDiv {
+  display: flex;
+  justify-content: space-between;
+ 
+}
+
+.topDiv svg {
+  cursor: pointer;
+}
+
+.topDiv svg:hover {
+  transition: .3s;
+  transform: rotate(40deg);
+}
+
+.btnRefresh {
+  background-color: none;
+  border: none;
+  outline: none;
+  font-size: 24px;
+}
+
 .list {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 5px;
 }
 
 .thead {
@@ -32,7 +53,14 @@
   background-color: white;
   border-radius: 6px;
   font-size: 15px;
+  margin-top: 5px;
   text-align: left;
+}
+
+.listItem td {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
 }
 
 .tdCustomerProfile a, .tdCustomerProfile span {
@@ -44,9 +72,15 @@
   display: inline-block;
   font-size: 13px;
   width: 100px;
+  cursor: default;
   text-align: center;
 }
 
 .customerBtn {
+  cursor: pointer !important;
   font-weight: bold;
+}
+
+.customerBtn:hover {
+  background-color: rgb(225, 224, 224);
 }

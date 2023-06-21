@@ -1,5 +1,7 @@
 // get a list of raffledCodes and group by provider
 
+import { GeneratedCodes } from "@prisma/client";
+
 export function groupByProvider(array: any[]) {
   const removeDuplicated = new Set(array.map((provider) => provider.provider));
   const transformToArray = [...removeDuplicated].map((provider) => {
@@ -23,4 +25,14 @@ export function groupByProvider(array: any[]) {
   });
 
   return transformToArray;
+}
+
+export function sortArrayByDayAndHour(arr: GeneratedCodes[]) {
+  arr.sort((a: GeneratedCodes, b: GeneratedCodes) => {
+    const dateA = new Date(a.createdAt);
+    const dateB = new Date(b.createdAt);
+    return dateB.getTime() - dateA.getTime();
+  });
+
+  return arr;
 }

@@ -1,7 +1,6 @@
 .section {
   background-color: white;
   border-radius: 6px;
-  height: 85vh;
   width: 100%;
   box-shadow: var(--shadow);
   padding: 10px;

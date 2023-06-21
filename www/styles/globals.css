@@ -1,10 +1,20 @@
 @import "react-alice-carousel/lib/alice-carousel.css";
 
+@import "activatedCodesSlide.css";
+
 :root {
   --darkColor: #060fbf;
   --lightColor: #38bdff;
   --veryLightColor: #c7ecff;
-  --shadow: 0 1px 4px rgba(0,0,0,.05), 0 4px 16px rgba(0,0,0,.06)
+  --shadow: 0 1px 4px rgba(0,0,0,.05), 0 4px 16px rgba(0,0,0,.06);
+}
+
+html {
+  height: auto
+}
+
+body {
+  height: auto;
 }
 
 * {
@@ -14,17 +24,3 @@
   margin: 0;
 }
 
-.alice-carousel__dots {
-  margin: 10px;
-}
-
-.alice-carousel__stage {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 10px;
-}
-
-.alice-carousel__stage-item__active__target {
-  width: 100px;
-}
