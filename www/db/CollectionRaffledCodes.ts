@@ -60,6 +60,7 @@ export default class CollectionRaffledCodes implements ICollectionRaffledCodes {
     return await this.prisma.generatedCodes.findMany({
       where: { providerId },
       take: 15,
+      orderBy: { createdAt: 'desc' }
     });
   }
 }

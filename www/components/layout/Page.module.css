@@ -27,12 +27,25 @@
   background-color: var(--darkColor);
 }
 
-.signOut {
+.headerBtns {
+  display: flex;
+  justify-content: space-between;
+  width: 110px;
+}
+
+.signOut,
+.btnCustomers {
   background: none;
+  text-decoration: none;
   border: none;
   cursor: pointer;
   font-weight: bold;
-  font-size: 17px;
+  font-size: 15px;
+  color: rgb(38, 38, 38);
+}
+
+.signOut {
+  color: rgb(255, 34, 34);
 }
 
 .section {

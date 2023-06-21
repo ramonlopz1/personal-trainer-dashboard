@@ -21,6 +21,7 @@ export interface IServiceUser {
     providerId?: string | string[]
   ) => Promise<IUser>;
   list: () => Promise<IUser[]>;
+  listByProvider: (providerId: string | string[]) => Promise<IUser[]>
   update: (id: string | string[], user: any) => Promise<IUser>;
 }
 
@@ -53,6 +54,12 @@ export default class ServiceUser implements IServiceUser {
 
   async list() {
     const users = await this._collection.listUsers();
+    if (!users) throw new Error("Usuários não encontrados.");
+    return users;
+  }
+
+  async listByProvider(providerId: string | string[]) {
+    const users = await this._collection.listUsersByProvider(providerId);
     if (!users) throw new Error("Usuários não encontrados.");
     return users;
   }

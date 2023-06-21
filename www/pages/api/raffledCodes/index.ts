@@ -14,6 +14,8 @@ export default async function handler(
   const service: IServiceRaffledCodes = new ServiceRaffledCodes();
 
   if (req.method === "GET" && !req.query.id) {
+    // GET ALL CODES
+
     // if (token?.role !== "ADMIN") {
     //   return res.status(401).send("Não autorizado");
     // }
@@ -24,6 +26,8 @@ export default async function handler(
       return res.status(404).send({ Mensagem: err["message"] });
     }
   } else if (req.method === "GET" && req.query.id) {
+    // GET ALL CODES BY USER ID
+
     // if (token?.role !== "ADMIN") {
     //   return res.status(401).send("Não autorizado");
     // }
@@ -34,6 +38,8 @@ export default async function handler(
       return res.status(404).send({ Mensagem: err["message"] });
     }
   } else if (req.method === "POST") {
+    // ACTIVATE A NEW CODE
+
     try {
       await service.active(req.body);
       return res.status(200).send("Código ativado com sucesso!");
@@ -41,6 +47,8 @@ export default async function handler(
       return res.status(404).send("Código inválido.");
     }
   } else if (req.method === "DELETE" && req.query.id) {
+    // DELETE ALL CODES BY USER ID
+
     try {
       await service.deleteAll(req.query.id);
       return res.status(200).send("Códigos expirados.");

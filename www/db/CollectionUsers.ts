@@ -8,6 +8,7 @@ interface ICollectionUser {
   getUserByPhone: (phone: string) => Promise<IUser>;
   getUserById: (id: string) => Promise<IUser>;
   listUsers: () => Promise<IUser[]>;
+  listUsersByProvider: (providerId: string) => Promise<IUser[]>;
   updateUser: (id: string, user: any) => Promise<IUser>;
   getUserByProvider: (id: any, providerId: any) => Promise<IUser>;
 }
@@ -65,6 +66,20 @@ export default class CollectionUser implements ICollectionUser {
   async listUsers(): Promise<IUser[]> {
     const users = await this.prisma.users.findMany({
       include: { raffledCodes: true },
+    });
+
+    const resp = users.map((user: IUser) => {
+      const { password, ...rest } = user;
+      return rest;
+    });
+
+    return resp;
+  }
+
+  async listUsersByProvider(providerId: any): Promise<IUser[]> {
+    const users = await this.prisma.users.findMany({
+      include: { raffledCodes: { where: { providerId } } },
+      where: { raffledCodes: { some: { providerId } } },
     });
 
     const resp = users.map((user: IUser) => {

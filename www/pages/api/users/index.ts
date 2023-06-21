@@ -17,7 +17,8 @@ export default async function handler(
   const { id: queryId, providerId: queryProviderId } = req.query;
   const service: IServiceUser = new ServiceUser();
 
-  if (req.method === "GET" && !queryId) {
+  if (req.method === "GET" && !queryId && !queryProviderId) {
+    // LIST ALL USERS
     try {
       // if (token?.role !== 'ADMIN') {
       //   return res.status(401).send("Não autorizado");
@@ -28,7 +29,19 @@ export default async function handler(
     } catch (err: any) {
       return res.status(404).send(err["message"]);
     }
+  } else if (req.method === "GET" && !queryId && queryProviderId) {
+    // LIST ALL USERS WHO HAVE CODES WITH THE PROVIDERID
+    try {
+      if (queryProviderId !== tokenId || token?.role !== "ADMIN")
+        return res.status(401).send("Não autorizado");
+      const users: IUser[] = await service.listByProvider(queryProviderId);
+      return res.status(200).send(users);
+    } catch (err: any) {
+      return res.status(404).send(err["message"]);
+    }
   } else if (req.method === "GET" && queryId && !queryProviderId) {
+    // GET A USER BY ID
+
     try {
       if (queryId !== tokenId) return res.status(401).send("Não autorizado");
       const user: IUser = await service.getOne(queryId);
@@ -37,6 +50,8 @@ export default async function handler(
       return res.status(404).send(err["message"]);
     }
   } else if (req.method === "GET" && queryId && queryProviderId) {
+    // GET A USER BY ID, WHO HAVE CODES WITH THE PROVIDERID
+
     try {
       console.log(token?.role);
       if (token?.role !== "ADMIN")
@@ -47,6 +62,8 @@ export default async function handler(
       return res.status(404).send(err["message"]);
     }
   } else if (req.method === "POST") {
+    // CREATE A NEW USER
+
     try {
       await service.add(req.body);
       return res.status(200).send("Usuário criado com sucesso");
@@ -54,6 +71,8 @@ export default async function handler(
       return res.status(404).send(err["message"]);
     }
   } else if (req.method === "PUT" && queryId) {
+    // UPDATE A USER BY ID
+
     try {
       if (queryId !== tokenId) return res.status(401).send("Não autorizado");
       const user: IUser = await service.update(queryId, req.body);
