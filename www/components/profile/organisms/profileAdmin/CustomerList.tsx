@@ -17,25 +17,52 @@ export default function CustomerList() {
       .then(() => setLoading(false));
   }, []);
 
-  console.log(users);
+  const calcGeneralInfos = () => {
+    let totalActivatedCodes: number = 0;
 
-  const renderCustomer = () => {
+    users?.forEach((user) => {
+      totalActivatedCodes += user.raffledCodes?.length!;
+    });
+
+    const totalCustomers = users?.length;
+
+    return {
+      totalActivatedCodes,
+      totalCustomers,
+    };
+  };
+
+  const renderGeneralInfo = () => {
+    const generalInfos = calcGeneralInfos();
+
+    return (
+      <div className={styles.generalInfo}>
+        <div className={styles.generalInfoBox}>
+          <span>Total de clientes:</span>
+          <span>{generalInfos.totalCustomers}</span>
+        </div>
+        <div className={styles.generalInfoBox}>
+          <span>Total de códigos ativados:</span>
+          <span>{generalInfos.totalActivatedCodes}</span>
+        </div>
+      </div>
+    );
+  };
+
+  const renderCustomerList = () => {
     return users?.map((user, i) => {
       return (
         <div className={styles.userContainer}>
           <div className={styles.picture}>
-                <div className={styles.img}>
-
-                </div>
+            <div className={styles.img}></div>
           </div>
           <div className={styles.userInfo}>
-                <div>{user.id}</div>
-                <div>{user.name}</div>
-                <div>{user.phone}</div>
-                <div>{user.email}</div>
-                <div>{user.birthDate}</div>
-                {/* <div>{user.raffledCodes[0].createdAt}</div> */}
-                <div>qtd {user.raffledCodes?.length}</div>
+            <div>{user.name}</div>
+            <div>qtd {user.raffledCodes?.length}</div>
+            <div>{user.phone}</div>
+            <div>{user.email}</div>
+            <div>{user.birthDate}</div>
+            {/* <div>{user.raffledCodes[0].createdAt}</div> */}
           </div>
         </div>
       );
@@ -49,7 +76,8 @@ export default function CustomerList() {
       ) : (
         <>
           <div className={styles.containers}>
-            <div className={styles.subContainer}>{renderCustomer()}</div>
+            <div className={styles.subContainer}>{renderGeneralInfo()}</div>
+            <div className={styles.subContainer}>{renderCustomerList()}</div>
           </div>
         </>
       )}

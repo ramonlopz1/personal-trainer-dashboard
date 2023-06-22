@@ -8,7 +8,6 @@
 
 .containers {
   display: flex;
-  flex-direction: column;
   height: 100%;
   width: 100%;
   gap: 15px;
@@ -34,7 +33,7 @@
 }
 
 .picture {
-  width: 150px;
+  width: 100px;
 }
 
 .picture .img {
@@ -47,5 +46,5 @@
 .userInfo {
   display: flex;
   justify-content: space-between;
-  width: calc(100% - 160px);
+  width: calc(100% - 100px);
 }

@@ -25,7 +25,7 @@ export default class CollectionRaffledCodes implements ICollectionRaffledCodes {
         raffleCode: data.raffleCode,
         ownerId: data.ownerId,
         provider: data.provider,
-        providerId: data.providerId
+        providerId: data.providerId,
       },
     });
   }
@@ -60,7 +60,7 @@ export default class CollectionRaffledCodes implements ICollectionRaffledCodes {
     return await this.prisma.generatedCodes.findMany({
       where: { providerId },
       take: 15,
-      orderBy: { createdAt: 'desc' }
+      orderBy: { createdAt: "desc" },
     });
   }
 }
