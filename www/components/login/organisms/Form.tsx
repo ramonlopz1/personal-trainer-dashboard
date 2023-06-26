@@ -23,6 +23,7 @@ interface FormProps {
   login: (e: any) => Promise<void>;
   register: (e: any) => void;
   enableBtn: boolean;
+  uploadImg: any
 }
 
 export default function Form({
@@ -37,6 +38,7 @@ export default function Form({
   login,
   register,
   enableBtn,
+  uploadImg
 }: FormProps): JSX.Element {
   return (
     <form onSubmit={login} className={styles.form}>
@@ -49,6 +51,16 @@ export default function Form({
       {showFormRegister ? (
         <>
           <div className={styles.inputs}>
+          <div className={styles.input}>
+              <label htmlFor="img">
+              </label>
+              <input
+                type="file"
+                name="img"
+                onChange={uploadImg}
+                placeholder="Insira o seu nome"
+              />
+            </div>
             <div className={styles.input}>
               <label htmlFor="name">
                 <IoPersonSharp />

@@ -6,25 +6,27 @@
   background-image: -webkit-linear-gradient(
     30deg,
     #ffffff 50%,
-    var(--veryLightColor) 50%
+    var(--lightColor) 50%
   );
   height: 800px;
 }
 
 .header {
-  height: 90px;
+  height: 60px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  padding: 0px 100px;
+  padding: 10px 100px;
+  margin-bottom: 10px;
+  background-color: var(--darkColor);
 }
 
 .logo {
-  height: 60px;
-  width: 60px;
-  border-radius: 30px;
-  background-color: var(--darkColor);
+  height: 40px;
+  width: 40px;
+  border-radius: 20px;
+  background-color: white;
 }
 
 .headerBtns {
@@ -40,12 +42,12 @@
   border: none;
   cursor: pointer;
   font-weight: bold;
+  color: white;
   font-size: 15px;
-  color: rgb(38, 38, 38);
 }
 
-.signOut {
-  color: rgb(255, 34, 34);
+.signOut:hover, .btnCustomers:hover {
+  color: rgb(223, 221, 221);
 }
 
 .section {

@@ -10,10 +10,13 @@
 
 .codeActivation input[type="text"] {
   width: 40px;
+  
 }
 
 .codeActivation input[type="submit"] {
     height: 30px;
+    background-color: var(--darkColor);
+    color: white;
     width: 100px ;
     outline: none;
     border-radius: 4px;

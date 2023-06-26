@@ -17,7 +17,8 @@ export default function Login() {
     register,
     registerErrorMsgs,
     registerValidationMsgs,
-    enableBtn
+    enableBtn,
+    uploadImg
   } = useFormLogin();
 
   return (
@@ -62,6 +63,7 @@ export default function Login() {
           setShowFormRegister={setShowFormRegister}
           showFormRegister={showFormRegister}
           enableBtn={enableBtn}
+          uploadImg={uploadImg}
         />
       ) : (
         false

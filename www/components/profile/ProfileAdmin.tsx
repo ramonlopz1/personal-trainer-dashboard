@@ -40,7 +40,7 @@ export default function Profile() {
         <Loading />
       ) : (
         <>
-          <h3>Olá, {user?.name}</h3>
+          <h3 className={styles.title}>Olá, {user?.name}</h3>
           <div className={styles.containers}>
             <div className={styles.subContainer}>
               <CodeGenerator

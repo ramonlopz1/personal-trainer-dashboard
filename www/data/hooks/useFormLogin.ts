@@ -6,6 +6,7 @@ import { useSession } from "next-auth/react";
 import { constUser } from "../constants/constants";
 
 interface IUserFormData {
+  image?: string;
   name?: string;
   birthDate?: string;
   email: string;
@@ -120,6 +121,25 @@ export default function useFormLogin() {
     }
   };
 
+  const uploadImg = (e: ChangeEvent<HTMLInputElement>) => {
+    const formData = new FormData();
+    formData.append("image", e.target.files[0]);
+
+    fetch("https://api.imgur.com/3/image", {
+      method: "POST",
+      headers: {
+        Authorization: "Client-ID d9d975905f90bbe",
+      },
+      body: JSON.stringify(formData),
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        if (res.link) {
+          setUserInfo({ ...userData, image: res.link });
+        }
+      });
+  };
+
   return {
     showFormLogin,
     registerValidationMsgs,
@@ -133,5 +153,6 @@ export default function useFormLogin() {
     register,
     registerErrorMsgs,
     enableBtn,
+    uploadImg,
   };
 }

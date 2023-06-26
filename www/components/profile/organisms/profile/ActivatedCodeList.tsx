@@ -1,5 +1,6 @@
 import { groupByProvider } from "@/logic/utils/array";
 import styles from "./ActivatedCodeList.module.css";
+import { IoTimerOutline } from 'react-icons/io5'
 import CodeDeadLine from "./CodeDeadLine";
 import AliceCarousel from "react-alice-carousel";
 
@@ -40,7 +41,10 @@ export default function CodeList(props: ActivatedCodeListProps) {
             </span>
           </div>
           <div className={styles.codeList}>
+            <div className={styles.deadLine}>
+            <IoTimerOutline/>
             <CodeDeadLine startDate={expireDate.createdAt} />
+            </div>
             <div className={styles.codes}>
               <AliceCarousel
                 mouseTracking

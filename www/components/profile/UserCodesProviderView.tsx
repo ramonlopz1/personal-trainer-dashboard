@@ -14,7 +14,7 @@ const backBtnStyle = {
   fontWeight: "bold",
   borderRadius: "4px",
   color: "white",
-  backgroundColor: "var(--lightColor)",
+  backgroundColor: "var(--darkColor)",
   cursor: "pointer",
   width: "80px",
   display: "inline-block",

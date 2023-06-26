@@ -1,8 +1,9 @@
-import { IUser } from "@/logic/services/user/ServiceUsers"
+import { IUser } from "@/logic/services/user/ServiceUsers";
 
-import { IRaffledCode } from "@/logic/services/raffledcodes/ServiceRaffledCodes"
+import { IRaffledCode } from "@/logic/services/raffledcodes/ServiceRaffledCodes";
 
 export const constUser = {
+  image: "pattern",
   name: "",
   email: "",
   password: "",
@@ -10,15 +11,14 @@ export const constUser = {
   birthDate: "",
   phone: "",
   role: "USER",
-}
+};
 
 export const constRegisterValidationMsgs = {
-    name: "",
-    email: "",
-    password: "",
-    passwordConfirmation: "",
-    birthDate: "",
-    phone: "",
-}
-
-
+  image: "",
+  name: "",
+  email: "",
+  password: "",
+  passwordConfirmation: "",
+  birthDate: "",
+  phone: "",
+};

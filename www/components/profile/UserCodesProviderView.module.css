@@ -1,9 +1,7 @@
 .section {
-  background-color: white;
   border-radius: 6px;
   height: 95%;
   width: 100%;
-  box-shadow: var(--shadow);
   padding: 10px;
 }
 
@@ -21,8 +19,9 @@
 }
 
 .subContainer {
+  box-shadow: var(--shadow);
   border-radius: 6px;
-  background-color: whitesmoke;
+  background-color: white;
   padding: 10px;
   width: 100%;
 }
