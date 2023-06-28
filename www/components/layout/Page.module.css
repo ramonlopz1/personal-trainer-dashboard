@@ -6,9 +6,9 @@
   background-image: -webkit-linear-gradient(
     30deg,
     #ffffff 50%,
-    var(--lightColor) 50%
+    var(--lightBlue) 50%
   );
-  height: 800px;
+  justify-content: space-between;
 }
 
 .header {
@@ -19,24 +19,28 @@
   width: 100%;
   padding: 10px 100px;
   margin-bottom: 10px;
-  background-color: var(--darkColor);
+  background-color: var(--darkBlue);
 }
 
 .logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   height: 40px;
-  width: 40px;
-  border-radius: 20px;
-  background-color: white;
+  width: 100px;
 }
 
 .headerBtns {
   display: flex;
+  align-items: center;
   justify-content: space-between;
   width: 110px;
+  gap: 25px;
 }
 
 .signOut,
-.btnCustomers {
+.btnCustomers,
+.btnHome {
   background: none;
   text-decoration: none;
   border: none;
@@ -46,7 +50,26 @@
   font-size: 15px;
 }
 
-.signOut:hover, .btnCustomers:hover {
+.btnHome,
+.btnCustomers {
+  border: 1px solid rgba(245, 245, 245, 0.534);
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  font-size: 22px;
+  padding: 3px 10px;
+  border-radius: 3px;
+}
+
+.signOut {
+  background-color: var(--redColor);
+  padding: 6px 10px;
+  border-radius: 3px;
+}
+
+.btnHome:hover,
+.signOut:hover,
+.btnCustomers:hover {
   color: rgb(223, 221, 221);
 }
 
@@ -55,4 +78,14 @@
   align-items: center;
   justify-content: center;
   width: 100%;
+}
+
+.footer {
+  display: flex;
+  height: 30px;
+  width: 100%;
+  justify-content: space-between;
+  padding: 5px 100px;
+  background-color: var(--darkBlue);
+  color: white;
 }

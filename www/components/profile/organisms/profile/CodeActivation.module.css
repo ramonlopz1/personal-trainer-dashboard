@@ -15,7 +15,7 @@
 
 .codeActivation input[type="submit"] {
     height: 30px;
-    background-color: var(--darkColor);
+    background-color: var(--redColor);
     color: white;
     width: 100px ;
     outline: none;

@@ -1,6 +1,6 @@
 import { groupByProvider } from "@/logic/utils/array";
 import styles from "./ActivatedCodeList.module.css";
-import { IoTimerOutline } from 'react-icons/io5'
+import { IoTimerOutline } from "react-icons/io5";
 import CodeDeadLine from "./CodeDeadLine";
 import AliceCarousel from "react-alice-carousel";
 
@@ -23,6 +23,7 @@ export default function CodeList(props: ActivatedCodeListProps) {
         return (
           <div className={styles.codeBox} key={i}>
             <span className={styles.code}>{code.code}</span>
+            <hr style={{ width: "60%", margin: "3px" }} />
             <span className={styles.createdAt}>{localeDate}</span>
           </div>
         );
@@ -35,15 +36,18 @@ export default function CodeList(props: ActivatedCodeListProps) {
             <span className={styles.name}>{item.provider}</span>
             <span
               className={styles.activatedQuantity}
-              style={{ backgroundColor: activatedQuantity > 10 ? "green" : "red" }}
+              style={{
+                backgroundColor:
+                  activatedQuantity > 10 ? "var(--greenColor)" : "var(--redColor)",
+              }}
             >
               {activatedQuantity} / 10
             </span>
           </div>
           <div className={styles.codeList}>
-            <div className={styles.deadLine}>
-            <IoTimerOutline/>
-            <CodeDeadLine startDate={expireDate.createdAt} />
+            <div className={styles.deadLine} style={{}}>
+              <IoTimerOutline />
+              <CodeDeadLine startDate={expireDate.createdAt} />
             </div>
             <div className={styles.codes}>
               <AliceCarousel

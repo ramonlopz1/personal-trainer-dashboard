@@ -10,6 +10,7 @@ import {
 } from "react-icons/io5";
 import InputMask from "react-input-mask";
 import styles from "./Form.module.css";
+import Link from "next/link";
 
 interface FormProps {
   userData: any;
@@ -23,7 +24,7 @@ interface FormProps {
   login: (e: any) => Promise<void>;
   register: (e: any) => void;
   enableBtn: boolean;
-  uploadImg: any
+  uploadImg: any;
 }
 
 export default function Form({
@@ -38,22 +39,15 @@ export default function Form({
   login,
   register,
   enableBtn,
-  uploadImg
+  uploadImg,
 }: FormProps): JSX.Element {
   return (
     <form onSubmit={login} className={styles.form}>
-      <button
-        className={styles.btnBack}
-        onClick={() => setShowFormLogin(false)}
-      >
-        <IoArrowBack />
-      </button>
       {showFormRegister ? (
         <>
           <div className={styles.inputs}>
-          <div className={styles.input}>
-              <label htmlFor="img">
-              </label>
+            <div className={styles.inputImg}>
+              <label htmlFor="img"></label>
               <input
                 type="file"
                 name="img"
@@ -195,6 +189,7 @@ export default function Form({
       ) : (
         false
       )}
+      {!showFormRegister ? <Link href="">Esqueceu a senha?</Link> : false}
       <div className={styles.btns}>
         {showFormRegister ? (
           <button
@@ -232,6 +227,16 @@ export default function Form({
           </button>
         )}
       </div>
+      {showFormRegister ? (
+        false
+      ) : (
+        <button
+          className={styles.btnBack}
+          onClick={() => setShowFormLogin(false)}
+        >
+          <IoArrowBack />
+        </button>
+      )}
     </form>
   );
 }

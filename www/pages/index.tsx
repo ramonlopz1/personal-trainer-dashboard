@@ -4,6 +4,7 @@ import Page from "@/components/layout/Page";
 import { useSession } from "next-auth/react";
 import Router from "next/router";
 import Image from "next/image";
+import AsideImage from "@/components/login/AsideImage";
 
 export default function LoginPage() {
   const { data: session } = useSession();
@@ -20,20 +21,19 @@ export default function LoginPage() {
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           <link rel="icon" href="/favicon.ico" />
         </Head>
-        <main>
-          <Page extern>
-            <div style={{}}>
-              <Image
-                src="/loginPageImage.png"
-                alt="vector"
-                width={580}
-                height={500}
-                priority={true} 
-              />
-            </div>
+        <Page extern>
+          <div
+            style={{
+              display: "flex",
+              boxShadow:
+                "0 1px 4px rgba(0, 0, 0, 0.05), 0 4px 16px rgba(0, 0, 0, 0.06)",
+              margin: "30px",
+            }}
+          >
+            <AsideImage />
             <Login />
-          </Page>
-        </main>
+          </div>
+        </Page>
       </>
     );
   }

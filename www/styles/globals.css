@@ -3,9 +3,12 @@
 @import "activatedCodesSlide.css";
 
 :root {
-  --darkColor: #060fbf;
-  --lightColor: #38bdff;
-  --veryLightColor: #c7ecff;
+  --darkBlue: #060fbf;
+  --lightBlue: #19C5FF;
+  --redColor: #FF0040;
+  --wineColor: #d6005d;
+  --greenColor: rgb(2, 240, 70);
+  --yellowColor: rgb(255, 217, 0);
   --shadow: 0 1px 4px rgba(0,0,0,.05), 0 4px 16px rgba(0,0,0,.06);
 }
 

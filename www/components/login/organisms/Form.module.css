@@ -4,7 +4,7 @@
   justify-content: space-evenly;
   align-items: center;
   width: 80%;
-  height: 85%;
+  height: 90%;
 }
 
 .form .inputs {
@@ -17,6 +17,11 @@
   align-items: center;
   height: 40px;
   width: 100%;
+  
+}
+
+.inputImg {
+  margin-bottom: 10px;
 }
 
 .input label,
@@ -73,7 +78,7 @@
 }
 
 .form .btns .submit {
-  background-color: var(--darkColor);
+  background-color: var(--darkBlue);
 }
 
 .form .btns .submit:hover {
@@ -85,12 +90,12 @@
 }
 
 .form .btns .btnSignUp:disabled {
-  background-color: var(--veryLightColor);
+  background-color: var(--redColor);
   cursor: default;
 }
 
 .form .btns .btnSignUp:disabled:hover {
-  background-color: var(--veryLightColor);
+  background-color: var(--redColor);
 }
 
 .form .btns .btnSignUp:hover {
@@ -107,5 +112,5 @@
 }
 
 .form .btnBack:hover {
-  color: var(--veryLightColor);
+  color: var(--redColor);
 }

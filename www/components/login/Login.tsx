@@ -18,7 +18,7 @@ export default function Login() {
     registerErrorMsgs,
     registerValidationMsgs,
     enableBtn,
-    uploadImg
+    uploadImg,
   } = useFormLogin();
 
   return (
