@@ -1,16 +1,9 @@
 import CollectionRaffledCodes from "@/db/CollectionRaffledCodes";
-import { GeneratedCodes } from "@prisma/client";
-
-export interface IRaffledCode {
-  raffleCode: string;
-  ownerId: string;
-  provider: string;
-  providerId: string;
-}
+import { GeneratedCodes, RaffledCodes } from "@prisma/client";
 
 export interface IServiceRaffledCodes {
-  active: (data: IRaffledCode) => Promise<IRaffledCode>;
-  list: () => Promise<IRaffledCode[]>;
+  active: (data: RaffledCodes) => Promise<RaffledCodes>;
+  list: () => Promise<RaffledCodes[]>;
   listByProvider: (providerId: string) => Promise<GeneratedCodes[]>;
   deleteAll: (ownerId: string) => any;
 }
@@ -18,7 +11,7 @@ export interface IServiceRaffledCodes {
 export default class ServiceRaffledCodes implements IServiceRaffledCodes {
   private _collection = new CollectionRaffledCodes();
 
-  async active(data: IRaffledCode) {
+  async active(data: RaffledCodes) {
     const { raffleCode } = data;
     const isActive = await this._collection.isActive(raffleCode);
     const isValidCode = await this._collection.isValidCode(raffleCode);

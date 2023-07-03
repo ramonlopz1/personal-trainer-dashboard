@@ -1,17 +1,17 @@
-import { PrismaClient } from "@prisma/client";
-import { IRaffledCode } from "@/logic/services/raffledcodes/ServiceRaffledCodes";
+import { PrismaClient, RaffledCodes } from "@prisma/client";
+
 
 interface ICollectionRaffledCodes {
-  activateCode: (data: IRaffledCode) => Promise<IRaffledCode>;
+  activateCode: (data: RaffledCodes) => Promise<RaffledCodes>;
   isActive: (code: string) => Promise<any>;
   isValidCode: (code: string) => Promise<any>;
-  listCodes: () => Promise<IRaffledCode[]>;
+  listCodes: () => Promise<RaffledCodes[]>;
 }
 
 export default class CollectionRaffledCodes implements ICollectionRaffledCodes {
   constructor(private readonly prisma = new PrismaClient()) {}
 
-  async activateCode(data: any): Promise<IRaffledCode> {
+  async activateCode(data: any): Promise<RaffledCodes> {
     await this.prisma.generatedCodes.update({
       where: { code: data.raffleCode },
       data: {
@@ -42,7 +42,7 @@ export default class CollectionRaffledCodes implements ICollectionRaffledCodes {
     });
   }
 
-  async listCodes(): Promise<IRaffledCode[]> {
+  async listCodes(): Promise<RaffledCodes[]> {
     return await this.prisma.raffledCodes.findMany({
       include: {
         owner: true,

@@ -37,7 +37,11 @@ export const authOptions = {
     secret: process.env.SECRET,
   },
   callbacks: {
+    async signIn({ user, account, profile, email, credentials }) {
+      return true
+    },
     async jwt({ token, user }) {
+      console.log(user)
       if (user) {
         // pass the role of user to token
         token.user = user;

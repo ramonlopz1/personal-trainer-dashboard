@@ -1,22 +1,21 @@
-import { IUser } from "@/logic/services/user/ServiceUsers";
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient, Users } from "@prisma/client";
 import argon2 from "argon2";
 
 interface ICollectionUser {
-  createUser: (user: IUser) => Promise<IUser>;
-  getUserByEmail: (email: string) => Promise<IUser>;
-  getUserByPhone: (phone: string) => Promise<IUser>;
-  getUserById: (id: string) => Promise<IUser>;
-  listUsers: () => Promise<IUser[]>;
-  listUsersByProvider: (providerId: string) => Promise<IUser[]>;
-  updateUser: (id: string, user: any) => Promise<IUser>;
-  getUserByProvider: (id: any, providerId: any) => Promise<IUser>;
+  createUser: (user: Users) => Promise<Users>;
+  getUserByEmail: (email: string) => Promise<Users>;
+  getUserByPhone: (phone: string) => Promise<Users>;
+  getUserById: (id: string) => Promise<Users>;
+  listUsers: () => Promise<Users[]>;
+  listUsersByProvider: (providerId: string) => Promise<Users[]>;
+  updateUser: (id: string, user: any) => Promise<Users>;
+  getUserByProvider: (id: any, providerId: any) => Promise<Users>;
 }
 
 export default class CollectionUser implements ICollectionUser {
   constructor(private readonly prisma = new PrismaClient()) {}
 
-  async createUser(user: IUser): Promise<IUser> {
+  async createUser(user: Users): Promise<Users> {
     const { password, ...data } = user;
 
     await this.prisma.users.create({
@@ -26,7 +25,7 @@ export default class CollectionUser implements ICollectionUser {
       },
     });
 
-    return data;
+    return { ...data, password: "" };
   }
 
   async getUserByEmail(email: string): Promise<any> {
@@ -41,7 +40,7 @@ export default class CollectionUser implements ICollectionUser {
     });
   }
 
-  async getUserById(id: any): Promise<IUser> {
+  async getUserById(id: any): Promise<Users> {
     const user = await this.prisma.users.findUnique({
       // retorna o usuário e o dados relacionados da tabela raffledCodes
       where: { id },
@@ -49,10 +48,10 @@ export default class CollectionUser implements ICollectionUser {
     });
 
     const { password, ...res } = user!;
-    return res;
+    return {...res, password: ""};
   }
 
-  async getUserByProvider(id: any, providerId: any): Promise<IUser> {
+  async getUserByProvider(id: any, providerId: any): Promise<Users> {
     const user = await this.prisma.users.findUnique({
       // retorna o usuário e o dados relacionados da tabela raffledCodes
       where: { id },
@@ -60,43 +59,43 @@ export default class CollectionUser implements ICollectionUser {
     });
 
     const { password, ...res } = user!;
-    return res;
+    return { ...res, password: "" };
   }
 
-  async listUsers(): Promise<IUser[]> {
+  async listUsers(): Promise<Users[]> {
     const users = await this.prisma.users.findMany({
       include: { raffledCodes: true },
     });
 
-    const resp = users.map((user: IUser) => {
+    const res = users.map((user: Users) => {
       const { password, ...rest } = user;
-      return rest;
+      return {...rest, password: ""};
     });
 
-    return resp;
+    return res;
   }
 
-  async listUsersByProvider(providerId: any): Promise<IUser[]> {
+  async listUsersByProvider(providerId: any): Promise<Users[]> {
     const users = await this.prisma.users.findMany({
       include: { raffledCodes: { where: { providerId } } },
       where: { raffledCodes: { some: { providerId } } },
     });
 
-    const resp = users.map((user: IUser) => {
+    const res = users.map((user: Users) => {
       const { password, ...rest } = user;
-      return rest;
+      return {...rest, password: ""};
     });
 
-    return resp;
+    return res;
   }
 
-  async updateUser(id: any, user: any): Promise<IUser> {
+  async updateUser(id: any, user: any): Promise<Users> {
     const updatedUser = await this.prisma.users.update({
       where: { id },
       data: user,
     });
 
     const { password, ...res } = updatedUser;
-    return res;
+    return {...res, password: ""};
   }
 }

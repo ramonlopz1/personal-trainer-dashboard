@@ -1,9 +1,7 @@
-import ServiceUser, {
-  IServiceUser,
-  IUser,
-} from "@/logic/services/user/ServiceUsers";
+import ServiceUser, { IServiceUser } from "@/logic/services/user/ServiceUsers";
 import { NextApiRequest, NextApiResponse } from "next";
 import { getToken } from "next-auth/jwt";
+import { Users } from "@prisma/client";
 
 const secret = process.env.SECRET;
 
@@ -24,7 +22,7 @@ export default async function handler(
       //   return res.status(401).send("Não autorizado");
       // }
 
-      const users: IUser[] = await service.list();
+      const users: Users[] = await service.list();
       return res.status(200).send(users);
     } catch (err: any) {
       return res.status(404).send(err["message"]);
@@ -34,7 +32,7 @@ export default async function handler(
     try {
       if (queryProviderId !== tokenId || token?.role !== "ADMIN")
         return res.status(401).send("Não autorizado");
-      const users: IUser[] = await service.listByProvider(queryProviderId);
+      const users: Users[] = await service.listByProvider(queryProviderId);
       return res.status(200).send(users);
     } catch (err: any) {
       return res.status(404).send(err["message"]);
@@ -44,7 +42,7 @@ export default async function handler(
 
     try {
       if (queryId !== tokenId) return res.status(401).send("Não autorizado");
-      const user: IUser = await service.getOne(queryId);
+      const user: Users = await service.getOne(queryId);
       return res.status(200).send(user);
     } catch (err: any) {
       return res.status(404).send(err["message"]);
@@ -56,7 +54,7 @@ export default async function handler(
       console.log(token?.role);
       if (token?.role !== "ADMIN")
         return res.status(401).send("Não autorizado");
-      const user: IUser = await service.getOne(queryId, queryProviderId);
+      const user: Users = await service.getOne(queryId, queryProviderId);
       return res.status(200).send(user);
     } catch (err: any) {
       return res.status(404).send(err["message"]);
@@ -75,7 +73,7 @@ export default async function handler(
 
     try {
       if (queryId !== tokenId) return res.status(401).send("Não autorizado");
-      const user: IUser = await service.update(queryId, req.body);
+      const user: Users = await service.update(queryId, req.body);
       return res.status(200).send(user);
     } catch (err: any) {
       return res.status(404).send(err["message"]);

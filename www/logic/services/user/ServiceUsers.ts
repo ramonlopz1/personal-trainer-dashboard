@@ -2,32 +2,22 @@ import CollectionUser from "@/db/CollectionUsers";
 import argon2 from "argon2";
 import { IRaffledCode } from "../raffledcodes/ServiceRaffledCodes";
 
-export interface IUser {
-  id?: string;
-  name: string;
-  email: string;
-  password?: string;
-  passwordConfirmation?: string | null;
-  birthDate?: string | null;
-  phone?: string | null;
-  role?: string;
-  raffledCodes?: IRaffledCode[];
-}
+import { Role, Users, RaffledCodes } from "@prisma/client";
 
 export interface IServiceUser {
-  add: (user: IUser) => Promise<IUser>;
+  add: (user: Users) => Promise<Users>;
   getOne: (
     id: string | string[],
     providerId?: string | string[]
-  ) => Promise<IUser>;
-  list: () => Promise<IUser[]>;
-  listByProvider: (providerId: string | string[]) => Promise<IUser[]>
-  update: (id: string | string[], user: any) => Promise<IUser>;
+  ) => Promise<Users>;
+  list: () => Promise<Users[]>;
+  listByProvider: (providerId: string | string[]) => Promise<Users[]>;
+  update: (id: string | string[], user: any) => Promise<Users>;
 }
 
 export default class ServiceUser implements IServiceUser {
   private _collection = new CollectionUser();
-  async add(user: IUser) {
+  async add(user: Users) {
     const emailIsUsed = await this._collection.getUserByEmail(user.email);
     const phoneIsUsed =
       user.phone && (await this._collection.getUserByPhone(user.phone));
@@ -64,7 +54,7 @@ export default class ServiceUser implements IServiceUser {
     return users;
   }
 
-  async update(id: string | string[], user: IUser) {
+  async update(id: string | string[], user: Users) {
     const updatedUser = await this._collection.updateUser(id, user);
     if (!updatedUser) throw new Error("Usuário não encontrado");
 

@@ -9,6 +9,8 @@ import AsideImage from "@/components/login/AsideImage";
 export default function LoginPage() {
   const { data: session } = useSession();
 
+  console.log(session)
+
   if (session) {
     Router.push(`/profile?id=${session?.user?.id}`);
     return;
