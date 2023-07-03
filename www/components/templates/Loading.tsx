@@ -1,15 +1,17 @@
 import Image from "next/image";
+import styles from "./Loading.module.css";
 
 export default function Loading() {
   const style = {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
+    height: '500px'
   };
 
   return (
     <div style={{ ...style }}>
-      <Image src="/loading.gif" alt="Loading" height={200} width={200} />
+      <div className={styles.customLoader}></div>
     </div>
   );
 }

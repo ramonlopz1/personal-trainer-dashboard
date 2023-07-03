@@ -123,21 +123,24 @@ export default function useFormLogin() {
 
   const uploadImg = (e: ChangeEvent<HTMLInputElement>) => {
     const formData = new FormData();
-    formData.append("image", e.target.files[0]);
 
-    fetch("https://api.imgur.com/3/image", {
-      method: "POST",
-      headers: {
-        Authorization: "Client-ID d9d975905f90bbe",
-      },
-      body: JSON.stringify(formData),
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        if (res.link) {
-          setUserInfo({ ...userData, image: res.link });
-        }
-      });
+    if (e.target.files && e.target.files?.length > 0) {
+      formData.append("image", e.target.files[0]);
+
+      fetch("https://api.imgur.com/3/image", {
+        method: "POST",
+        headers: {
+          Authorization: `Cliente-ID ${process.env.IMGUR_CLIENT_ID}`,
+        },
+        body: JSON.stringify(formData),
+      })
+        .then((res) => res.json())
+        .then((res) => {
+          if (res.link) {
+            setUserInfo({ ...userData, image: res.link });
+          }
+        });
+    }
   };
 
   return {

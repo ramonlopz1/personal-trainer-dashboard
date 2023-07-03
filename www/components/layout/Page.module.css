@@ -8,7 +8,7 @@
     #ffffff 50%,
     var(--lightBlue) 50%
   );
-  justify-content: space-between;
+  justify-content: space-between !important;
 }
 
 .header {
@@ -75,9 +75,10 @@
 
 .section {
   display: flex;
-  align-items: center;
   justify-content: center;
   width: 100%;
+  min-height: calc(100vh - 65px - 30px);
+  padding: 5px;
 }
 
 .footer {

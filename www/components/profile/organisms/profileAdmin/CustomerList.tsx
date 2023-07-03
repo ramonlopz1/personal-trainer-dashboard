@@ -7,7 +7,7 @@ import { useRouter } from "next/router";
 export default function CustomerList() {
   const { query } = useRouter();
 
-  const [loading, setLoading] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
   const [users, setUsers] = useState<IUser[]>();
 
   useEffect(() => {

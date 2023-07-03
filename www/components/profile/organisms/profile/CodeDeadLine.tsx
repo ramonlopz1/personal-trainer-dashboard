@@ -61,15 +61,27 @@ const CodeDeadLine: React.FC<CodeDeadLineProps> = ({ startDate }) => {
     countdown.minutes === 0 &&
     countdown.seconds === 0
   ) {
-
     //delete all codes
   }
 
   return (
-    <div style={{
-      fontSize: '15px',
-      marginLeft: '5px'
-    }}>
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        fontSize: "15px",
+        marginLeft: "5px",
+        padding: "2px 5px",
+        width: "190px",
+        borderRadius: '0px 4px 4px 0px',
+        backgroundColor:
+          countdown.days > 20
+            ? "var(--greenColor)"
+            : countdown.days > 10 && countdown.days < 20
+            ? "var(--yellowColor)"
+            : "var(--redColor)",
+      }}
+    >
       {countdown.days > 0 && (
         <p>
           {countdown.days} dias, <span> </span>

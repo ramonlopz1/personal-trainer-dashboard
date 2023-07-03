@@ -1,110 +1,115 @@
 .title {
-    margin-bottom: 5px;
-    font-size: 16px;
+  margin-bottom: 5px;
+  font-size: 16px;
 }
 
 .providerList {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
 }
 
 .provider {
-    display: flex;
-    justify-content: flex-start;
-    height: 150px;
-    gap: 10px;
-    width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  height: 150px;
+  gap: 10px;
+  width: 100%;
 }
 
 .providerInfo {
-    border-radius: 6px 0px 0px 6px;
-    height: 100%;
-    width: 120px;
-    background-color: whitesmoke;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 0px 10px;
-    justify-content: center;
+  border-radius: 6px 0px 0px 6px;
+  height: 100%;
+  width: 120px;
+  background-color: whitesmoke;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0px 10px;
+  justify-content: center;
 }
 
 .logo {
-    height: 60px;
-    width: 60px;
-    background-color: black;
-    border-radius: 30px;
+  height: 60px;
+  width: 60px;
+  background-color: black;
+  border-radius: 30px;
 }
 
 .name {
-    font-size: 14px;
-    margin-top: 5px;
-    text-align: center;
+  font-size: 14px;
+  margin-top: 5px;
+  text-align: center;
 }
 
 .activatedQuantity {
-    color: white;
-    margin-top: 5px;
-    font-size: 14px;
-    padding: 3px 5px;
-    border-radius: 4px;
-    font-weight: bold;
+  color: white;
+  margin-top: 5px;
+  font-size: 14px;
+  padding: 3px 5px;
+  border-radius: 4px;
+  font-weight: bold;
 }
 
 .deadLine {
-    display: flex;
-    justify-content: center;
-    color: rgb(35, 35, 35);
-    background-color: var(--lightBlue);
-    border-radius: 3px;
-    padding: 3px 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: rgb(35, 35, 35);
+  background-color: white;
+  border-radius: 4px;
+  padding-left: 5px;
+  border: 1px solid rgb(104, 104, 104);
+  font-weight: bold;
+}
+
+.deadLine span {
     font-weight: bold;
-    width: 200px;
 }
 
 .codeList {
-    display: flex;
-    align-items: flex-start;
-    justify-content: flex-start;
-    flex-direction: column;
-    gap: 5px;
-    overflow: hidden;
-    padding: 15px;
-    border-radius: 0px 6px 6px 0px;
-    background-color: whitesmoke;
-    height: 100%;
-    width: 95%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-direction: column;
+  gap: 5px;
+  overflow: hidden;
+  padding: 15px;
+  border-radius: 0px 6px 6px 0px;
+  background-color: whitesmoke;
+  height: 100%;
+  width: 95%;
 }
 
 .codes {
-    display: flex;
-    justify-content: flex-start;
-    gap: 5px;
-    height: 80%;
-    width: 100%;    
+  display: flex;
+  justify-content: flex-start;
+  gap: 5px;
+  height: 80%;
+  width: 100%;
 }
 
 .codeBox {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    height: 80%;
-    padding: 10px;
-    width: 100px;
-    background-color: white;
-    border: 1px solid var(--lightBlue);
-    color: white;
-    border-radius: 3px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 80%;
+  padding: 10px;
+  width: 100px;
+  background-color: white;
+  border: 1px solid var(--lightBlue);
+  color: white;
+  border-radius: 3px;
 }
 
 .code {
-    color: rgb(53, 53, 53);
-    font-weight: bold;
+  color: rgb(53, 53, 53);
+  font-weight: bold;
 }
 
 .createdAt {
-    color: rgb(53, 53, 53);
-    font-size: 13px;
+  color: rgb(53, 53, 53);
+  font-size: 13px;
 }
