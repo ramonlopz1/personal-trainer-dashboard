@@ -61,7 +61,9 @@ export default function CustomerList() {
           <div className={styles.userInfo}>
             <div className={styles.box}>
               <span className={styles.boxLabel}>Nome</span>
-              <span className={styles.boxValue}>{user.name}</span>
+              <span className={styles.boxValue}>
+                {user.name.split(" ").slice(0, 2).join(" ")}
+              </span>
             </div>
             <div className={styles.box}>
               <span className={styles.boxLabel}>Qtd</span>
