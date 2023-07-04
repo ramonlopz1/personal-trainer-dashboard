@@ -1,14 +1,14 @@
 import Loading from "@/components/templates/Loading";
 import styles from "./CustomerList.module.css";
 import { useEffect, useState } from "react";
-import { IUser } from "@/logic/services/user/ServiceUsers";
 import { useRouter } from "next/router";
+import Image from "next/image";
 
 export default function CustomerList() {
   const { query } = useRouter();
 
   const [loading, setLoading] = useState<boolean>(true);
-  const [users, setUsers] = useState<IUser[]>();
+  const [users, setUsers] = useState<any[]>();
 
   useEffect(() => {
     fetch(`/api/users?providerId=${query.providerId}`)
@@ -54,14 +54,33 @@ export default function CustomerList() {
       return (
         <div className={styles.userContainer}>
           <div className={styles.picture}>
-            <div className={styles.img}></div>
+            <div className={styles.img}>
+              <Image alt="profilePic" src={user.image} height={55} width={55} />
+            </div>
           </div>
           <div className={styles.userInfo}>
-            <div>{user.name}</div>
-            <div>qtd {user.raffledCodes?.length}</div>
-            <div>{user.phone}</div>
-            <div>{user.email}</div>
-            <div>{user.birthDate}</div>
+            <div className={styles.box}>
+              <span className={styles.boxLabel}>Nome</span>
+              <span className={styles.boxValue}>{user.name}</span>
+            </div>
+            <div className={styles.box}>
+              <span className={styles.boxLabel}>Qtd</span>
+              <span className={styles.boxValue}>
+                {user.raffledCodes?.length}
+              </span>
+            </div>
+            <div className={styles.box}>
+              <span className={styles.boxLabel}>Fone</span>
+              <span className={styles.boxValue}>{user.phone}</span>
+            </div>
+            <div className={styles.box}>
+              <span className={styles.boxLabel}>E-mail</span>
+              <span className={styles.boxValue}>{user.email}</span>
+            </div>
+            <div className={styles.box}>
+              <span className={styles.boxLabel}>Dt Nascimento</span>
+              <span className={styles.boxValue}>{user.birthDate}</span>
+            </div>
             {/* <div>{user.raffledCodes[0].createdAt}</div> */}
           </div>
         </div>

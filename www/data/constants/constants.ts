@@ -4,8 +4,8 @@ export const constUser = {
   email: "",
   password: "",
   passwordConfirmation: "",
-  birthDate: "",
-  phone: "",
+  birthDate: "Não informado",
+  phone: "Nao informado",
   role: "USER",
 };
 
