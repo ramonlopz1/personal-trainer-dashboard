@@ -12,10 +12,15 @@ export default async function handler(
   const token = await getToken({ req, secret });
   const tokenId = token?.sub;
 
-  const { id: queryId, providerId: queryProviderId } = req.query;
+  const {
+    id: queryId,
+    providerId: queryProviderId,
+    socialId: querySocialId,
+  } = req.query;
+
   const service: IServiceUser = new ServiceUser();
 
-  if (req.method === "GET" && !queryId && !queryProviderId) {
+  if (req.method === "GET" && !queryId && !queryProviderId && !querySocialId) {
     // LIST ALL USERS
     try {
       // if (token?.role !== 'ADMIN') {
@@ -27,7 +32,12 @@ export default async function handler(
     } catch (err: any) {
       return res.status(404).send(err["message"]);
     }
-  } else if (req.method === "GET" && !queryId && queryProviderId) {
+  } else if (
+    req.method === "GET" &&
+    !queryId &&
+    !querySocialId &&
+    queryProviderId
+  ) {
     // LIST ALL USERS WHO HAVE CODES WITH THE PROVIDERID
     try {
       if (queryProviderId !== tokenId || token?.role !== "ADMIN")
@@ -37,8 +47,15 @@ export default async function handler(
     } catch (err: any) {
       return res.status(404).send(err["message"]);
     }
-  } else if (req.method === "GET" && queryId && !queryProviderId) {
+  } else if (
+    req.method === "GET" &&
+    queryId &&
+    !querySocialId &&
+    !queryProviderId
+  ) {
     // GET A USER BY ID
+
+    console.log(token)
 
     try {
       if (queryId !== tokenId) return res.status(401).send("Não autorizado");
@@ -47,7 +64,34 @@ export default async function handler(
     } catch (err: any) {
       return res.status(404).send(err["message"]);
     }
-  } else if (req.method === "GET" && queryId && queryProviderId) {
+  } else if (
+    req.method === "POST" &&
+    querySocialId &&
+    !queryId &&
+    !queryProviderId
+  ) {
+    // GET A USER BY SOCIAL ID
+
+    try {
+      if (req.body.socialId !== tokenId)
+        return res.status(401).send("Não autorizado");
+
+        
+      const user: Users = await service.getOneOrCreateBySocialId(
+        req.body,
+        querySocialId
+      );
+
+      return res.status(200).send(user);
+    } catch (err: any) {
+      return res.status(404).send({ error: true });
+    }
+  } else if (
+    req.method === "GET" &&
+    queryId &&
+    queryProviderId &&
+    !querySocialId
+  ) {
     // GET A USER BY ID, WHO HAVE CODES WITH THE PROVIDERID
 
     try {

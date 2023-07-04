@@ -6,6 +6,7 @@ interface ICollectionUser {
   getUserByEmail: (email: string) => Promise<Users>;
   getUserByPhone: (phone: string) => Promise<Users>;
   getUserById: (id: string) => Promise<Users>;
+  getUserOrCreateBySocialId: (payload: any, id: string) => Promise<Users>;
   listUsers: () => Promise<Users[]>;
   listUsersByProvider: (providerId: string) => Promise<Users[]>;
   updateUser: (id: string, user: any) => Promise<Users>;
@@ -22,6 +23,7 @@ export default class CollectionUser implements ICollectionUser {
       data: {
         password: await argon2.hash(password!),
         ...data,
+        socialId: Math.random(),
       },
     });
 
@@ -48,7 +50,27 @@ export default class CollectionUser implements ICollectionUser {
     });
 
     const { password, ...res } = user!;
-    return {...res, password: ""};
+    return { ...res, password: "" };
+  }
+
+  async getUserOrCreateBySocialId(payload: any, socialId: any): Promise<Users> {
+    let user = await this.prisma.users.findUnique({
+      // retorna o usuário e o dados relacionados da tabela raffledCodes
+      where: { socialId },
+      rejectOnNotFound: false,
+      include: { raffledCodes: true },
+    });
+
+    if (!user) {
+      user = await this.prisma.users.create({
+        data: {
+          ...payload,
+        },
+      });
+    }
+
+    const { password, ...res } = user!;
+    return { ...res, password: "" };
   }
 
   async getUserByProvider(id: any, providerId: any): Promise<Users> {
@@ -69,7 +91,7 @@ export default class CollectionUser implements ICollectionUser {
 
     const res = users.map((user: Users) => {
       const { password, ...rest } = user;
-      return {...rest, password: ""};
+      return { ...rest, password: "" };
     });
 
     return res;
@@ -83,7 +105,7 @@ export default class CollectionUser implements ICollectionUser {
 
     const res = users.map((user: Users) => {
       const { password, ...rest } = user;
-      return {...rest, password: ""};
+      return { ...rest, password: "" };
     });
 
     return res;
@@ -96,6 +118,6 @@ export default class CollectionUser implements ICollectionUser {
     });
 
     const { password, ...res } = updatedUser;
-    return {...res, password: ""};
+    return { ...res, password: "" };
   }
 }

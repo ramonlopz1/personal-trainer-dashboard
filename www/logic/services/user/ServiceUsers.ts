@@ -1,6 +1,5 @@
 import CollectionUser from "@/db/CollectionUsers";
 import argon2 from "argon2";
-import { IRaffledCode } from "../raffledcodes/ServiceRaffledCodes";
 
 import { Role, Users, RaffledCodes } from "@prisma/client";
 
@@ -9,6 +8,10 @@ export interface IServiceUser {
   getOne: (
     id: string | string[],
     providerId?: string | string[]
+  ) => Promise<Users>;
+  getOneOrCreateBySocialId: (
+    payload: any,
+    socialId?: string | string[]
   ) => Promise<Users>;
   list: () => Promise<Users[]>;
   listByProvider: (providerId: string | string[]) => Promise<Users[]>;
@@ -37,6 +40,16 @@ export default class ServiceUser implements IServiceUser {
     } else {
       user = await this._collection.getUserByProvider(id, providerId);
     }
+
+    if (!user) throw new Error("Usuário não encontrado");
+    return user;
+  }
+
+  async getOneOrCreateBySocialId(payload: any, socialId?: string | string[]) {
+    const user = await this._collection.getUserOrCreateBySocialId(
+      payload,
+      socialId
+    );
 
     if (!user) throw new Error("Usuário não encontrado");
     return user;

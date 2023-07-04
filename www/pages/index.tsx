@@ -8,11 +8,28 @@ import AsideImage from "@/components/login/AsideImage";
 
 export default function LoginPage() {
   const { data: session } = useSession();
+  //session.user.provider
 
-  console.log(session)
+  // ta salvando o usuário do google no mongo, mas ta dando algum erro
 
-  if (session) {
-    Router.push(`/profile?id=${session?.user?.id}`);
+  if (session?.user.provider === "google") {
+    fetch(`/api/users?socialId=${session?.user.id}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        socialId: session?.user.id,
+        name: session?.user.name,
+        email: session?.user.email,
+        image: session?.user.image,
+        password: "googlepassword",
+      }),
+    })
+      .then((data) => data.json())
+      .then((res) => Router.push(`/profile?id=${res.id}`));
+  }
+
+  if (session?.user.provider === "credentials") {
+    Router.push(`/profile?id=${session?.user.id}`);
     return;
   } else {
     return (

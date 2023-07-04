@@ -38,10 +38,10 @@ export const authOptions = {
   },
   callbacks: {
     async signIn({ user, account, profile, email, credentials }) {
+      user.provider = account.provider
       return true
     },
     async jwt({ token, user }) {
-      console.log(user)
       if (user) {
         // pass the role of user to token
         token.user = user;
@@ -50,7 +50,7 @@ export const authOptions = {
 
       return token;
     },
-    async session({ session, user, token }) {
+    async session({ session, user, token, account }) {
       // pass the role to client session
       if (token) {
         session.user = token.user;

@@ -12,6 +12,7 @@ datasource db {
 
 model Users {
   id              String         @id @default(auto()) @map("_id") @db.ObjectId
+  socialId        String?        @unique
   image           String?
   name            String
   email           String         @unique
