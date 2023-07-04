@@ -1,4 +1,3 @@
-import { IUser } from "@/logic/services/user/ServiceUsers";
 import styles from "./UserInfo.module.css";
 
 interface UserInfoProps {

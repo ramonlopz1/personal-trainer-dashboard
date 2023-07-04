@@ -3,7 +3,6 @@ import Login from "@/components/login/Login";
 import Page from "@/components/layout/Page";
 import { useSession } from "next-auth/react";
 import Router from "next/router";
-import Image from "next/image";
 import AsideImage from "@/components/login/AsideImage";
 import { useState } from "react";
 

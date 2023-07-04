@@ -52,7 +52,7 @@ export default function CustomerList() {
   const renderCustomerList = () => {
     return users?.map((user, i) => {
       return (
-        <div className={styles.userContainer}>
+        <div className={styles.userContainer} key={i}>
           <div className={styles.picture}>
             <div className={styles.img}>
               <Image alt="profilePic" src={user.image} height={55} width={55} />

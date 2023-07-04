@@ -25,7 +25,7 @@ export default function ProfileAdmin() {
       .then((data) => data.json())
       .then(setUser)
       .then(() => setLoading(false));
-  }, []);
+  }, [id]);
 
   useEffect(() => {
     fetch(`/api/raffledCodes?id=${id}`)

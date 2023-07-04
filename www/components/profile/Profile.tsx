@@ -22,7 +22,7 @@ export default function Profile() {
       .then((data) => data.json())
       .then(setUser)
       .then(() => setLoading(false));
-  }, [activationStatus]);
+  }, [activationStatus, id]);
 
   return (
     <div className={styles.section}>

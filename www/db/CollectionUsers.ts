@@ -59,7 +59,6 @@ export default class CollectionUser implements ICollectionUser {
       // retorna o usuário e o dados relacionados da tabela raffledCodes
       where: { socialId },
       rejectOnNotFound: false,
-      include: { raffledCodes: true },
     });
 
     if (!user) {

@@ -1,12 +1,12 @@
 import { useSession } from "next-auth/react";
 import styles from "./UserCodesProviderView.module.css";
-import { IUser } from "@/logic/services/user/ServiceUsers";
 import ActivatedCodeList from "./organisms/profile/ActivatedCodeList";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import Loading from "../templates/Loading";
 import Link from "next/link";
 import UserInfo from "./organisms/providerView/UserInfo";
+import { Users } from "@prisma/client";
 
 const backBtnStyle = {
   textDecoration: "none",
@@ -23,7 +23,7 @@ const backBtnStyle = {
 };
 
 export default function UserCodesProviderView() {
-  const [user, setUser] = useState<IUser>();
+  const [user, setUser] = useState<Users>();
   const [loading, setLoading] = useState<boolean>(true);
 
   
@@ -36,7 +36,7 @@ export default function UserCodesProviderView() {
       .then((data) => data.json())
       .then(setUser)
       .then(() => setLoading(false));
-  }, []);
+  }, [id]);
 
   
   return (
