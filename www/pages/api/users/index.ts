@@ -41,8 +41,6 @@ export default async function handler(
   } else if (req.method === "GET" && qId && !qSocialId && !qProviderId) {
     // GET A USER BY ID
 
-    console.log(token);
-
     try {
       const user: Users = await service.getOne(qId);
 
@@ -73,7 +71,6 @@ export default async function handler(
     // GET A USER BY ID, WHO HAVE CODES WITH THE PROVIDERID
 
     try {
-      console.log(token?.role);
       if (token?.role !== "ADMIN")
         return res.status(401).send("Não autorizado");
       const user: Users = await service.getOne(qId, qProviderId);

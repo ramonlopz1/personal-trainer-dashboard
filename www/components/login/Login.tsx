@@ -33,13 +33,13 @@ export default function Login() {
             <ImGoogle />
             <span>Google</span>
           </button>
-          <button
+          {/* <button
             className={styles.facebook}
             onClick={() => signIn("facebook")}
           >
             <ImFacebook2 />
             <span>Facebook</span>
-          </button>
+          </button> */}
 
           <button
             className={styles.email}

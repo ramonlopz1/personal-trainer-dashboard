@@ -54,7 +54,7 @@ export default class CollectionUser implements ICollectionUser {
     return { ...res, password: "" };
   }
 
-  async getUserOrCreateBySocialId(payload: any, socialId: any): Promise<Users> {
+  async getUserOrCreateBySocialId(payload: Users, socialId: any): Promise<Users> {
     let user = await this.prisma.users.findUnique({
       // retorna o usuário e o dados relacionados da tabela raffledCodes
       where: { socialId },

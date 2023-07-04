@@ -30,8 +30,13 @@ export default function Profile() {
         <Loading />
       ) : (
         <>
-          <div>
-            <Image alt="profilePic" src={user?.image || ""} height={30} width={30}/>
+          <div className={styles.hello}>
+            <Image
+              alt="profilePic"
+              src={user?.image || ""}
+              height={30}
+              width={30}
+            />
             <h3 className={styles.title}>Olá, {user?.name}</h3>
           </div>
           <div className={styles.containers}>

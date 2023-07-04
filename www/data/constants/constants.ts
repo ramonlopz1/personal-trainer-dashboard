@@ -1,9 +1,5 @@
-import { IUser } from "@/logic/services/user/ServiceUsers";
-
-import { IRaffledCode } from "@/logic/services/raffledcodes/ServiceRaffledCodes";
-
 export const constUser = {
-  image: "pattern",
+  image: "/profileAvatar.jpg",
   name: "",
   email: "",
   password: "",

@@ -1,9 +1,20 @@
 .section {
- 
   border-radius: 6px;
   width: 100%;
-  
   padding: 10px;
+}
+
+.hello {
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  gap: 10px;
+  width: 100%;
+  background-color: white;
+  margin-bottom: 10px;
+  box-shadow: var(--shadow);
+  border-radius: 6px;
+  padding: 5px 7px;
 }
 
 .title {
@@ -16,7 +27,6 @@
   height: 100%;
   width: 100%;
   gap: 15px;
-  
 }
 
 .subContainer {
@@ -25,8 +35,4 @@
   background-color: white;
   padding: 10px;
   width: 100%;
-}
-
-.subContainer {
-  
 }
