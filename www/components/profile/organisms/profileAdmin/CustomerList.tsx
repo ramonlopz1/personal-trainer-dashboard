@@ -3,6 +3,8 @@ import styles from "./CustomerList.module.css";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
+import { formatBRDateTime } from "@/logic/utils/string";
+import Link from "next/link";
 
 export default function CustomerList() {
   const { query } = useRouter();
@@ -83,7 +85,15 @@ export default function CustomerList() {
               <span className={styles.boxLabel}>Dt Nascimento</span>
               <span className={styles.boxValue}>{user.birthDate}</span>
             </div>
-            {/* <div>{user.raffledCodes[0].createdAt}</div> */}
+            <div className={styles.box}>
+              <span className={styles.boxLabel}>Última ativação</span>
+              <span className={styles.boxValue}>
+                {formatBRDateTime(user.raffledCodes[0].createdAt)}
+              </span>
+            </div>
+            <div className={styles.box}>
+              <Link className={styles.btnProfile} href={`/userByProvider?id=${user.id}&providerId=${query.providerId}`}>Ver</Link>
+            </div>
           </div>
         </div>
       );

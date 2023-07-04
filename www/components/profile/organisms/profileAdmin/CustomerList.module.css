@@ -1,79 +1,99 @@
 .section {
-    background-color: white;
-    border-radius: 6px;
-    width: 100%;
-    box-shadow: var(--shadow);
-    padding: 10px;
-  }
-  
-  .containers {
-    display: flex;
-    height: 500px;
-    width: 100%;
-    gap: 15px;
-  }
-  
-  .subContainer {
-    border-radius: 6px;
-    background-color: whitesmoke;
-    padding: 10px;
-    height: 100%;
-  }
-  
-  .subContainer:nth-of-type(1) {
-    width: 20%;
-  }
-  
-  .generalInfo {
-    display: flex;
-    height: 100%;
-  }
-  
-  .subContainer:nth-of-type(2) {
-    width: 79%;
-    overflow-y: scroll;
-  }
-  
-  .userContainer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 5px 15px;
-    font-size: 13px;
-    height: 100px;
-    width: 100%;
-    border-radius: 6px;
-    margin-top: 5px;
-    background-color: white;
-  }
-  
-  .picture {
-    width: 100px;
-  }
-  
-  .picture .img {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-    width: 55px;
-    height: 55px;
-    border-radius: 27.5px;
-  }
-  
-  .userInfo {
-    display: flex;
-    width: calc(100% - 100px);
-  }
-  
-  .userInfo .box {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    width: calc(100% / 5);
-    align-items: center;
-  }
-  
-  .boxLabel {
-    font-weight: bold;
-  }
+  background-color: white;
+  border-radius: 6px;
+  width: 100%;
+  box-shadow: var(--shadow);
+  padding: 10px;
+}
+
+.containers {
+  display: flex;
+  height: 500px;
+  width: 100%;
+  gap: 15px;
+}
+
+.subContainer {
+  border-radius: 6px;
+  background-color: whitesmoke;
+  padding: 10px;
+  height: 100%;
+}
+
+.subContainer:nth-of-type(1) {
+  width: 20%;
+}
+
+.generalInfo {
+  display: flex;
+  height: 100%;
+}
+
+.subContainer:nth-of-type(2) {
+  width: 79%;
+  overflow-y: scroll;
+}
+
+.userContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px 15px;
+  font-size: 13px;
+  height: 100px;
+  width: 100%;
+  border-radius: 6px;
+  margin-top: 5px;
+  background-color: white;
+}
+
+.picture {
+  width: 100px;
+}
+
+.picture .img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  width: 55px;
+  height: 55px;
+  border-radius: 27.5px;
+}
+
+.userInfo {
+  display: flex;
+  width: calc(100% - 100px);
+}
+
+.userInfo .box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: calc(100% / 5);
+  align-items: center;
+}
+
+.boxLabel {
+  font-weight: bold;
+}
+
+.btnProfile {
+  text-decoration: none;
+  color: black;
+  padding: 3px 5px;
+  border-radius: 4px;
+  border: 1px solid gray;
+  display: inline-block;
+  font-size: 13px;
+  width: 50px;
+  cursor: default;
+  text-align: center;
+  cursor: pointer !important;
+  font-weight: bold;
+  background: none;
+}
+
+.btnProfile:hover {
+  background-color: rgb(225, 224, 224);
+}
