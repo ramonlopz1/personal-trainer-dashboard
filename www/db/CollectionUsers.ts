@@ -18,12 +18,13 @@ export default class CollectionUser implements ICollectionUser {
 
   async createUser(user: Users): Promise<Users> {
     const { password, ...data } = user;
+    const randomId = Math.random()
 
     await this.prisma.users.create({
       data: {
         password: await argon2.hash(password!),
         ...data,
-        socialId: Math.random(),
+        socialId: randomId.toString(),
       },
     });
 
@@ -65,6 +66,7 @@ export default class CollectionUser implements ICollectionUser {
       user = await this.prisma.users.create({
         data: {
           ...payload,
+          password: await argon2.hash(payload.password!),
         },
       });
     }

@@ -1,7 +1,7 @@
 import Head from "next/head";
 import Page from "@/components/layout/Page";
 import Profile from "@/components/profile/Profile";
-import ProfileAdmin from "@/components/profile/ProfileAdmin"
+import ProfileAdmin from "@/components/profile/ProfileAdmin";
 import useAppData from "@/data/hooks/useAppContext";
 import { useSession } from "next-auth/react";
 
@@ -9,8 +9,8 @@ export default function ProfilePage() {
   // const ctx = useAppData()
   // console.log(ctx)
 
-  const { data: session } = useSession()
-  const role = session?.role
+  const { data: session } = useSession();
+  const role = session?.role;
 
   return (
     <>
@@ -20,9 +20,7 @@ export default function ProfilePage() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Page>
-        {role === 'ADMIN' ? <ProfileAdmin /> : <Profile />}
-      </Page>
+      <Page>{role === "ADMIN" ? <ProfileAdmin /> : <Profile />}</Page>
     </>
   );
 }

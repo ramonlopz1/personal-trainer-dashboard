@@ -13,6 +13,8 @@ export default function LoginPage() {
   // ta salvando o usuário do google no mongo, mas ta dando algum erro
 
   if (session?.user.provider === "google") {
+    localStorage.setItem("socialId", session?.user.id);
+
     fetch(`/api/users?socialId=${session?.user.id}`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },

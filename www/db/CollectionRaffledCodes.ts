@@ -50,13 +50,13 @@ export default class CollectionRaffledCodes implements ICollectionRaffledCodes {
     });
   }
 
-  async deleteAll(ownerId: string) {
+  async deleteAll(ownerId: any) {
     return await this.prisma.raffledCodes.deleteMany({
       where: { ownerId },
     });
   }
 
-  async listCodesByProviderId(providerId: string) {
+  async listCodesByProviderId(providerId: any) {
     return await this.prisma.generatedCodes.findMany({
       where: { providerId },
       take: 15,

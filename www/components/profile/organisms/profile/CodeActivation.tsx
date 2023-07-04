@@ -2,6 +2,7 @@ import { useState, useEffect, Dispatch, SetStateAction } from "react";
 import OneTimeInput from "./OneTimeInput";
 import styles from "./CodeActivation.module.css";
 import { useSession, getSession } from "next-auth/react";
+import { useRouter } from "next/router";
 
 interface CodeActivationProps {
   setActivationStatus: Dispatch<SetStateAction<string>>;
@@ -13,6 +14,8 @@ export default function CodeActivation({
   setActivationStatus,
 }: CodeActivationProps) {
   const [code, setCode] = useState<string>("");
+
+  const router = useRouter()
 
   // session was implemented in this way to remove an typescript error when using useSession hook
   const [session, setSession] = useState<any>();
@@ -27,8 +30,7 @@ export default function CodeActivation({
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         raffleCode: code,
-        ownerId: session?.user?.id,
-        
+        ownerId: router.query.id,
       }),
     })
       .then((res) => res.text())
