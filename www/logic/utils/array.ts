@@ -8,7 +8,9 @@ export function groupByProvider(array: any[]) {
     return {
       ownerId: "",
       provider: provider,
+      providerId: "",
       codes: [],
+      image: ""
     };
   });
 
@@ -16,9 +18,11 @@ export function groupByProvider(array: any[]) {
     transformToArray.forEach((provider: any) => {
       if (item.provider === provider.provider) {
         provider.ownerId = item.ownerId;
+        provider.providerId = item.providerId
         provider.codes.push({
           code: item.raffleCode,
           createdAt: item.createdAt,
+          image: item.image
         });
       }
     });

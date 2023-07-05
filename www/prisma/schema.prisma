@@ -43,6 +43,7 @@ model GeneratedCodes {
   createdAt  DateTime @default(now())
   isActive   Boolean  @default(false)
   ownerId    String   @default("")
+  activationDate DateTime?
 }
 
 enum Role {

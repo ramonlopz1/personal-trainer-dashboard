@@ -15,7 +15,7 @@ export default function CodeActivation({
 }: CodeActivationProps) {
   const [code, setCode] = useState<string>("");
 
-  const router = useRouter()
+  const router = useRouter();
 
   // session was implemented in this way to remove an typescript error when using useSession hook
   const [session, setSession] = useState<any>();
@@ -41,9 +41,13 @@ export default function CodeActivation({
     <div className={styles.codeActivation}>
       <span>Ativar código:</span>
       <OneTimeInput setCode={setCode} code={code} />
-      <span style={{
-        height: '10px'
-      }}>{activationStatus}</span>
+      <span
+        style={{
+          height: "10px",
+        }}
+      >
+        {activationStatus}
+      </span>
       <input
         onClick={() => onSubmitHandler(code)}
         type="submit"

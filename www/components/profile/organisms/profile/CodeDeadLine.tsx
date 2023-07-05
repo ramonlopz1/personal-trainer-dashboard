@@ -73,7 +73,6 @@ const CodeDeadLine: React.FC<CodeDeadLineProps> = ({ startDate }) => {
         marginLeft: "5px",
         padding: "2px 5px",
         width: "190px",
-        borderRadius: '0px 4px 4px 0px',
         backgroundColor:
           countdown.days > 20
             ? "var(--greenColor)"

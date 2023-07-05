@@ -1,6 +1,5 @@
 import { PrismaClient, RaffledCodes } from "@prisma/client";
 
-
 interface ICollectionRaffledCodes {
   activateCode: (data: RaffledCodes) => Promise<RaffledCodes>;
   isActive: (code: string) => Promise<any>;
@@ -17,6 +16,7 @@ export default class CollectionRaffledCodes implements ICollectionRaffledCodes {
       data: {
         isActive: true,
         ownerId: data.ownerId,
+        activationDate: new Date().toJSON(),
       },
     });
 

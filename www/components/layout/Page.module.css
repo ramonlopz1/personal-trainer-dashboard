@@ -6,10 +6,9 @@
   background-image: -webkit-linear-gradient(
     30deg,
     #ffffff 50%,
-    var(--lightBlue) 50%
+    rgb(0, 98, 255) 50%
   );
   justify-content: space-between !important;
-  
 }
 
 .header {

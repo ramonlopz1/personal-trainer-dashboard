@@ -25,6 +25,9 @@ export default function GeneratedCodeList(
 
     return sortByHour?.map((item, i) => {
       const dateTime = formatBRDateTime(item.createdAt);
+      const activationTime = item.activationDate
+        ? formatBRDateTime(item.activationDate)
+        : "";
 
       return (
         <tr className={styles.listItem} key={i}>
@@ -38,6 +41,7 @@ export default function GeneratedCodeList(
           >
             {item.isActive ? "Ativo" : "Inativo"}
           </td>
+          <td>{activationTime || "-"}</td>
           <td className={styles.tdCustomerProfile}>
             {item.isActive ? (
               <Link
@@ -76,9 +80,10 @@ export default function GeneratedCodeList(
         <thead className={styles.thead}>
           <tr style={{ width: "100%" }}>
             <th className={styles.listHeader}>
-              <td>Data</td>
+              <td>Data Criação</td>
               <td>Código</td>
               <td>Status</td>
+              <td>Data Ativação</td>
               <td>Cliente</td>
             </th>
           </tr>

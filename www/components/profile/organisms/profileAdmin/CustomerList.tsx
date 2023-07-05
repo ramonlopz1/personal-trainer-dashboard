@@ -40,18 +40,19 @@ export default function CustomerList() {
     return (
       <div className={styles.generalInfo}>
         <div className={styles.generalInfoBox}>
-          <span>Total de clientes:</span>
-          <span>{generalInfos.totalCustomers}</span>
+          <span className={styles.generalInfoBoxLabel}>Total de clientes</span>
+          <span className={styles.generalInfoBoxValue}>{generalInfos.totalCustomers}</span>
         </div>
         <div className={styles.generalInfoBox}>
-          <span>Total de códigos ativados:</span>
-          <span>{generalInfos.totalActivatedCodes}</span>
+          <span className={styles.generalInfoBoxLabel}>Total de códigos ativados</span>
+          <span className={styles.generalInfoBoxValue}>{generalInfos.totalActivatedCodes}</span>
         </div>
       </div>
     );
   };
 
   const renderCustomerList = () => {
+    console.log(users)
     return users?.map((user, i) => {
       return (
         <div className={styles.userContainer} key={i}>
@@ -75,7 +76,7 @@ export default function CustomerList() {
             </div>
             <div className={styles.box}>
               <span className={styles.boxLabel}>Fone</span>
-              <span className={styles.boxValue}>{user.phone}</span>
+              <span className={styles.boxValue}>{user.phone || "-"}</span>
             </div>
             <div className={styles.box}>
               <span className={styles.boxLabel}>E-mail</span>
@@ -83,12 +84,12 @@ export default function CustomerList() {
             </div>
             <div className={styles.box}>
               <span className={styles.boxLabel}>Dt Nascimento</span>
-              <span className={styles.boxValue}>{user.birthDate}</span>
+              <span className={styles.boxValue}>{user.birthDate || "-"}</span>
             </div>
             <div className={styles.box}>
               <span className={styles.boxLabel}>Última ativação</span>
               <span className={styles.boxValue}>
-                {formatBRDateTime(user.raffledCodes[0].createdAt)}
+                {formatBRDateTime(user.raffledCodes.at(-1).createdAt)}
               </span>
             </div>
             <div className={styles.box}>
