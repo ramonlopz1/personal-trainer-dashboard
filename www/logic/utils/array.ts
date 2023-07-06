@@ -19,10 +19,10 @@ export function groupByProvider(array: any[]) {
       if (item.provider === provider.provider) {
         provider.ownerId = item.ownerId;
         provider.providerId = item.providerId
+        provider.image = item.image
         provider.codes.push({
           code: item.raffleCode,
           createdAt: item.createdAt,
-          image: item.image
         });
       }
     });

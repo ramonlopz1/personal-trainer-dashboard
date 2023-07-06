@@ -18,7 +18,7 @@ export default class CollectionUser implements ICollectionUser {
 
   async createUser(user: Users): Promise<Users> {
     const { password, ...data } = user;
-    const randomId = Math.random()
+    const randomId = Math.random();
 
     await this.prisma.users.create({
       data: {
@@ -54,7 +54,10 @@ export default class CollectionUser implements ICollectionUser {
     return { ...res, password: "" };
   }
 
-  async getUserOrCreateBySocialId(payload: Users, socialId: any): Promise<Users> {
+  async getUserOrCreateBySocialId(
+    payload: Users,
+    socialId: any
+  ): Promise<Users> {
     let user = await this.prisma.users.findUnique({
       // retorna o usuário e o dados relacionados da tabela raffledCodes
       where: { socialId },
