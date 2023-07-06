@@ -10,7 +10,7 @@ export function groupByProvider(array: any[]) {
       provider: provider,
       providerId: "",
       codes: [],
-      image: ""
+      image: "",
     };
   });
 
@@ -18,8 +18,8 @@ export function groupByProvider(array: any[]) {
     transformToArray.forEach((provider: any) => {
       if (item.provider === provider.provider) {
         provider.ownerId = item.ownerId;
-        provider.providerId = item.providerId
-        provider.image = item.image
+        provider.providerId = item.providerId;
+        provider.image = item.image;
         provider.codes.push({
           code: item.raffleCode,
           createdAt: item.createdAt,
@@ -29,6 +29,34 @@ export function groupByProvider(array: any[]) {
   });
 
   return transformToArray;
+}
+
+export function groupRaffledCodesByDay(users: []) {
+  const allCodes: any = [];
+  users
+    ?.map((user: any, i) => user.raffledCodes)
+    .forEach((codes, i) =>
+      codes.forEach((code: any) => {
+        const formatDate = code.createdAt.split("T")[0];
+
+        allCodes.push(formatDate);
+      })
+    );
+
+  // {2023-07-05: 3, 2023-07-06: 2}
+  return countElements(allCodes);
+}
+
+function countElements(array: any) {
+  return array.reduce((countObj: any, value: any) => {
+    if (!countObj[value]) {
+      countObj[value] = 1;
+    } else {
+      countObj[value]++;
+    }
+
+    return countObj;
+  }, {});
 }
 
 export function sortArrayByDayAndHour(arr: GeneratedCodes[]) {

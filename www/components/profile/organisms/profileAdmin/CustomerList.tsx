@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import Image from "next/image";
 import { formatBRDateTime } from "@/logic/utils/string";
 import Link from "next/link";
+import { groupRaffledCodesByDay } from "@/logic/utils/array";
 
 export default function CustomerList() {
   const { query } = useRouter();
@@ -28,6 +29,9 @@ export default function CustomerList() {
 
     const totalCustomers = users?.length;
 
+    const countCodesByDate = groupRaffledCodesByDay(users)
+    console.log(countCodesByDate)
+
     return {
       totalActivatedCodes,
       totalCustomers,
@@ -41,18 +45,23 @@ export default function CustomerList() {
       <div className={styles.generalInfo}>
         <div className={styles.generalInfoBox}>
           <span className={styles.generalInfoBoxLabel}>Total de clientes</span>
-          <span className={styles.generalInfoBoxValue}>{generalInfos.totalCustomers}</span>
+          <span className={styles.generalInfoBoxValue}>
+            {generalInfos.totalCustomers}
+          </span>
         </div>
         <div className={styles.generalInfoBox}>
-          <span className={styles.generalInfoBoxLabel}>Total de códigos ativados</span>
-          <span className={styles.generalInfoBoxValue}>{generalInfos.totalActivatedCodes}</span>
+          <span className={styles.generalInfoBoxLabel}>
+            Total de códigos ativados
+          </span>
+          <span className={styles.generalInfoBoxValue}>
+            {generalInfos.totalActivatedCodes}
+          </span>
         </div>
       </div>
     );
   };
 
   const renderCustomerList = () => {
-    console.log(users)
     return users?.map((user, i) => {
       return (
         <div className={styles.userContainer} key={i}>
@@ -93,7 +102,12 @@ export default function CustomerList() {
               </span>
             </div>
             <div className={styles.box}>
-              <Link className={styles.btnProfile} href={`/userByProvider?id=${user.id}&providerId=${query.providerId}`}>Ver</Link>
+              <Link
+                className={styles.btnProfile}
+                href={`/userByProvider?id=${user.id}&providerId=${query.providerId}`}
+              >
+                Ver
+              </Link>
             </div>
           </div>
         </div>
