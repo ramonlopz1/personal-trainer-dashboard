@@ -19,11 +19,12 @@ export default function CodeList(props: ActivatedCodeListProps) {
   const [providerInfo, setProviderInfo] = useState<any>([]);
 
   const { raffledCodes } = props.user;
-
+  const list = groupByProvider(raffledCodes);
   useEffect(() => {
     // busca os dados de cada fornecedor na api e agrupa em um array - refatorar -
 
-    raffledCodes.forEach((elem: any) => {
+    list.forEach((elem: any) => {
+      console.log(elem);
       fetch(`/api/users?id=${elem.providerId}`)
         .then((data) => data.json())
         .then((apiProv) => {
@@ -39,12 +40,10 @@ export default function CodeList(props: ActivatedCodeListProps) {
   }, []);
 
   const renderCards = () => {
-    const list = groupByProvider(raffledCodes);
     return list.map((item: any, i: any) => {
-
       // busca informações individuais do fornecedor - refatorar -
       let providerAvatar = "";
-     
+
       if (providerInfo) {
         providerInfo.forEach((prov: any) => {
           if (prov.id === item.providerId) {
@@ -72,7 +71,7 @@ export default function CodeList(props: ActivatedCodeListProps) {
           <div className={styles.providerInfo}>
             <div className={styles.logo}>
               <Image
-                src={providerAvatar}
+                src={providerAvatar ?? "/profileAvatar.jpg"}
                 alt="profileAvatar"
                 height={65}
                 width={65}

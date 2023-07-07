@@ -31,7 +31,7 @@ export function groupByProvider(array: any[]) {
   return transformToArray;
 }
 
-export function groupRaffledCodesByDay(users: []) {
+export function activatedQttByDate(users: any[]) {
   const allCodes: any = [];
   users
     ?.map((user: any, i) => user.raffledCodes)
@@ -44,10 +44,29 @@ export function groupRaffledCodesByDay(users: []) {
     );
 
   // {2023-07-05: 3, 2023-07-06: 2}
-  return countElements(allCodes);
+
+  const quantityByDate = countElements(allCodes);
+  const formatted = Object.entries(quantityByDate).map(([name, value]) => {
+    return {
+      name,
+      value,
+    };
+  });
+
+  const names = formatted.map(v => {
+    const splitted = v.name.split("-")
+    const removeYear = splitted[2] + "-" + splitted[1]
+    return removeYear
+  })
+  const values = formatted.map(v => v.value)
+
+  console.log(values)
+  return {
+    names, values
+  };
 }
 
-function countElements(array: any) {
+function countElements(array: any[]) {
   return array.reduce((countObj: any, value: any) => {
     if (!countObj[value]) {
       countObj[value] = 1;

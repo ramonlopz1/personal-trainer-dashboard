@@ -5,7 +5,8 @@ import { useRouter } from "next/router";
 import Image from "next/image";
 import { formatBRDateTime } from "@/logic/utils/string";
 import Link from "next/link";
-import { groupRaffledCodesByDay } from "@/logic/utils/array";
+import { activatedQttByDate } from "@/logic/utils/array";
+import { Chart } from "@/components/templates/Chart";
 
 export default function CustomerList() {
   const { query } = useRouter();
@@ -29,12 +30,12 @@ export default function CustomerList() {
 
     const totalCustomers = users?.length;
 
-    const countCodesByDate = groupRaffledCodesByDay(users)
-    console.log(countCodesByDate)
+    const qtByDate = users && activatedQttByDate(users);
 
     return {
       totalActivatedCodes,
       totalCustomers,
+      qtByDate,
     };
   };
 
@@ -56,6 +57,13 @@ export default function CustomerList() {
           <span className={styles.generalInfoBoxValue}>
             {generalInfos.totalActivatedCodes}
           </span>
+        </div>
+        <div className={styles.chart}>
+          <span className={styles.generalInfoBoxLabel}>Últimos 5 dias</span>
+          <Chart
+            labels={generalInfos.qtByDate?.names!}
+            values={generalInfos.qtByDate?.values!}
+          />
         </div>
       </div>
     );
