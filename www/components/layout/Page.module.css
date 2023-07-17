@@ -18,6 +18,7 @@
   align-items: center;
   width: 100%;
   padding: 10px 100px;
+  border-top: 3px solid var(--redColor);
   margin-bottom: 10px;
   background-color: var(--darkBlue);
 }

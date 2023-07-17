@@ -1,0 +1,5 @@
+- criar lista de melhores clientes (com mais códigos) e exibir no perfil do fornecedor
+- criar componente do relógio
+- criar forma do fornecedor editar o tempo de expiração
+- criar botão para atualizar lista de códigos criados/ativados - ok
+- 
