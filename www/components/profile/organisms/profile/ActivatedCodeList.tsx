@@ -10,51 +10,56 @@ import AliceCarousel from "react-alice-carousel";
 import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import useActivatedCodeList from "@/data/hooks/useActivatedCodeList";
 
 interface ActivatedCodeListProps {
   user: any;
 }
 
 export default function CodeList(props: ActivatedCodeListProps) {
-  const [providerInfo, setProviderInfo] = useState<any>([]);
-
   const { raffledCodes } = props.user;
-  const list = groupByProvider(raffledCodes);
-  useEffect(() => {
-    // busca os dados de cada fornecedor na api e agrupa em um array - refatorar -
 
-    list.forEach((elem: any) => {
-      console.log(elem);
-      fetch(`/api/users?id=${elem.providerId}`)
-        .then((data) => data.json())
-        .then((apiProv) => {
-          const exists = providerInfo.find(
-            (provider: any) => provider.id === apiProv.id
-          );
+  const { codesGroupedByProvider, providersProfileData } =
+    useActivatedCodeList(raffledCodes);
 
-          if (!exists) {
-            setProviderInfo([...providerInfo, apiProv]);
-          }
-        });
+  const renderProfileInfo = (providerId: string) => {
+    
+    const providerInfo = providersProfileData.find((prov: any) => {
+      return prov.id === providerId;
     });
-  }, []);
 
-  const renderCards = () => {
-    return list.map((item: any, i: any) => {
-      // busca informações individuais do fornecedor - refatorar -
-      let providerAvatar = "";
+    if (providerInfo?.id) {
+      return (
+        <>
+          <div className={styles.logo}>
+            <Image
+              src={providerInfo?.image || ""}
+              alt="profileAvatar"
+              height={65}
+              width={65}
+            />
+          </div>
+          <span className={styles.name}>{providerInfo.name || "-"}</span>
+          <span className={styles.socialMedial}>
+            <Link href={``}>
+              <IoLogoInstagram color="#C13584" />
+            </Link>
+            <Link href={``}>
+              <IoLogoWhatsapp color="#25D366" />
+            </Link>
+          </span>
+        </>
+      );
+    } else {
+      return <div>Carregando...</div>;
+    }
+  };
 
-      if (providerInfo) {
-        providerInfo.forEach((prov: any) => {
-          if (prov.id === item.providerId) {
-            providerAvatar = prov.image;
-          }
-        });
-      }
-
-      const expireDate = item.codes.reverse()[0];
-      const activatedQuantity = item.codes.length;
-      const items = item.codes.map((code: any, i: any) => {
+  const renderTicketInfo = () => {
+    return codesGroupedByProvider.map((code: any, i: any) => {
+      const expireDate = code.codes.reverse()[0];
+      const activatedQuantity = code.codes.length;
+      const ticketCardList = code.codes.map((code: any, i: any) => {
         const localeDate = new Date(code.createdAt).toLocaleDateString();
 
         return (
@@ -69,23 +74,7 @@ export default function CodeList(props: ActivatedCodeListProps) {
       return (
         <div key={i} className={styles.provider}>
           <div className={styles.providerInfo}>
-            <div className={styles.logo}>
-              <Image
-                src={providerAvatar ?? "/profileAvatar.jpg"}
-                alt="profileAvatar"
-                height={65}
-                width={65}
-              />
-            </div>
-            <span className={styles.name}>{item.provider}</span>
-            <span className={styles.socialMedial}>
-              <Link href={``}>
-                <IoLogoInstagram color="#C13584" />
-              </Link>
-              <Link href={``}>
-                <IoLogoWhatsapp color="#25D366" />
-              </Link>
-            </span>
+            {renderProfileInfo(code.providerId)}
           </div>
           <div className={styles.codeList}>
             <div className={styles.deadLine} style={{}}>
@@ -107,7 +96,7 @@ export default function CodeList(props: ActivatedCodeListProps) {
               <AliceCarousel
                 mouseTracking
                 disableButtonsControls
-                items={items}
+                items={ticketCardList}
                 responsive={{
                   1024: {
                     items: 5,
@@ -124,7 +113,7 @@ export default function CodeList(props: ActivatedCodeListProps) {
   return (
     <div>
       <h4 className={styles.title}>Códigos ativos</h4>
-      <div className={styles.providerList}>{renderCards()}</div>
+      <div className={styles.providerList}>{renderTicketInfo()}</div>
     </div>
   );
 }
