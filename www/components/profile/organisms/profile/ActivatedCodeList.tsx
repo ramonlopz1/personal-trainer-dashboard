@@ -23,10 +23,16 @@ export default function CodeList(props: ActivatedCodeListProps) {
     useActivatedCodeList(raffledCodes);
 
   const renderProfileInfo = (providerId: string) => {
-    
     const providerInfo = providersProfileData.find((prov: any) => {
       return prov.id === providerId;
     });
+
+    const whatsappPhone = "55".concat(providerInfo?.phone)
+      .split(" ")
+      .join("")
+      .replace("(", "")
+      .replace(")", "")
+      .replace("-", "");
 
     if (providerInfo?.id) {
       return (
@@ -44,7 +50,7 @@ export default function CodeList(props: ActivatedCodeListProps) {
             <Link href={``}>
               <IoLogoInstagram color="#C13584" />
             </Link>
-            <Link href={``}>
+            <Link href={`https://wa.me/${whatsappPhone}`} target="_blank">
               <IoLogoWhatsapp color="#25D366" />
             </Link>
           </span>

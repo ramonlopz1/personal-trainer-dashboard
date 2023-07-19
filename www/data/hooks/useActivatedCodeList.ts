@@ -9,40 +9,38 @@ export default function useActivatedCodeList(raffledCodes: []) {
   const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
-    // o raffledCode tem o id do provider
-    // com esse id, é feita a consulta no endpoint users?id=... que retorna os dados do provider
-    // cada consulta provider é adicionado a lista contendo as informações completas sobre o provider
     console.log(codesGroupedByProvider);
+
     codesGroupedByProvider.forEach((code: any) => {
       fetch(`/api/users?id=${code.providerId}`)
         .then((data) => data.json())
         .then((resProvider) => {
-          const exists = providersProfileData.find(
-            (provider: any) => provider.id === resProvider.id
-          );
+          // update the state based on the arrow function return:
+          // 1 - return [...prevProviders, resProvider]
+          // 2 - return prevProviders
+          // setProvidersProfileData([...prev providers, resProvider])
+          // setProvidersProfileData(prevProviders)
+          // the param received inside the arrow function thats passed to the setProvidersProfileData, contains the prevState
 
-          if (!exists) {
-            setProvidersProfileData([...providersProfileData, resProvider]);
-          }
+          setProvidersProfileData((prevProviders: any) => {
+            // Check if the provider with the given ID already exists in the state
+            const exists = prevProviders.some(
+              (provider: any) => provider.id === resProvider.id
+            );
+
+            // If it doesn't exist, append the new provider to the state
+            if (!exists) {
+              return [...prevProviders, resProvider];
+            }
+
+            // If it already exists, just return the previous state
+            return prevProviders;
+          });
         });
     });
-  }, []);
-
-  const getProfileAvatar = (list: [], id: string) => {
-    let providerAvatar = "/profileAvatar.jpg";
-    if (list.length > 0) {
-      list.forEach((item: any) => {
-        if (item.id === id) {
-          providerAvatar = item.image;
-        }
-      });
-    }
-
-    return providerAvatar;
-  };
+  }, [codesGroupedByProvider]);
 
   return {
-    getProfileAvatar,
     codesGroupedByProvider,
     providersProfileData,
   };
