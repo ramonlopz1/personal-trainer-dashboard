@@ -37,9 +37,21 @@ export default function useActivatedCodeList(raffledCodes: []) {
     });
   }, [codesGroupedByProvider]);
 
+  const [hiddenConfetti, setHiddenConfetti] = useState(true);
+
+  useEffect(() => {
+    const fadeOutTimeout = setTimeout(() => {
+      setHiddenConfetti(false);
+    }, 5000); // Change 3000 to the number of milliseconds you want to wait before fading out (e.g., 5000 for 5 seconds).
+
+    return () => {
+      clearTimeout(fadeOutTimeout);
+    };
+  }, []);
 
   return {
     codesGroupedByProvider,
     providersProfileData,
+    hiddenConfetti,
   };
 }

@@ -52,9 +52,43 @@
   color: white;
   font-size: 14px;
   font-weight: bold;
+
   height: 100%;
-  width: 140px;
+  width: 150px;
   font-size: 13px;
+}
+
+.confetti {
+  visibility: hidden;
+  opacity: 0;
+  transition: .5s;
+}
+
+.rewardBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-size: 17px;
+  font-weight: bold;
+  color: white;
+  cursor: pointer;
+  width: 120px;
+  padding: 6px 0px;
+  border-radius: 4px;
+  outline: none;
+  border: 0px;
+  background-color: var(--yellowColor);
+}
+
+.rewardBtn:hover svg {
+ transform: rotate(50deg);
+ transition: .3s;
+}
+
+.rewardBtn:not(:hover) svg {
+  transform: rotate(-50deg);
+  transition: .3s;
 }
 
 .socialMedial {

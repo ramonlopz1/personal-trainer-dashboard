@@ -5,6 +5,7 @@ import {
   IoLogoInstagram,
   IoLogoWhatsapp,
 } from "react-icons/io5";
+import { AiFillStar } from "react-icons/ai";
 import CodeDeadLine from "./CodeDeadLine";
 import AliceCarousel from "react-alice-carousel";
 import Link from "next/link";
@@ -20,7 +21,7 @@ interface ActivatedCodeListProps {
 export default function CodeList(props: ActivatedCodeListProps) {
   const { raffledCodes } = props.user;
 
-  const { codesGroupedByProvider, providersProfileData } =
+  const { codesGroupedByProvider, providersProfileData, hiddenConfetti } =
     useActivatedCodeList(raffledCodes);
 
   const renderProfileInfo = (providerId: string) => {
@@ -62,7 +63,7 @@ export default function CodeList(props: ActivatedCodeListProps) {
       return <div>Carregando...</div>;
     }
   };
-  console.log(window.innerWidth);
+
   const renderTicketInfo = () => {
     return codesGroupedByProvider.map((code: any, i: any) => {
       const expireDate = code.codes.reverse()[0];
@@ -99,18 +100,19 @@ export default function CodeList(props: ActivatedCodeListProps) {
               >
                 {activatedQuantity} / 10 códigos ativos
               </span>
-              <div>
-                {activatedQuantity >= 10 ? (
-                  <Confetti
-                    width={window.innerWidth - 70 ?? 5}
-                    tweenDuration={20}
-                  />
-                ) : (
-                  false
-                )}
-                <button>Resgatar</button>
-              </div>
+              {activatedQuantity >= 10 ? (
+                <Confetti
+                  width={window.innerWidth - 70 ?? 5}
+                  className={`${!hiddenConfetti ? styles.confetti : ""}`}
+                />
+              ) : (
+                false
+              )}
             </div>
+            <button className={styles.rewardBtn}>
+              <AiFillStar /> 
+              <span>Resgatar</span>
+            </button>
             <div className={styles.codes}>
               <AliceCarousel
                 mouseTracking
