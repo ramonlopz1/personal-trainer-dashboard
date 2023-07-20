@@ -21,24 +21,6 @@ export default function CustomerList() {
       .then(() => setLoading(false));
   }, []);
 
-  const calcGeneralInfos = () => {
-    let totalActivatedCodes: number = 0;
-
-    users?.forEach((user) => {
-      totalActivatedCodes += user.raffledCodes?.length!;
-    });
-
-    const totalCustomers = users?.length;
-
-    const qtByDate = users && activatedQttByDate(users);
-
-    return {
-      totalActivatedCodes,
-      totalCustomers,
-      qtByDate,
-    };
-  };
-
   const renderGeneralInfo = () => {
     const generalInfos = calcGeneralInfos();
 
@@ -59,14 +41,29 @@ export default function CustomerList() {
           </span>
         </div>
         <div className={styles.chart}>
-          <span className={styles.generalInfoBoxLabel}>Últimos 5 dias</span>
-          <Chart
-            labels={generalInfos.qtByDate?.names!}
-            values={generalInfos.qtByDate?.values!}
-          />
+          <span className={styles.generalInfoBoxLabel}>Últimos 7 dias</span>
+          <Chart chartData={generalInfos.qtByDate} />
         </div>
       </div>
     );
+  };
+
+  const calcGeneralInfos = () => {
+    let totalActivatedCodes: number = 0;
+
+    users?.forEach((user) => {
+      totalActivatedCodes += user.raffledCodes?.length!;
+    });
+
+    const totalCustomers = users?.length;
+
+    const qtByDate = users && activatedQttByDate(users);
+
+    return {
+      totalActivatedCodes,
+      totalCustomers,
+      qtByDate,
+    };
   };
 
   const renderCustomerList = () => {

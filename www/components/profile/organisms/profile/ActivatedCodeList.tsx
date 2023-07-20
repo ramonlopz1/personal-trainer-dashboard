@@ -11,6 +11,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import useActivatedCodeList from "@/data/hooks/useActivatedCodeList";
+import Confetti from "react-confetti";
 
 interface ActivatedCodeListProps {
   user: any;
@@ -27,7 +28,8 @@ export default function CodeList(props: ActivatedCodeListProps) {
       return prov.id === providerId;
     });
 
-    const whatsappPhone = "55".concat(providerInfo?.phone)
+    const whatsappPhone = "55"
+      .concat(providerInfo?.phone)
       .split(" ")
       .join("")
       .replace("(", "")
@@ -60,7 +62,7 @@ export default function CodeList(props: ActivatedCodeListProps) {
       return <div>Carregando...</div>;
     }
   };
-
+  console.log(window.innerWidth);
   const renderTicketInfo = () => {
     return codesGroupedByProvider.map((code: any, i: any) => {
       const expireDate = code.codes.reverse()[0];
@@ -97,6 +99,17 @@ export default function CodeList(props: ActivatedCodeListProps) {
               >
                 {activatedQuantity} / 10 códigos ativos
               </span>
+              <div>
+                {activatedQuantity >= 10 ? (
+                  <Confetti
+                    width={window.innerWidth - 70 ?? 5}
+                    tweenDuration={20}
+                  />
+                ) : (
+                  false
+                )}
+                <button>Resgatar</button>
+              </div>
             </div>
             <div className={styles.codes}>
               <AliceCarousel

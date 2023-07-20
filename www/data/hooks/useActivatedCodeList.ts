@@ -6,11 +6,8 @@ export default function useActivatedCodeList(raffledCodes: []) {
   const codesGroupedByProvider = groupByProvider(raffledCodes ?? []);
 
   const [providersProfileData, setProvidersProfileData] = useState<any>([]);
-  const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
-    console.log(codesGroupedByProvider);
-
     codesGroupedByProvider.forEach((code: any) => {
       fetch(`/api/users?id=${code.providerId}`)
         .then((data) => data.json())
@@ -39,6 +36,7 @@ export default function useActivatedCodeList(raffledCodes: []) {
         });
     });
   }, [codesGroupedByProvider]);
+
 
   return {
     codesGroupedByProvider,

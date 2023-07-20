@@ -53,17 +53,17 @@ export function activatedQttByDate(users: any[]) {
     };
   });
 
-  const names = formatted.map(v => {
-    const splitted = v.name.split("-")
-    const removeYear = splitted[2] + "-" + splitted[1]
-    return removeYear
-  })
-  const values = formatted.map(v => v.value)
 
-  console.log(values)
-  return {
-    names, values
+  const compareDates = (date1: any, date2: any) => {
+    return new Date(date1).valueOf() - new Date(date2).valueOf() ;
   };
+
+ const sortted = formatted.sort((a, b) => compareDates(a.name, b.name));
+
+
+
+
+  return sortted;
 }
 
 function countElements(array: any[]) {

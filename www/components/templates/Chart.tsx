@@ -21,12 +21,11 @@ ChartJS.register(
 );
 
 interface ChartProps {
-  labels: any[];
-  values: any[];
+  chartData: any;
 }
 
 export function Chart(props: ChartProps) {
-  const { labels, values } = props;
+  const { chartData } = props;
 
   const options = {
     maintainAspectRatio: false,
@@ -57,8 +56,20 @@ export function Chart(props: ChartProps) {
     },
   };
 
+  const labels = chartData
+    .map((obj: any) => obj.name)
+    .reverse()
+    .slice(0, 7)
+    .reverse();
+    
+  const values = chartData
+    .map((obj: any) => obj.value)
+    .reverse()
+    .slice(0, 7)
+    .reverse();
+
   const data = {
-    labels,
+    labels: labels,
     datasets: [
       {
         label: "Últimos dias",
