@@ -24,6 +24,8 @@ export default function CodeActivation({
   }, []);
 
   const onSubmitHandler = (code: string) => {
+    if(code.length <= 0) return 
+
     setActivationStatus("Verificando código...");
     fetch("/api/raffledCodes", {
       method: "POST",
@@ -44,6 +46,7 @@ export default function CodeActivation({
       <span
         style={{
           height: "10px",
+          margin: "5px 0px"
         }}
       >
         {activationStatus}

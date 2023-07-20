@@ -47,7 +47,9 @@ export default class CollectionUser implements ICollectionUser {
     const user = await this.prisma.users.findUnique({
       // retorna o usuário e o dados relacionados da tabela raffledCodes
       where: { id },
-      include: { raffledCodes: true },
+      include: { raffledCodes: { where: {
+        expired: false
+      } } },
     });
 
     const { password, ...res } = user!;

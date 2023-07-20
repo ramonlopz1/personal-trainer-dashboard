@@ -3,6 +3,10 @@ import { GeneratedCodes, RaffledCodes } from "@prisma/client";
 
 export interface IServiceRaffledCodes {
   active: (data: RaffledCodes) => Promise<RaffledCodes>;
+  expire: (
+    id: string | string[],
+    providerId: string | string[]
+  ) => Promise<RaffledCodes>;
   list: () => Promise<RaffledCodes[]>;
   listByProvider: (providerId: string | string[]) => Promise<GeneratedCodes[]>;
   deleteAll: (ownerId: string | string[]) => any;
@@ -27,6 +31,13 @@ export default class ServiceRaffledCodes implements IServiceRaffledCodes {
       provider: isValidCode.provider,
       providerId: isValidCode.providerId,
     });
+  }
+
+  async expire(id: string | string[], providerId: string | string[]) {
+    const codes = await this._collection.expireCodes(id, providerId);
+    if (!Object.keys(codes || {}).length)
+      throw new Error("Códigos não encontrados.");
+    return codes;
   }
 
   async list() {

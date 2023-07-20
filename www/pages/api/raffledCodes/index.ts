@@ -11,6 +11,8 @@ export default async function handler(
   res: NextApiResponse
 ) {
   const token = await getToken({ req, secret });
+  const tokenId = token?.sub;
+
   const service: IServiceRaffledCodes = new ServiceRaffledCodes();
 
   if (req.method === "GET" && !req.query.id) {
@@ -52,6 +54,21 @@ export default async function handler(
     try {
       await service.deleteAll(req.query.id);
       return res.status(200).send("Códigos expirados.");
+    } catch (err: any) {
+      return res.status(404).send("Erro inesperado.");
+    }
+  } else if (
+    req.method === "PUT" &&
+    req.body.expire &&
+    req.query.id &&
+    req.query.providerId
+  ) {
+    try {
+      // if (req.query.id !== tokenId)
+      //   return res.status(401).send("Não autorizado");
+
+      await service.expire(req.query.id, req.query.providerId);
+      return res.status(200).send("Códigos expirados com sucesso.");
     } catch (err: any) {
       return res.status(404).send("Erro inesperado.");
     }

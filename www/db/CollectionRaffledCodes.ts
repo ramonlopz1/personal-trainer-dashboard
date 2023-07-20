@@ -2,6 +2,7 @@ import { PrismaClient, RaffledCodes } from "@prisma/client";
 
 interface ICollectionRaffledCodes {
   activateCode: (data: RaffledCodes) => Promise<RaffledCodes>;
+  expireCodes: (id: string, providerId: any) => Promise<RaffledCodes>;
   isActive: (code: string) => Promise<any>;
   isValidCode: (code: string) => Promise<any>;
   listCodes: () => Promise<RaffledCodes[]>;
@@ -30,6 +31,15 @@ export default class CollectionRaffledCodes implements ICollectionRaffledCodes {
     });
   }
 
+  async expireCodes(id: any, providerId: any): Promise<any> {
+    return await this.prisma.raffledCodes.updateMany({
+      where: { ownerId: id, providerId},
+      data: {
+        expired: true,
+      },
+    });
+  }
+
   async isActive(code: string): Promise<any> {
     return await this.prisma.raffledCodes.findUnique({
       where: { raffleCode: code },
@@ -46,6 +56,9 @@ export default class CollectionRaffledCodes implements ICollectionRaffledCodes {
     return await this.prisma.raffledCodes.findMany({
       include: {
         owner: true,
+      },
+      where: {
+        expired: false,
       },
     });
   }

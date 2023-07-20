@@ -68,6 +68,8 @@ export default function CodeList(props: ActivatedCodeListProps) {
     return codesGroupedByProvider.map((code: any, i: any) => {
       const expireDate = code.codes.reverse()[0];
       const activatedQuantity = code.codes.length;
+
+
       const ticketCardList = code.codes.map((code: any, i: any) => {
         const localeDate = new Date(code.createdAt).toLocaleDateString();
 
@@ -88,7 +90,7 @@ export default function CodeList(props: ActivatedCodeListProps) {
           <div className={styles.codeList}>
             <div className={styles.deadLine} style={{}}>
               <IoTimerOutline />
-              <CodeDeadLine startDate={expireDate.createdAt} />
+              <CodeDeadLine startDate={expireDate.createdAt} code={code} />
               <span
                 className={styles.activatedQuantity}
                 style={{
@@ -109,10 +111,14 @@ export default function CodeList(props: ActivatedCodeListProps) {
                 false
               )}
             </div>
-            <button className={styles.rewardBtn}>
-              <AiFillStar /> 
-              <span>Resgatar</span>
-            </button>
+            {activatedQuantity >= 10 ? (
+              <button className={styles.rewardBtn}>
+                <AiFillStar />
+                <span>Resgatar</span>
+              </button>
+            ) : (
+              false
+            )}
             <div className={styles.codes}>
               <AliceCarousel
                 mouseTracking

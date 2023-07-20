@@ -2,9 +2,10 @@ import React, { useState, useEffect } from "react";
 
 interface CodeDeadLineProps {
   startDate: string; // Accepts a date string in the format 'YYYY-MM-DD'
+  code: any;
 }
 
-const CodeDeadLine: React.FC<CodeDeadLineProps> = ({ startDate }) => {
+const CodeDeadLine: React.FC<CodeDeadLineProps> = ({ startDate, code }) => {
   const [countdown, setCountdown] = useState<{
     days: number;
     hours: number;
@@ -55,14 +56,24 @@ const CodeDeadLine: React.FC<CodeDeadLineProps> = ({ startDate }) => {
     };
   }, [startDate]);
 
-  if (
-    countdown.days === 0 &&
-    countdown.hours === 0 &&
-    countdown.minutes === 0 &&
-    countdown.seconds === 0
-  ) {
-    //delete all codes
-  }
+  useEffect(() => {
+    if (
+      countdown.days === 0 &&
+      countdown.hours === 0 &&
+      countdown.minutes === 0 &&
+      countdown.seconds === 0
+    ) {
+      const URI = `http://localhost:3000/api/raffledCodes?id=${code.ownerId}&providerId=${code.providerId}`;
+      fetch(URI, {
+        method: "PUT",
+        body: JSON.stringify({
+          expire: true,
+        }),
+      })
+        .then((data) => data.json())
+        .then(console.log);
+    }
+  }, [countdown]);
 
   return (
     <div

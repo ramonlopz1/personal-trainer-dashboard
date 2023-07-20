@@ -32,17 +32,18 @@ model RaffledCodes {
   ownerId    String   @db.ObjectId
   provider   String
   providerId String   @db.ObjectId
+  expired    Boolean?  @default(false)
   createdAt  DateTime @default(now())
 }
 
 model GeneratedCodes {
-  id         String   @id @default(auto()) @map("_id") @db.ObjectId
-  code       String   @unique
-  provider   String
-  providerId String   @db.ObjectId
-  createdAt  DateTime @default(now())
-  isActive   Boolean  @default(false)
-  ownerId    String   @default("")
+  id             String    @id @default(auto()) @map("_id") @db.ObjectId
+  code           String    @unique
+  provider       String
+  providerId     String    @db.ObjectId
+  createdAt      DateTime  @default(now())
+  isActive       Boolean   @default(false)
+  ownerId        String    @default("")
   activationDate DateTime?
 }
 
