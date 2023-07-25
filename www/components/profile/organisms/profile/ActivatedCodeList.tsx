@@ -13,6 +13,7 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import useActivatedCodeList from "@/data/hooks/useActivatedCodeList";
 import Confetti from "react-confetti";
+import WinCode from "./WinCode";
 
 interface ActivatedCodeListProps {
   user: any;
@@ -21,8 +22,13 @@ interface ActivatedCodeListProps {
 export default function CodeList(props: ActivatedCodeListProps) {
   const { raffledCodes } = props.user;
 
-  const { codesGroupedByProvider, providersProfileData, hiddenConfetti } =
-    useActivatedCodeList(raffledCodes);
+  const {
+    codesGroupedByProvider,
+    providersProfileData,
+    recoveryGift,
+    showConfetti,
+    giftCode,
+  } = useActivatedCodeList(raffledCodes);
 
   const renderProfileInfo = (providerId: string) => {
     const providerInfo = providersProfileData.find((prov: any) => {
@@ -69,7 +75,6 @@ export default function CodeList(props: ActivatedCodeListProps) {
       const expireDate = code.codes.reverse()[0];
       const activatedQuantity = code.codes.length;
 
-
       const ticketCardList = code.codes.map((code: any, i: any) => {
         const localeDate = new Date(code.createdAt).toLocaleDateString();
 
@@ -87,51 +92,58 @@ export default function CodeList(props: ActivatedCodeListProps) {
           <div className={styles.providerInfo}>
             {renderProfileInfo(code.providerId)}
           </div>
-          <div className={styles.codeList}>
-            <div className={styles.deadLine} style={{}}>
-              <IoTimerOutline />
-              <CodeDeadLine startDate={expireDate.createdAt} code={code} />
-              <span
-                className={styles.activatedQuantity}
-                style={{
-                  backgroundColor:
-                    activatedQuantity > 10
-                      ? "var(--greenColor)"
-                      : "var(--redColor)",
-                }}
-              >
-                {activatedQuantity} / 10 códigos ativos
-              </span>
+          {!showConfetti || activatedQuantity < 10 ? (
+            <div className={styles.codeList}>
+              <div className={styles.deadLine} style={{}}>
+                <IoTimerOutline />
+                <CodeDeadLine startDate={expireDate.createdAt} code={code} />
+                <span
+                  className={styles.activatedQuantity}
+                  style={{
+                    backgroundColor:
+                      activatedQuantity > 10
+                        ? "var(--greenColor)"
+                        : "var(--redColor)",
+                  }}
+                >
+                  {activatedQuantity} / 10 códigos ativos
+                </span>
+                {showConfetti ? (
+                  <Confetti
+                    width={window.innerWidth - 70 ?? 5}
+                    className={styles.confetti}
+                  />
+                ) : (
+                  false
+                )}
+              </div>
               {activatedQuantity >= 10 ? (
-                <Confetti
-                  width={window.innerWidth - 70 ?? 5}
-                  className={`${!hiddenConfetti ? styles.confetti : ""}`}
-                />
+                <button
+                  onClick={() => recoveryGift(code.ownerId, code.providerId)}
+                  className={styles.rewardBtn}
+                >
+                  <AiFillStar />
+                  <span>Resgatar</span>
+                </button>
               ) : (
                 false
               )}
+              <div className={styles.codes}>
+                <AliceCarousel
+                  mouseTracking
+                  disableButtonsControls
+                  items={ticketCardList}
+                  responsive={{
+                    1024: {
+                      items: 5,
+                    },
+                  }}
+                />
+              </div>
             </div>
-            {activatedQuantity >= 10 ? (
-              <button className={styles.rewardBtn}>
-                <AiFillStar />
-                <span>Resgatar</span>
-              </button>
-            ) : (
-              false
-            )}
-            <div className={styles.codes}>
-              <AliceCarousel
-                mouseTracking
-                disableButtonsControls
-                items={ticketCardList}
-                responsive={{
-                  1024: {
-                    items: 5,
-                  },
-                }}
-              />
-            </div>
-          </div>
+          ) : (
+            <WinCode code={giftCode} />
+          )}
         </div>
       );
     });

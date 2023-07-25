@@ -24,10 +24,9 @@ export default function LoginPage() {
         image: session?.user.image,
         password: "googlepassword",
       }),
-    })
+    }) 
       .then((data) => data.json())
       .then((res) => setId(res.id));
-    console.log(id)
 
     if (id) {
       Router.push(`/profile?id=${id}`);

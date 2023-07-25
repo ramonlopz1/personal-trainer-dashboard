@@ -37,21 +37,29 @@ export default function useActivatedCodeList(raffledCodes: []) {
     });
   }, [codesGroupedByProvider]);
 
-  const [hiddenConfetti, setHiddenConfetti] = useState(true);
+  const [giftCode, setGiftCode] = useState("");
+  const [showConfetti, setShowConfetti] = useState(false);
 
-  useEffect(() => {
-    const fadeOutTimeout = setTimeout(() => {
-      setHiddenConfetti(false);
-    }, 5000); // Change 3000 to the number of milliseconds you want to wait before fading out (e.g., 5000 for 5 seconds).
+  const recoveryGift = (ownerId: string, providerId: string) => {
+    setShowConfetti(!showConfetti);
 
-    return () => {
-      clearTimeout(fadeOutTimeout);
-    };
-  }, []);
+    fetch("http://localhost:3000/api/restricted/giftCodeGenerator", {
+      method: "post",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        ownerId,
+        providerId,
+      }),
+    })
+      .then((data) => data.json())
+      .then(generatedCode => setGiftCode(generatedCode.code));
+  };
 
   return {
     codesGroupedByProvider,
     providersProfileData,
-    hiddenConfetti,
+    recoveryGift,
+    showConfetti,
+    giftCode,
   };
 }

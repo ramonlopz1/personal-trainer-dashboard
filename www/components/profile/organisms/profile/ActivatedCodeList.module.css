@@ -58,10 +58,30 @@
   font-size: 13px;
 }
 
+@keyframes fadeOut {
+  0% {
+    opacity: 100%;
+  }
+
+  50% {
+    opacity: 90%;
+  }
+
+  75% {
+    opacity: 65%;
+  }
+
+  90% {
+    opacity: 30%;
+  }
+
+  100% {
+    opacity: 0%;
+  }
+}
+
 .confetti {
-  visibility: hidden;
-  opacity: 0;
-  transition: .5s;
+  animation: fadeOut 5s ease-in-out forwards;
 }
 
 .rewardBtn {
@@ -82,13 +102,13 @@
 }
 
 .rewardBtn:hover svg {
- transform: rotate(50deg);
- transition: .3s;
+  transform: rotate(50deg);
+  transition: 0.3s;
 }
 
 .rewardBtn:not(:hover) svg {
   transform: rotate(-50deg);
-  transition: .3s;
+  transition: 0.3s;
 }
 
 .socialMedial {
