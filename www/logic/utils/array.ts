@@ -20,9 +20,11 @@ export function groupByProvider(array: any[]) {
         provider.ownerId = item.ownerId;
         provider.providerId = item.providerId;
         provider.image = item.image;
+
         provider.codes.push({
           code: item.raffleCode,
           createdAt: item.createdAt,
+          win: item.win
         });
       }
     });

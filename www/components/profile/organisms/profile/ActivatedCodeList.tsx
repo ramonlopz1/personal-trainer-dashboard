@@ -71,11 +71,16 @@ export default function CodeList(props: ActivatedCodeListProps) {
   };
 
   const renderTicketInfo = () => {
+    console.log(codesGroupedByProvider);
     return codesGroupedByProvider.map((code: any, i: any) => {
       const expireDate = code.codes.reverse()[0];
-      const activatedQuantity = code.codes.length;
+      const notWinnedCodes = code.codes.filter(
+        (code: any) => code.win === false
+      );
 
-      const ticketCardList = code.codes.map((code: any, i: any) => {
+      const activatedQuantity = notWinnedCodes.length;
+
+      const ticketCardList = notWinnedCodes?.map((code: any, i: any) => {
         const localeDate = new Date(code.createdAt).toLocaleDateString();
 
         return (

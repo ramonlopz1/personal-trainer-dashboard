@@ -35,6 +35,7 @@ model RaffledCodes {
   providerId String   @db.ObjectId
   expired    Boolean? @default(false)
   createdAt  DateTime @default(now())
+  win        Boolean? @default(false)
 }
 
 model GeneratedCodes {

@@ -20,6 +20,7 @@ export interface IServiceUser {
 
 export default class ServiceUser implements IServiceUser {
   private _collection = new CollectionUser();
+  
   async add(user: Users) {
     const emailIsUsed = await this._collection.getUserByEmail(user.email);
     const phoneIsUsed =
