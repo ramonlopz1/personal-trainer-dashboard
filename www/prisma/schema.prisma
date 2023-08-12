@@ -22,7 +22,7 @@ model Users {
   phone           String?        @unique
   role            Role           @default(USER)
   raffledCodes    RaffledCodes[]
-  winCodes        WinCodes[]
+  giftCodes        GiftCodes[]
   createdAt       DateTime       @default(now())
 }
 
@@ -49,7 +49,7 @@ model GeneratedCodes {
   activationDate DateTime?
 }
 
-model WinCodes {
+model GiftCodes {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
   code      String   @unique
   owner     Users    @relation(fields: [ownerId], references: [id])
