@@ -1,7 +1,7 @@
 import CollectionUser from "@/db/CollectionUsers";
 import argon2 from "argon2";
 
-import { Role, Users, RaffledCodes } from "@prisma/client";
+import { Role, Users } from "@prisma/client";
 
 export interface IServiceUser {
   add: (user: Users) => Promise<Users>;

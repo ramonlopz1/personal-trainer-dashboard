@@ -11,51 +11,17 @@ datasource db {
 }
 
 model Users {
-  id              String         @id @default(auto()) @map("_id") @db.ObjectId
-  socialId        String?        @unique
+  id              String   @id @default(auto()) @map("_id") @db.ObjectId
+  socialId        String?  @unique
   image           String?
   name            String
-  email           String         @unique
+  email           String   @unique
   password        String
   birthDate       String?
   rememberMeToken String?
-  phone           String?        @unique
-  role            Role           @default(USER)
-  raffledCodes    RaffledCodes[]
-  giftCodes        GiftCodes[]
-  createdAt       DateTime       @default(now())
-}
-
-model RaffledCodes {
-  id         String   @id @default(auto()) @map("_id") @db.ObjectId
-  raffleCode String   @unique
-  owner      Users    @relation(fields: [ownerId], references: [id])
-  ownerId    String   @db.ObjectId
-  provider   String
-  providerId String   @db.ObjectId
-  expired    Boolean? @default(false)
-  createdAt  DateTime @default(now())
-  win        Boolean? @default(false)
-}
-
-model GeneratedCodes {
-  id             String    @id @default(auto()) @map("_id") @db.ObjectId
-  code           String    @unique
-  provider       String
-  providerId     String    @db.ObjectId
-  createdAt      DateTime  @default(now())
-  isActive       Boolean   @default(false)
-  ownerId        String    @default("")
-  activationDate DateTime?
-}
-
-model GiftCodes {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  code      String   @unique
-  owner     Users    @relation(fields: [ownerId], references: [id])
-  ownerId   String   @db.ObjectId
-  createdAt DateTime @default(now())
-  expired   Boolean? @default(false)
+  phone           String?  @unique
+  role            Role     @default(USER)
+  createdAt       DateTime @default(now())
 }
 
 enum Role {

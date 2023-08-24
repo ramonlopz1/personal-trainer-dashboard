@@ -2,18 +2,14 @@ import styles from "./ProfileAdmin.module.css";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import Loading from "../templates/Loading";
-import CodeGenerator from "./organisms/profileAdmin/CodeGenerator";
-import GeneratedCodeList from "./organisms/profileAdmin/GeneratedCodeList";
-import { GeneratedCodes, Users } from "@prisma/client";
+import ClientsOverview from "./organisms/profileAdmin/ClientsOverview";
+import ClientsList from "./organisms/profileAdmin/ClientsList";
+import { Users } from "@prisma/client";
 import Image from "next/image";
 
 export default function ProfileAdmin() {
   const [user, setUser] = useState<Users>();
   const [loading, setLoading] = useState<boolean>(true);
-  const [generatedCode, setGeneratedCode] = useState<any>();
-  const [generatedCodeList, setGeneratedCodeList] =
-    useState<GeneratedCodes[]>();
-
   const [refresh, setRefresh] = useState<boolean>(false);
 
   const {
@@ -26,12 +22,6 @@ export default function ProfileAdmin() {
       .then(setUser)
       .then(() => setLoading(false));
   }, [id]);
-
-  useEffect(() => {
-    fetch(`/api/raffledCodes?id=${id}`)
-      .then((data) => data.json())
-      .then(setGeneratedCodeList);
-  }, [generatedCode, refresh]);
 
   return (
     <div className={styles.section}>
@@ -50,16 +40,13 @@ export default function ProfileAdmin() {
           </div>
           <div className={styles.containers}>
             <div className={styles.subContainer}>
-              <CodeGenerator
-                generatedCode={generatedCode}
-                setGeneratedCode={setGeneratedCode}
-              />
+              <ClientsOverview />
             </div>
             <div className={styles.subContainer}>
-              <GeneratedCodeList
-                generatedCodeList={generatedCodeList}
-                setRefresh={setRefresh}
+              <ClientsList
                 refresh={refresh}
+                setRefresh={setRefresh}
+                clientsList={[]}
               />
             </div>
           </div>

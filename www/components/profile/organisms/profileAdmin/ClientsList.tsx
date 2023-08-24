@@ -1,29 +1,26 @@
 import { Dispatch, useState } from "react";
-import styles from "./GeneratedCodeList.module.css";
-import { GeneratedCodes } from "@prisma/client";
+import styles from "./ClientsList.module.css";
 import Link from "next/link";
 import { BiRefresh } from "react-icons/bi";
 import { sortArrayByDayAndHour } from "@/logic/utils/array";
 import Loading from "@/components/templates/Loading";
 import { formatBRDateTime } from "@/logic/utils/string";
 
-interface GeneratedCodeListProps {
-  generatedCodeList: GeneratedCodes[] | undefined;
+interface ClientsListProps {
   setRefresh: Dispatch<boolean>;
   refresh: boolean;
+  clientsList: any[]
 }
 
-export default function GeneratedCodeList(
-  props: GeneratedCodeListProps
-): JSX.Element {
-  const { generatedCodeList: codeList, setRefresh, refresh } = props;
+export default function ClientsList(props: ClientsListProps): JSX.Element {
+  const { setRefresh, refresh, clientsList } = props;
   const [loading, setLoading] = useState<boolean>(false);
   const renderList = () => {
-    if (!codeList?.length) return <div>Não existem códigos</div>;
+    // if (!codeList?.length) return <div>Não existem códigos</div>;
 
-    const sortByHour = sortArrayByDayAndHour(codeList);
+    const sortByHour = sortArrayByDayAndHour(clientsList);
 
-    return sortByHour?.map((item, i) => {
+    return sortByHour?.map((item: any, i: any) => {
       const dateTime = formatBRDateTime(item.createdAt);
       const activationTime = item.activationDate
         ? formatBRDateTime(item.activationDate)
@@ -71,7 +68,7 @@ export default function GeneratedCodeList(
   return (
     <div className={styles.generatedCodeList}>
       <div className={styles.topDiv}>
-        <h4>Últimos códigos gerados</h4>
+        <h4>Últimos clientes cadastrados</h4>
         <button className={styles.btnRefresh} onClick={btnRefreshHandler}>
           <BiRefresh />
         </button>
@@ -81,10 +78,10 @@ export default function GeneratedCodeList(
           <tr style={{ width: "100%" }}>
             <th className={styles.listHeader}>
               <td>Data Criação</td>
-              <td>Código</td>
-              <td>Status</td>
-              <td>Data Ativação</td>
-              <td>Cliente</td>
+              <td>Nome</td>
+              <td>Peso</td>
+              <td>Altura</td>
+              <td>Perfil</td>
             </th>
           </tr>
         </thead>

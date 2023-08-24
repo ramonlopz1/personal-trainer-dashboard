@@ -21,7 +21,9 @@ export default function Profile() {
     fetch(`/api/users?id=${id}`)
       .then((data) => data.json())
       .then(setUser)
-      .then(() => setLoading(false));
+      .then(() => setLoading(false))
+
+    console.log(loading)
   }, [activationStatus, id]);
 
   return (
@@ -39,7 +41,7 @@ export default function Profile() {
             />
             <h3 className={styles.title}>Olá, {user?.name}</h3>
           </div>
-          <div className={styles.containers}>
+          {/* <div className={styles.containers}>
             <div className={styles.subContainer}>
               <CodeActivation
                 setActivationStatus={setActivationStatus}
@@ -49,7 +51,7 @@ export default function Profile() {
             <div className={styles.subContainer}>
               <ActivatedCodeList user={user} />
             </div>
-          </div>
+          </div> */}
         </>
       )}
     </div>

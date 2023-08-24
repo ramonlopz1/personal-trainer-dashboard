@@ -47,9 +47,9 @@ export default class CollectionUser implements ICollectionUser {
     const user = await this.prisma.users.findUnique({
       // retorna o usuário e o dados relacionados da tabela raffledCodes
       where: { id },
-      include: { raffledCodes: { where: {
-        expired: false
-      } } },
+      // include: { raffledCodes: { where: {
+      //   expired: false
+      // } } },
     });
 
     const { password, ...res } = user!;
@@ -63,7 +63,7 @@ export default class CollectionUser implements ICollectionUser {
     let user = await this.prisma.users.findUnique({
       // retorna o usuário e o dados relacionados da tabela raffledCodes
       where: { socialId },
-      rejectOnNotFound: false,
+      // rejectOnNotFound: false,
     });
 
     if (!user) {
@@ -83,7 +83,7 @@ export default class CollectionUser implements ICollectionUser {
     const user = await this.prisma.users.findUnique({
       // retorna o usuário e o dados relacionados da tabela raffledCodes
       where: { id },
-      include: { raffledCodes: { where: { providerId: providerId } } },
+      // include: { raffledCodes: { where: { providerId: providerId } } },
     });
 
     const { password, ...res } = user!;
@@ -92,7 +92,7 @@ export default class CollectionUser implements ICollectionUser {
 
   async listUsers(): Promise<Users[]> {
     const users = await this.prisma.users.findMany({
-      include: { raffledCodes: true },
+      // include: { raffledCodes: true },
     });
 
     const res = users.map((user: Users) => {
@@ -105,8 +105,8 @@ export default class CollectionUser implements ICollectionUser {
 
   async listUsersByProvider(providerId: any): Promise<Users[]> {
     const users = await this.prisma.users.findMany({
-      include: { raffledCodes: { where: { providerId } } },
-      where: { raffledCodes: { some: { providerId } } },
+      // include: { raffledCodes: { where: { providerId } } },
+      // where: { raffledCodes: { some: { providerId } } },
     });
 
     const res = users.map((user: Users) => {
