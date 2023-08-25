@@ -9,28 +9,26 @@ import {
   IoCallSharp,
 } from "react-icons/io5";
 import InputMask from "react-input-mask";
-import styles from "./Form.module.css";
+import styles from "./FormRegister.module.css";
 import Link from "next/link";
+import useFormRegister from "@/data/hooks/useFormRegister";
 
 interface FormProps {
-  userData: any;
-  registerErrorMsgs: string;
-  registerValidationMsgs: any;
-  appendUserData: (event: ChangeEvent<HTMLInputElement>) => void;
-  register: (e: any) => void;
-  enableBtn: boolean;
-  uploadImg: any;
+  adminId: string;
 }
 
-export default function Form({
-  userData,
-  registerErrorMsgs,
-  registerValidationMsgs,
-  appendUserData,
-  register,
-  uploadImg,
-  enableBtn
-}: FormProps): JSX.Element {
+export default function Form({ adminId }: FormProps): JSX.Element {
+  const {
+    userData,
+    appendUserData,
+    register,
+    registerErrorMsgs,
+    registerValidationMsgs,
+    enableBtn,
+    uploadImg,
+    userRegistered
+  } = useFormRegister();
+
   return (
     <form className={styles.form}>
       <>
@@ -158,10 +156,10 @@ export default function Form({
         </span>
       </div>
 
+      {/* {userRegistered === 'Usuário criado com sucesso'} */}
       {registerErrorMsgs ? <span>{registerErrorMsgs}</span> : false}
-      <Link href="">Esqueceu a senha?</Link>
       <div className={styles.btns}>
-        <Link href={""} className={styles.submit}>
+        <Link href={`/profile?id=${adminId}`} className={styles.submit}>
           Voltar
         </Link>
 

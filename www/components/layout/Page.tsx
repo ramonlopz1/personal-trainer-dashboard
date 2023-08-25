@@ -6,10 +6,12 @@ import Boxed from "./Boxed";
 import styles from "./Page.module.css";
 import Link from "next/link";
 import Image from "next/image";
+
 interface PageProps {
   extern?: boolean;
   children: any;
   className?: string;
+  bgColor?: string
 }
 
 export default function Page(props: PageProps) {
@@ -19,13 +21,13 @@ export default function Page(props: PageProps) {
 
   function render() {
     return (
-      <main className={styles.page}>
+      <main className={styles.page} style={{backgroundColor: props.bgColor ? props.bgColor : 'white'}}>
         {props.extern ? (
           false
         ) : (
           <header className={styles.header}>
             <div className={styles.logo}>
-              <Image src="/logo.png" alt="logo" height={30} width={70} />
+              <Image src="/logo.png" alt="logo" height={40} width={150} />
             </div>
             <div className={styles.headerBtns}>
               <Link className={styles.btnHome} href={`/profile?id=${userId}`}>
@@ -34,7 +36,7 @@ export default function Page(props: PageProps) {
               {role === "ADMIN" ? (
                 <Link
                   className={styles.btnCustomers}
-                  href={`/customers?providerId=${userId}`}
+                  href="/register"
                 >
                   <BsFillPeopleFill />
                 </Link>

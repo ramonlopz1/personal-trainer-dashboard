@@ -3,11 +3,6 @@
   flex-direction: column;
   align-items: center;
   width: 100%;
-  background-image: -webkit-linear-gradient(
-    30deg,
-    #ffffff 50%,
-    rgb(0, 98, 255) 50%
-  );
   justify-content: space-between !important;
 }
 
@@ -18,7 +13,7 @@
   align-items: center;
   width: 100%;
   padding: 10px 100px;
-  border-top: 3px solid var(--redColor);
+  border-top: 3px solid var(--wineColor);
   margin-bottom: 10px;
   background-color: var(--darkBlue);
 }

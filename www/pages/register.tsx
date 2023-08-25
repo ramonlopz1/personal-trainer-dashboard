@@ -3,7 +3,6 @@ import Register from "@/components/login/Register";
 import Page from "@/components/layout/Page";
 import { useSession } from "next-auth/react";
 import Router from "next/router";
-import AsideImage from "@/components/login/AsideImage";
 import { useState } from "react";
 
 export default function RegisterPage() {
@@ -12,8 +11,8 @@ export default function RegisterPage() {
   //session.user.provider
 
   // ta salvando o usuário do google no mongo, mas ta dando algum erro
-
-  if (session?.user.provider === "credentials") {
+  
+  if (session?.role !== "ADMIN") {
     Router.push(`/profile?id=${session?.user.id}`);
     return;
   } else {
@@ -25,7 +24,7 @@ export default function RegisterPage() {
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           <link rel="icon" href="/favicon.ico" />
         </Head>
-        <Page extern>
+        <Page>
           <div
             style={{
               display: "flex",
@@ -34,8 +33,7 @@ export default function RegisterPage() {
               margin: "30px",
             }}
           >
-            <AsideImage />
-            <Register />
+            <Register adminId={session?.user.id}/>
           </div>
         </Page>
       </>

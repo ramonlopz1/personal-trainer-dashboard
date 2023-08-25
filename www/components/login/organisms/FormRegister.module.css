@@ -17,7 +17,6 @@
   align-items: center;
   height: 40px;
   width: 100%;
-  
 }
 
 .inputImg {
@@ -59,7 +58,7 @@
 
 .form .btns {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   gap: 5px;
   width: 100%;
   margin-top: 10px;
@@ -69,6 +68,10 @@
 .form .btns .btnSignUp {
   height: 40px;
   outline: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
   border: none;
   border-radius: 6px;
   color: white;

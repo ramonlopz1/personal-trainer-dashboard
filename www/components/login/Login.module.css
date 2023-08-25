@@ -25,13 +25,14 @@
   width: 80%;
 }
 
-.socialLogin .google,
-.facebook,
-.email {
+/* .socialLogin .google,
+.facebook, */
+.loginTitle {
   margin-top: 10px;
   display: flex;
+  
   align-items: center;
-  justify-content: left;
+  justify-content: center;
   gap: 120px;
   padding-left: 20px;
   font-weight: bold;
@@ -41,7 +42,6 @@
   font-size: 17px;
   outline: none;
   border-radius: 6px;
-  cursor: pointer;
 }
 
 .socialLogin .google {
@@ -60,14 +60,13 @@
   background-color: #597cc2;
 }
 
-.email {
+.loginTitle {
   background-color: rgb(221, 221, 221);
   color: black;
+  text-align: center;
+  
 }
 
-.email:hover {
-  background-color: rgb(201, 201, 201);
-}
 
 .form {
   transition: 0.4s;

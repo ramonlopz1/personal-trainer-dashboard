@@ -43,39 +43,7 @@ export default function Form({
 }: FormProps): JSX.Element {
   return (
     <form onSubmit={login} className={styles.form}>
-      {showFormRegister ? (
-        <>
-          <div className={styles.inputs}>
-            <div className={styles.inputImg}>
-              <label htmlFor="img"></label>
-              <input
-                type="file"
-                name="img"
-                onChange={uploadImg}
-                placeholder="Insira o seu nome"
-              />
-            </div>
-            <div className={styles.input}>
-              <label htmlFor="name">
-                <IoPersonSharp />
-              </label>
-              <input
-                type="text"
-                name="name"
-                required
-                value={userData.name}
-                onChange={appendUserData}
-                placeholder="Insira o seu nome"
-              />
-            </div>
-          </div>
-          <span className={styles.inputErrorMsg}>
-            {registerValidationMsgs.name}
-          </span>
-        </>
-      ) : (
-        false
-      )}
+    
       <div className={styles.inputs}>
         <div className={styles.input}>
           <label htmlFor="email">
@@ -113,75 +81,8 @@ export default function Form({
           </span>
         </span>
       </div>
-      {showFormRegister ? (
-        <div className={styles.inputs}>
-          <div className={styles.input}>
-            <label htmlFor="passwordConfirmation">
-              <IoKeyOutline />
-            </label>
-            <input
-              type="password"
-              name="passwordConfirmation"
-              required
-              value={userData.passwordConfirmation}
-              onChange={appendUserData}
-              placeholder="Confirme a sua senha"
-            />
-          </div>
-          <span className={styles.inputErrorMsg}>
-            {registerValidationMsgs.passwordConfirmation}
-          </span>
-        </div>
-      ) : (
-        false
-      )}
-      {showFormRegister ? (
-        <div className={styles.inputs}>
-          <div className={styles.input}>
-            <label htmlFor="birthDate">
-              <IoCalendarNumberSharp />
-            </label>
-            <input
-              type="date"
-              name="birthDate"
-              required
-              value={userData.birthDate}
-              onChange={appendUserData}
-              placeholder="Informe a data de nascimento"
-            />
-          </div>
-          <span className={styles.inputErrorMsg}>
-            <span className={styles.inputErrorMsg}>
-              {registerValidationMsgs.birthDate}
-            </span>
-          </span>
-        </div>
-      ) : (
-        false
-      )}
-      {showFormRegister ? (
-        <div className={styles.inputs}>
-          <div className={styles.input}>
-            <label htmlFor="tel">
-              <IoCallSharp />
-            </label>
-            <InputMask
-              type="tel"
-              name="phone"
-              required
-              value={userData.phone}
-              onChange={appendUserData}
-              mask="(99) 99999-9999"
-              placeholder="(  ) _____-____"
-            />
-          </div>
-          <span className={styles.inputErrorMsg}>
-            {registerValidationMsgs.phone}
-          </span>
-        </div>
-      ) : (
-        false
-      )}
+   
+   
       {loginErrorMsg && !showFormRegister ? (
         <span>{loginErrorMsg}</span>
       ) : registerErrorMsgs && showFormRegister ? (
@@ -189,43 +90,11 @@ export default function Form({
       ) : (
         false
       )}
-      {!showFormRegister ? <Link href="">Esqueceu a senha?</Link> : false}
+      <Link href="">Esqueceu a senha?</Link> 
       <div className={styles.btns}>
-        {showFormRegister ? (
-          <button
-            onClick={(e) => {
-              e.preventDefault();
-              setShowFormRegister(false);
-            }}
-            className={styles.submit}
-          >
-            Voltar
-          </button>
-        ) : (
+     
           <input type="submit" className={styles.submit} value="Login" />
-        )}
-        {!showFormRegister ? (
-          <button
-            onClick={(e) => {
-              e.preventDefault();
-              setShowFormRegister(true);
-            }}
-            className={styles.btnSignUp}
-          >
-            Cadastrar
-          </button>
-        ) : (
-          <button
-            onClick={(e) => {
-              e.preventDefault();
-              register(userData);
-            }}
-            className={styles.btnSignUp}
-            disabled={enableBtn}
-          >
-            Cadastrar
-          </button>
-        )}
+      
       </div>
       {showFormRegister ? (
         false
