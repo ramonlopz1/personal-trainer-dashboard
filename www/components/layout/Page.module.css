@@ -13,9 +13,9 @@
   align-items: center;
   width: 100%;
   padding: 10px 100px;
-  border-top: 3px solid var(--wineColor);
+  border-top: 3px solid var(--thirdColor);
   margin-bottom: 10px;
-  background-color: var(--darkBlue);
+  background-color: var(--mainColor);
 }
 
 .logo {
@@ -83,6 +83,6 @@
   width: 100%;
   justify-content: space-between;
   padding: 5px 100px;
-  background-color: var(--darkBlue);
+  background-color: var(--mainColor);
   color: white;
 }

@@ -43,7 +43,7 @@ export default function LoginPage() {
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           <link rel="icon" href="/favicon.ico" />
         </Head>
-        <Page extern bgColor="var(--lightBlue)">
+        <Page extern bgColor="var(--secColor)">
           <div
             style={{
               display: "flex",

@@ -156,7 +156,7 @@ export default function Form({ adminId }: FormProps): JSX.Element {
         </span>
       </div>
 
-      {/* {userRegistered === 'Usuário criado com sucesso'} */}
+      {userRegistered === 'Usuário criado com sucesso'}
       {registerErrorMsgs ? <span>{registerErrorMsgs}</span> : false}
       <div className={styles.btns}>
         <Link href={`/profile?id=${adminId}`} className={styles.submit}>

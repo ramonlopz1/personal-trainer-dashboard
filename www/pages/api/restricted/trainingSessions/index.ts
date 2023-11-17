@@ -2,6 +2,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { v4 as uuid } from "uuid";
 import { PrismaClient } from "@prisma/client";
 import { getToken } from "next-auth/jwt";
+import ServiceTrainingSessions from "@/logic/services/user/ServiceTrainingSessions";
 const prisma = new PrismaClient();
 
 const secret = process.env.SECRET;
@@ -11,24 +12,20 @@ export default async function handler(
   res: NextApiResponse
 ) {
   const token = await getToken({ req, secret });
-  const providerId = token?.sub;
+  const service = new ServiceTrainingSessions();
   // if (token?.role !== "ADMIN")
   //   return res.status(401).send("Não autorizado.");
 
   if (!token) return res.status(401).json({ Message: "Não autorizado." });
 
-  const code = uuid().split("-")[0].toUpperCase();
-  try {
-    const store = await prisma.generatedCodes.create({
-      data: {
-        code,
-        provider: token?.name!,
-        providerId: providerId!,
-      },
-    });
-    return res.status(200).json(store);
-  } catch (err) {
-    console.error(err);
-    return res.status(500).json({ Message: "Erro inesperado." });
+  if (req.method === "POST") {
+    try {
+      const trainingSessions = await service.add(JSON.parse(req.body));
+
+      return res.status(200).send(trainingSessions);
+    } catch (err: any) {
+      console.log(err)
+      return res.status(404).send({ error: true });
+    }
   }
 }

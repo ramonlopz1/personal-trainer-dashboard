@@ -9,6 +9,7 @@ import Image from "next/image";
 
 export default function ProfileAdmin() {
   const [user, setUser] = useState<Users>();
+  const [users, setUsers] = useState()
   const [loading, setLoading] = useState<boolean>(true);
   const [refresh, setRefresh] = useState<boolean>(false);
 
@@ -20,6 +21,13 @@ export default function ProfileAdmin() {
     fetch(`/api/users?id=${id}`)
       .then((data) => data.json())
       .then(setUser)
+      .then(() => setLoading(false));
+  }, [id]);
+
+  useEffect(() => {
+    fetch(`/api/users`)
+      .then((data) => data.json())
+      .then(setUsers)
       .then(() => setLoading(false));
   }, [id]);
 
@@ -46,7 +54,7 @@ export default function ProfileAdmin() {
               <ClientsList
                 refresh={refresh}
                 setRefresh={setRefresh}
-                clientsList={[]}
+                clientsList={users || []}
               />
             </div>
           </div>

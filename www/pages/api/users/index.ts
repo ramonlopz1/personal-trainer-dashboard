@@ -83,7 +83,7 @@ export default async function handler(
 
     try {
       await service.add(req.body);
-      return res.status(200).send("Usuário criado com sucesso");
+      return res.status(200).send(true);
     } catch (err: any) {
       return res.status(404).send(err["message"]);
     }

@@ -96,16 +96,6 @@ export default function Form({
           <input type="submit" className={styles.submit} value="Login" />
       
       </div>
-      {showFormRegister ? (
-        false
-      ) : (
-        <button
-          className={styles.btnBack}
-          onClick={() => setShowFormLogin(false)}
-        >
-          <IoArrowBack />
-        </button>
-      )}
     </form>
   );
 }

@@ -10,7 +10,6 @@ import Image from "next/image";
 
 export default function Profile() {
   const [user, setUser] = useState<Users>();
-  const [activationStatus, setActivationStatus] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(true);
 
   const {
@@ -22,9 +21,7 @@ export default function Profile() {
       .then((data) => data.json())
       .then(setUser)
       .then(() => setLoading(false))
-
-    console.log(loading)
-  }, [activationStatus, id]);
+  }, [id]);
 
   return (
     <div className={styles.section}>

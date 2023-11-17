@@ -61,8 +61,8 @@
 }
 
 .loginTitle {
-  background-color: rgb(221, 221, 221);
-  color: black;
+  background-color: var(--thirdColor);
+  color: white;
   text-align: center;
   
 }

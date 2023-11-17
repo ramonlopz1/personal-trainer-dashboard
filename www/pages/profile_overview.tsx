@@ -2,13 +2,33 @@ import Head from "next/head";
 import Page from "@/components/layout/Page";
 import { useSession } from "next-auth/react";
 import UserCodesProviderView from "@/components/profile/UserCodesProviderView";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
+import { Users } from "@prisma/client";
+import ClientOverview from "@/components/profile/organisms/profile/ClientOverview";
 
-export default function ProfilePage() {
+
+export default function ProfileOverview() {
   // const ctx = useAppData()
   // console.log(ctx)'
 
   const { data: session } = useSession();
   const role = session?.role;
+  const [user, setUser] = useState<Users>();
+  const [loading, setLoading] = useState<boolean>(true);
+
+  const {
+    query: { id },
+  } = useRouter();
+
+  useEffect(() => {
+    fetch(`/api/users?id=${id}`)
+      .then((data) => data.json())
+      .then(setUser)
+      .then(() => setLoading(false));
+  }, [id]);
+
+  console.log(user)
 
   return (
     <>
@@ -19,11 +39,7 @@ export default function ProfilePage() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Page>
-        {role === "ADMIN" ? (
-          <UserCodesProviderView />
-        ) : (
-          <div>Não autorizado!</div>
-        )}
+        <ClientOverview user={user}/>
       </Page>
     </>
   );

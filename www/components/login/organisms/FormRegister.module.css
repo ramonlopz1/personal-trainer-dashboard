@@ -81,7 +81,7 @@
 }
 
 .form .btns .submit {
-  background-color: var(--darkBlue);
+  background-color: var(--mainColor);
 }
 
 .form .btns .submit:hover {

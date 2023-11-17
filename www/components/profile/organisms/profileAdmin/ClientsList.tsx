@@ -20,36 +20,32 @@ export default function ClientsList(props: ClientsListProps): JSX.Element {
 
     const sortByHour = sortArrayByDayAndHour(clientsList);
 
-    return sortByHour?.map((item: any, i: any) => {
-      const dateTime = formatBRDateTime(item.createdAt);
-      const activationTime = item.activationDate
-        ? formatBRDateTime(item.activationDate)
+    return sortByHour?.map((user: any, i: any) => {
+      const dateTime = formatBRDateTime(user.createdAt);
+      const activationTime = user.activationDate
+        ? formatBRDateTime(user.activationDate)
         : "";
 
       return (
         <tr className={styles.listItem} key={i}>
           <td>{dateTime}</td>
-          <td>{item.code}</td>
+          <td>{user.code}</td>
           <td
             style={{
-              color: item.isActive ? "green" : "red",
+              color: user.isActive ? "green" : "red",
               fontWeight: "bold",
             }}
           >
-            {item.isActive ? "Ativo" : "Inativo"}
+            {user.isActive ? "Ativo" : "Inativo"}
           </td>
           <td>{activationTime || "-"}</td>
           <td className={styles.tdCustomerProfile}>
-            {item.isActive ? (
               <Link
                 className={styles.customerBtn}
-                href={`/userByProvider?id=${item.ownerId}&providerId=${item.providerId}`}
+                href={`/profile_overview?id=${user.id}`}
               >
                 Ver cliente
               </Link>
-            ) : (
-              <span>Aguardando</span>
-            )}
           </td>
         </tr>
       );

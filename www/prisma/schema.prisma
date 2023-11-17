@@ -11,17 +11,66 @@ datasource db {
 }
 
 model Users {
-  id              String   @id @default(auto()) @map("_id") @db.ObjectId
-  socialId        String?  @unique
-  image           String?
-  name            String
-  email           String   @unique
-  password        String
-  birthDate       String?
-  rememberMeToken String?
-  phone           String?  @unique
-  role            Role     @default(USER)
-  createdAt       DateTime @default(now())
+  id                String                  @id @default(auto()) @map("_id") @db.ObjectId
+  socialId          String?                 @unique
+  image             String?
+  name              String
+  email             String                  @unique
+  password          String
+  birthDate         String?
+  rememberMeToken   String?
+  gender            String?
+  phone             String?                 @unique
+  role              Role                    @default(USER)
+  createdAt         DateTime                @default(now())
+  healthInformation UsersHealthInformation?
+}
+
+model UsersHealthInformation {
+  id               String             @id @default(auto()) @map("_id") @db.ObjectId
+  owner            Users              @relation(fields: [ownerId], references: [id])
+  ownerId          String            @unique @db.ObjectId
+  objective        String?
+  weight           Float?
+  height           Float?
+  classificationEN String?
+  imc              Float?
+  fc               Float?
+  vo2max           Float?
+  pa               Float?
+  description      String?
+  frequency        Int[]
+  macrociclo       Macrociclo?
+  fcev02max        FCeVO2Max?
+  trainingSessions TrainingSessions[]
+}
+
+model Macrociclo {
+  id           String                 @id @default(auto()) @map("_id") @db.ObjectId
+  healthRef    UsersHealthInformation @relation(fields: [healthInfoId], references: [id])
+  healthInfoId String                 @unique @db.ObjectId
+  mesociclo    Int[]
+  periodizacao Int[]
+  obs          String?
+}
+
+model FCeVO2Max {
+  id            String                 @id @default(auto()) @map("_id") @db.ObjectId
+  healthRef     UsersHealthInformation @relation(fields: [fcevo2maxId], references: [id])
+  fcevo2maxId   String                 @unique @db.ObjectId
+  entrenamiento Float[]
+  fct           Float[]
+  velocidade    Float[]
+}
+
+model TrainingSessions {
+  id                 String                 @id @default(auto()) @map("_id") @db.ObjectId
+  healthRef          UsersHealthInformation @relation(fields: [trainingsessionsId], references: [id])
+  trainingsessionsId String                 @unique @db.ObjectId
+  exercicio          String[]
+  series             String[]
+  repeticoes         String[]
+  cadencia           String[]
 }
 
 enum Role {
