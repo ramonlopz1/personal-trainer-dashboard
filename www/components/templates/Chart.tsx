@@ -6,8 +6,10 @@ import {
   Title,
   Tooltip,
   Legend,
+  PointElement,
+  LineElement
 } from "chart.js";
-import { Bar } from "react-chartjs-2";
+import { Bar, Line } from "react-chartjs-2";
 import ChartDataLabels from "chartjs-plugin-datalabels";
 
 ChartJS.register(
@@ -17,7 +19,9 @@ ChartJS.register(
   Title,
   Tooltip,
   Legend,
-  ChartDataLabels
+  ChartDataLabels,
+  PointElement,
+  LineElement
 );
 
 interface ChartProps {
@@ -56,24 +60,13 @@ export function Chart(props: ChartProps) {
     },
   };
 
-  const labels = chartData
-    .map((obj: any) => obj.name)
-    .reverse()
-    .slice(0, 7)
-    .reverse();
-    
-  const values = chartData
-    .map((obj: any) => obj.value)
-    .reverse()
-    .slice(0, 7)
-    .reverse();
 
   const data = {
-    labels: labels,
+    labels: ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "L", "M"],
     datasets: [
       {
         label: "Últimos dias",
-        data: values,
+        data: chartData,
         backgroundColor: "#FF0040",
         datalabels: {
           color: "black",
@@ -86,5 +79,9 @@ export function Chart(props: ChartProps) {
     ],
   };
 
-  return <Bar options={options} data={data} />;
+  const getChart = (type: string) => {
+    
+  }
+
+  return <Line options={options} data={data} />;
 }

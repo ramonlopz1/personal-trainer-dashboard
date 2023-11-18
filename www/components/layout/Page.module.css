@@ -4,6 +4,7 @@
   align-items: center;
   width: 100%;
   justify-content: space-between !important;
+  background-color: whitesmoke!important;
 }
 
 .header {
@@ -30,8 +31,21 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 110px;
   gap: 25px;
+}
+
+.searchInput {
+  display: flex;
+  justify-content: center;
+  height: 30px;
+}
+
+.searchInput input {
+  outline: line;
+  border: none;
+  border-radius: 4px;
+  text-indent: 10px;
+  width: 240px;
 }
 
 .signOut,

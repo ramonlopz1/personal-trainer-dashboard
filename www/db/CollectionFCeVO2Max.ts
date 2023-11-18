@@ -17,12 +17,24 @@ export default class CollectionFCeVO2Max implements ICollectionFCeVO2Max {
   async getFCeVO2MaxById(id: any): Promise<FCeVO2Max> {
     const healthInfo = await this.prisma.fCeVO2Max.findUniqueOrThrow({
       // retorna o usuário e o dados relacionados da tabela raffledCodes
-      where: { id },
+         where: { healthInfoId: id },
       // include: { raffledCodes: { where: {
       //   expired: false
       // } } },
     });
 
     return healthInfo;
+  }
+
+  async putFCeVO2MaxById(
+    id: any,
+    data: any
+  ): Promise<FCeVO2Max> {
+    const fcevo2max = await this.prisma.fCeVO2Max.update({
+         where: { healthInfoId: id },
+      data,
+    });
+
+    return fcevo2max;
   }
 }

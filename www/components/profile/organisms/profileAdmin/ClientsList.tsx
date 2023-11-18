@@ -29,7 +29,7 @@ export default function ClientsList(props: ClientsListProps): JSX.Element {
       return (
         <tr className={styles.listItem} key={i}>
           <td>{dateTime}</td>
-          <td>{user.code}</td>
+          <td>{user.name}</td>
           <td
             style={{
               color: user.isActive ? "green" : "red",
@@ -44,7 +44,7 @@ export default function ClientsList(props: ClientsListProps): JSX.Element {
                 className={styles.customerBtn}
                 href={`/profile_overview?id=${user.id}`}
               >
-                Ver cliente
+                Ver aluno
               </Link>
           </td>
         </tr>

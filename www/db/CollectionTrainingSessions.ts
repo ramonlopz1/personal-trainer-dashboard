@@ -17,12 +17,24 @@ export default class CollectionMacrociclo implements ICollectionTrainingSessions
   async getTrainingSessionsById(id: any): Promise<TrainingSessions> {
     const healthInfo = await this.prisma.trainingSessions.findUniqueOrThrow({
       // retorna o usuário e o dados relacionados da tabela raffledCodes
-      where: { id },
+      where: { healthInfoId: id },
       // include: { raffledCodes: { where: {
       //   expired: false
       // } } },
     });
 
     return healthInfo;
+  }
+
+  async putTrainingSessionsById(
+    id: any,
+    data: any
+  ): Promise<TrainingSessions> {
+    const trainingSessions = await this.prisma.trainingSessions.update({
+      where: { healthInfoId: id },
+      data,
+    });
+
+    return trainingSessions;
   }
 }

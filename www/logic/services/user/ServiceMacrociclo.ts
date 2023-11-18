@@ -13,4 +13,8 @@ export default class ServiceUsersHealthInformation implements IServiceUsersHealt
       data
     );
   }
+
+  async update(id: any, data: any) {
+    return this._collection.putMacrocicloById(id, data);
+  }
 }

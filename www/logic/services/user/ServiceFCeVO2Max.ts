@@ -13,4 +13,8 @@ export default class ServiceFCeVO2Max implements IServiceFCeVO2Max {
       data
     );
   }
+
+  async update(id: any, data: any) {
+    return this._collection.putFCeVO2MaxById(id, data);
+  }
 }

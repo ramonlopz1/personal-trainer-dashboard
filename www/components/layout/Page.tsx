@@ -30,6 +30,9 @@ export default function Page(props: PageProps) {
               <Image src="/logo.png" alt="logo" height={40} width={150} />
             </div>
             <div className={styles.headerBtns}>
+              <div className={styles.searchInput}>
+                <input type="text" placeholder="Pesquisar por aluno..."/>
+              </div>
               <Link className={styles.btnHome} href={`/profile?id=${userId}`}>
                 <HiHome />
               </Link>
@@ -58,7 +61,7 @@ export default function Page(props: PageProps) {
         </Boxed>
         <footer className={styles.footer}>
           <span>Developed By Ramon Lopes</span>
-          <span>PedeMais. © 2023 - Todos os direitos reservados.</span>
+          <span>Rafael Genú Personal Trainer. © 2023 - Todos os direitos reservados.</span>
           <span>Fale conosco.</span>
         </footer>
       </main>

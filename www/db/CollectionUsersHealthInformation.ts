@@ -1,9 +1,7 @@
 import { PrismaClient, Users, UsersHealthInformation } from "@prisma/client";
 import argon2 from "argon2";
 
-interface IUsersHealthInformation {
- 
-}
+interface IUsersHealthInformation {}
 
 export default class CollectionUsersHealthInformation
   implements IUsersHealthInformation
@@ -31,6 +29,18 @@ export default class CollectionUsersHealthInformation
         //   expired: false
         // } } },
       });
+
+    return healthInfo;
+  }
+
+  async putUsersHealthInformationById(
+    id: any,
+    data: any
+  ): Promise<UsersHealthInformation> {
+    const healthInfo = await this.prisma.usersHealthInformation.update({
+      where: { ownerId: id },
+      data,
+    });
 
     return healthInfo;
   }

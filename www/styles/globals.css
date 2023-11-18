@@ -4,9 +4,12 @@
   --redColor: #FF0040;
   --thirdColor: #e4bd1a;
   --greenColor: rgb(56, 238, 108);
-  --yellowColor: rgb(255, 217, 0);
+  --yellowColor:rgb(231 196 30);
+  --lightYellowColor:rgb(255, 231, 113);
+  --veryLightYellowColor:rgb(252, 237, 164);
   --lightGrayColor: rgb(194, 194, 194);
   --shadow: 0 1px 4px rgba(97, 97, 97, 0.05), 0 4px 16px rgba(63, 63, 63, 0.06);
+  --border: 1px solid rgba(0, 0, 0, 0.267);
 }
 
 html {

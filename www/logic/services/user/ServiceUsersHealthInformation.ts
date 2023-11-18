@@ -5,12 +5,16 @@ export interface IServiceUsersHealthInformation {
   add: (data: UsersHealthInformation) => Promise<UsersHealthInformation>;
 }
 
-export default class ServiceUsersHealthInformation implements IServiceUsersHealthInformation {
+export default class ServiceUsersHealthInformation
+  implements IServiceUsersHealthInformation
+{
   private _collection = new CollectionUsersHealthInformation();
 
   async add(data: UsersHealthInformation) {
-    return this._collection.createUsersHealthInformation(
-      data
-    );
+    return this._collection.createUsersHealthInformation(data);
+  }
+
+  async update(id: any, data: any) {
+    return this._collection.putUsersHealthInformationById(id, data);
   }
 }

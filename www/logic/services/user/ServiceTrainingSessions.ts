@@ -13,4 +13,8 @@ export default class ServiceTrainingSessions implements IServiceTrainingSessions
       data
     );
   }
+
+  async update(id: any, data: any) {
+    return this._collection.putTrainingSessionsById(id, data);
+  }
 }

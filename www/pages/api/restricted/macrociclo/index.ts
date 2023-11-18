@@ -27,5 +27,13 @@ export default async function handler(
       console.log(err)
       return res.status(404).send({ error: true });
     }
+  } else if (req.method === 'PUT' &&  req.query.id) {
+    try {
+      // if (req.query.id !== token?.id) return res.status(401).send("Não autorizado");
+      const macrociclo = await service.update(req.query.id, JSON.parse(req.body));
+      return res.status(200).send(macrociclo);
+    } catch (err: any) {
+      return res.status(404).send(err["message"]);
+    }
   }
 }
