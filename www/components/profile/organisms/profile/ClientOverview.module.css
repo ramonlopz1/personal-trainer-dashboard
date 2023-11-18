@@ -1,44 +1,96 @@
 .title {
-    margin-bottom: 20px;
+    padding: 5px;
+    border-radius: 6px;
+    margin-bottom: 10px;
+    background-color: whitesmoke;
+}
+
+.personalInfo, .healthInfo {
+    background-color: whitesmoke;
+    border-radius: 6px;
+    padding: 15px;
 }
 
 .form {
-    padding: 0px 30px;
-    display: flex;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
-    gap: 30px;
+
 }
 
-.form .div_input {
+.form .personalInfoInputs, .healthInfoInputs {
     display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    height: 40px;
-    width: 300px;
+    align-items: flex-start;
+    justify-content: left;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
     border-radius: 6px;
 }
 
-.form .div_input input {
+
+.form .divInput {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 30px;
+    width: 300px;
+}
+
+.form .divInput input {
     height: 100%;
     width: 200px;
     outline: none;
-    border-top: 1px solid black;
-    border-right: 1px solid black;
-    border-bottom: 1px solid black;
+    border-top: 1px solid rgba(0, 0, 0, 0.267);
+    border-right: 1px solid rgba(0, 0, 0, 0.267);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.267);
     border-left: none;
     padding: 10px;
+    border-radius: 0px 4px 4px 0px;
 }
 
-.form .div_input label {
+.form .divInput label {
     display: flex;
     align-items: center;
     padding-left: 10px;
     height: 100%;
-    border-top: 1px solid black;
-    border-left: 1px solid black;
-    border-bottom: 1px solid black;
-    border-right: 1px solid black;
-    
+    font-size: 15px;
+    border-top: 1px solid rgba(0, 0, 0, 0.267);
+    border-left: 1px solid rgba(0, 0, 0, 0.267);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.267);
+    border-right: 1px solid rgba(0, 0, 0, 0.267);
+    border-radius: 4px 0px 0px 4px;
     width: 100px;
+}
+
+.healthInfo {
+    margin-top: 10px;
+}
+
+.healthInfoBox {
+    display: flex;
+    width: 500px;
+}
+
+.healthInfoBox {
+    display: flex;
+}
+
+.healthInfoInputs .divInput {
+    width: 500px;
+}
+
+.healthInfoInputs .divInput label {
+    width: 160px;
+}
+
+.healthInfoInputs .divInput input {
+    width: 310px;
+}
+
+.healthDescription textarea {
+    resize: none;
+    outline: none;
+    width: 500px;
+    height: 270px;
+    border: 1px solid rgba(0, 0, 0, 0.267);
+    padding: 10px;
+    border-radius: 4px;
 }
