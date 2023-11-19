@@ -2,6 +2,7 @@ import { Users } from "@prisma/client";
 import styles from "./ClientOverview.module.css";
 import { Dispatch, useState } from "react";
 import { Chart } from "@/components/templates/Chart";
+import { AiOutlineConsoleSql } from "react-icons/ai";
 
 interface ClientOverview {
   user: any;
@@ -24,7 +25,6 @@ export default function ClientsOverview({ user }: ClientOverview): JSX.Element {
 
     setFormData(formDataObject);
 
-    console.log(formData);
     setReadOnly(!readOnly);
   };
 
@@ -59,6 +59,29 @@ export default function ClientsOverview({ user }: ClientOverview): JSX.Element {
       classificationEN,
       bgColor,
     };
+  };
+
+  const renderMesocicloTable = (arr: any[]) => {
+    if (!arr) return false;
+    const rows = [];
+
+    for (let i = 0; i < arr.length; i += 12) {
+      const chunk = arr.slice(i, i + 12);
+      rows.push(chunk);
+    }
+
+    console.log(rows)
+    return rows.map((row, i) => {
+      return (
+        <tr key={i}>
+          {row.map((data, j) => {
+            console.log(data)
+            if (j > 1) return <td key={j}>{data}</td>;
+            else return <td key={j}></td>;
+          })}
+        </tr>
+      );
+    });
   };
 
   return (
@@ -301,23 +324,10 @@ export default function ClientsOverview({ user }: ClientOverview): JSX.Element {
                     <td>11</td>
                     <td>12</td>
                   </tr>
-                  <tr>
-                    {user?.healthInformation?.macrociclo?.mesociclo.map(
-                      (elem: any, i: any) => {
-                        return (
-                          <td key={i}>
-                            <input
-                              readOnly={readOnly}
-                              name={`periodizacaoTable${i}`}
-                              className={styles.tableInput}
-                              type="text"
-                              value={elem}
-                            />
-                          </td>
-                        );
-                      }
-                    )}
-                  </tr>
+
+                  {renderMesocicloTable(
+                    user?.healthInformation?.macrociclo?.mesociclo
+                  )}
                 </tbody>
               </table>
             </div>
