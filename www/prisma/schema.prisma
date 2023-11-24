@@ -92,8 +92,8 @@ model FCeVO2Max {
 model TrainingSessions {
   id           String                 @id @default(auto()) @map("_id") @db.ObjectId
   healthRef    UsersHealthInformation @relation(fields: [healthInfoId], references: [id])
-  healthInfoId String                 @unique @db.ObjectId
-  exercicio    String[]
+  healthInfoId String                 @db.ObjectId
+  exercicios   String[]
   series       String[]
   repeticoes   String[]
   cadencia     String[]

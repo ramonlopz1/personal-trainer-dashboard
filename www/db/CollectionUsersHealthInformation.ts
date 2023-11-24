@@ -22,9 +22,9 @@ export default class CollectionUsersHealthInformation
     id: any
   ): Promise<UsersHealthInformation> {
     const healthInfo =
-      await this.prisma.usersHealthInformation.findUniqueOrThrow({
+      await this.prisma.usersHealthInformation.findUnique({
         // retorna o usuário e o dados relacionados da tabela raffledCodes
-        where: { id },
+        where: { ownerId: id },
         // include: { raffledCodes: { where: {
         //   expired: false
         // } } },
@@ -40,6 +40,13 @@ export default class CollectionUsersHealthInformation
     const healthInfo = await this.prisma.usersHealthInformation.update({
       where: { ownerId: id },
       data,
+      include: {
+        descriptions: true,
+        fcev02max: true,
+        macrociclo: true,
+        trainingSessions: true,
+        workoutActivity: true
+      }
     });
 
     return healthInfo;

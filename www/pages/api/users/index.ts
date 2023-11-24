@@ -91,11 +91,13 @@ export default async function handler(
     // UPDATE A USER BY ID
 
     try {
-      if (qId !== tokenId) return res.status(401).send("Não autorizado");
-      const user: Users = await service.update(qId, req.body);
+      if (token?.role !== "ADMIN")
+        return res.status(401).send("Não autorizado");
+
+      const user: Users = await service.update(qId, JSON.parse(req.body));
       return res.status(200).send(user);
     } catch (err: any) {
-      return res.status(404).send(err["message"]);
+      return res.status(404).send(err["message"].toString());
     }
   }
 }

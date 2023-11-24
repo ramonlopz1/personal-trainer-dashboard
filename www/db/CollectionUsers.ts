@@ -57,7 +57,7 @@ export default class CollectionUser implements ICollectionUser {
             macrociclo: true,
             fcev02max: true,
             trainingSessions: true,
-            workoutActivity: true
+            workoutActivity: true,
           },
         },
       },
@@ -128,13 +128,45 @@ export default class CollectionUser implements ICollectionUser {
     return res;
   }
 
-  async updateUser(id: any, user: any): Promise<Users> {
-    const updatedUser = await this.prisma.users.update({
+  async updateUser(id: string, user: any): Promise<Users> {
+    const { healthInformation, ...userData } = user;
+    const { macrociclo, descriptions, trainingSessions, workoutActivity } = healthInformation
+
+    const updatedUser = this.prisma.users.update({
       where: { id },
-      data: user,
+      data: userData,
     });
 
-    const { password, ...res } = updatedUser;
-    return { ...res, password: "" };
+    const updatedHealthInformation = this.prisma.usersHealthInformation.update({
+      where: { ownerId: id },
+      data: healthInformation,
+    });
+
+    const updatedMacrociclo = this.prisma.macrociclo.update({
+      where: { healthInfoId: healthInformation.id },
+      data: macrociclo,
+    });
+
+    const updatedTrainingSessions = this.prisma.trainingSessions.updateMany({
+      where: { healthInfoId: healthInformation.id },
+      data: trainingSessions,
+    });
+
+    // const updatedHealthInformationDescriptions = this.prisma.usersHealthInformationDescriptions.update({
+    //   where: { healthInfoId: id },
+    //   data: healthInformation.descriptions,
+    // });
+    
+    const transaction = await this.prisma.$transaction([
+      updatedUser,
+      updatedHealthInformation,
+      updatedMacrociclo,
+      updatedTrainingSessions,
+    ]);
+
+    console.log(transaction)
+
+    const { password, ...trans } = transaction[0];
+    return { ...trans, password: "" };
   }
 }
