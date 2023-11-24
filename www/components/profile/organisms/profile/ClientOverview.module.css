@@ -5,11 +5,50 @@
   width: 100%;
 }
 
-.title {
-  padding: 5px;
+.topTitle {
+  background-color: white;
+  display: flex;
+  justify-content: space-between;
+  padding-left: 10px;
+  padding: 5px 10px;
   border-radius: 6px;
   margin-bottom: 10px;
+  margin-top: 10px;
+} 
+
+.topTitle button {
+  outline: line;
+  border: none;
+  background: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.topTitle button:hover {
+    color: red !important;
+}
+
+.nav {
+  display: flex;
+  width: 100%;
+  padding: 10px;
   background-color: white;
+  margin-top: 10px;
+  gap: 5px;
+}
+
+.nav button {
+  outline: line;
+  border: none;
+  border-radius: 4px;
+  padding: 10px;
+  cursor: pointer;
+  font-weight: bold;
+  background-color: var(--lightYellowColor);;
+}
+
+.nav button:hover {
+  background-color: var(--veryLightYellowColor)
 }
 
 .personalInfo,
@@ -39,12 +78,12 @@
   justify-content: flex-start;
   align-items: center;
   height: 30px;
-  width: 300px;
+  width: 400px;
 }
 
 .form .divInput input {
   height: 100%;
-  width: 200px;
+  width: 250px;
   outline: none;
   border-top: var(--border);
   border-right: var(--border);
@@ -66,7 +105,7 @@
   border-bottom: var(--border);
   border-right: var(--border);
   border-radius: 4px 0px 0px 4px;
-  width: 100px;
+  width: 140px;
 }
 
 .healthInfo {
@@ -112,14 +151,48 @@
   border-radius: 4px;
 }
 
-.healthDescriptionTextarea textarea {
+.healthDescriptionTextarea input {
   resize: none;
   outline: none;
   border: 1px solid rgba(0, 0, 0, 0.089);
   padding: 10px;
-  height: 90%;
+  height: 50px;
   border-radius: 4px;
 }
+
+.healthDescriptionTextarea .descriptions {
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  flex-direction: column;
+  padding: 10px;
+  max-height: 65%;
+  overflow-y: scroll;
+  margin-top: 5px;
+  border-radius: 4px;
+ 
+}
+
+
+.healthDescriptionTextarea .description {
+  width: 100%;
+  background-color: whitesmoke;
+  margin-top: 5px;
+  font-size: 12px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  padding: 5px;
+  padding-left: 10px;
+  gap: 5px;
+  height: 40px;
+}
+
+.healthDescriptionTextarea .descriptions span:nth-of-type(1) {
+  font-size: 11px;
+}
+
 
 .generalInfo {
   margin-top: 10px;
@@ -211,5 +284,25 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    margin-top: 10px;
     justify-content: left;
+}
+
+.anamnese {
+  
+}
+
+.anamnese .anamneseInfo {
+  display: flex;
+  flex-direction: ;
+  justify-content: space-between;
+  padding: 10px;
+  border-radius: 6px;
+  background-color: white;
+}
+
+.anamnese .anamneseInfo .infos  {
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 10px;
 }

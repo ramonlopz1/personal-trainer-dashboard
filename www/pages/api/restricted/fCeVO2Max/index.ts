@@ -25,7 +25,7 @@ export default async function handler(
       return res.status(200).send(fCeVO2Max);
     } catch (err: any) {
       console.log(err)
-      return res.status(404).send({ error: true });
+      return res.status(404).send(err["message"]);
     }
   } else if (req.method === 'PUT' &&  req.query.id) {
     try {

@@ -24,11 +24,10 @@ export default function ProfileOverview() {
   useEffect(() => {
     fetch(`/api/users?id=${id}`)
       .then((data) => data.json())
-      .then(setUser)
+      .then((data:any) => setUser(data))
       .then(() => setLoading(false));
   }, [id]);
 
-  console.log(user)
 
   return (
     <>
@@ -39,7 +38,7 @@ export default function ProfileOverview() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Page>
-        <ClientOverview user={user}/>
+        <ClientOverview setUser={setUser} user={user}/>
       </Page>
     </>
   );

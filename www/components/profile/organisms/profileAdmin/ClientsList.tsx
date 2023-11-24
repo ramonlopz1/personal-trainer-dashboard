@@ -64,7 +64,7 @@ export default function ClientsList(props: ClientsListProps): JSX.Element {
   return (
     <div className={styles.generatedCodeList}>
       <div className={styles.topDiv}>
-        <h4>Últimos clientes cadastrados</h4>
+        <h4>Últimos alunos cadastrados</h4>
         <button className={styles.btnRefresh} onClick={btnRefreshHandler}>
           <BiRefresh />
         </button>

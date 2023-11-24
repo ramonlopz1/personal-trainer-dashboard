@@ -26,6 +26,7 @@ ChartJS.register(
 
 interface ChartProps {
   chartData: any;
+  type: string;
 }
 
 export function Chart(props: ChartProps) {
@@ -67,7 +68,7 @@ export function Chart(props: ChartProps) {
       {
         label: "Últimos dias",
         data: chartData,
-        backgroundColor: "#FF0040",
+        backgroundColor: "purple",
         datalabels: {
           color: "black",
           font: {
@@ -80,8 +81,12 @@ export function Chart(props: ChartProps) {
   };
 
   const getChart = (type: string) => {
-    
+    if(type === "line") {
+      return <Line options={options} data={data} />;
+    } else if(type === "bar") {
+      return <Bar options={options} data={data} />;
+    }
   }
 
-  return <Line options={options} data={data} />;
+  return getChart(props.type)
 }

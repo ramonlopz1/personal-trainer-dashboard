@@ -7,6 +7,41 @@
     justify-content: space-evenly;
     flex-direction: column;
     align-items: center;
-    height: 220px;
+    height: 180px;
     width: 100%;
+}
+
+.clientsOverview h4 {
+    text-align: left;
+    width: 100%;
+}
+
+.containers {
+    display: flex;
+    justify-content: left;
+    align-self: center;
+    gap: 10px;
+    height: 100%;
+    width: 100%;
+    padding: 10px 0px;
+}
+
+.containers .container {
+    display: flex;
+    flex: content;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 100%;
+    max-width: 240px;
+    background-color: whitesmoke;
+    border-radius: 6px;
+}
+
+.containers .container h5 {
+    font-size: 30px;
+}
+
+.containers .container span {
+    font-size: 35px;
 }

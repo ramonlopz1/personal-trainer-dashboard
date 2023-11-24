@@ -3,7 +3,7 @@ import { PrismaClient, Users, TrainingSessions } from "@prisma/client";
 
 interface ICollectionTrainingSessions {}
 
-export default class CollectionMacrociclo implements ICollectionTrainingSessions {
+export default class CollectionTrainingSessions implements ICollectionTrainingSessions {
   constructor(private readonly prisma = new PrismaClient()) {}
 
   async createTrainingSessions(trainingSessions: TrainingSessions): Promise<TrainingSessions> {

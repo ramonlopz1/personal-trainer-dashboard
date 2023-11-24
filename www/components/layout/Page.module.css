@@ -17,6 +17,7 @@
   border-top: 3px solid var(--thirdColor);
   margin-bottom: 10px;
   background-color: var(--mainColor);
+  position: fixed;
 }
 
 .logo {
@@ -84,6 +85,7 @@
 }
 
 .section {
+  margin-top: 70px;
   display: flex;
   justify-content: center;
   width: 100%;

@@ -2,7 +2,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { v4 as uuid } from "uuid";
 import { PrismaClient } from "@prisma/client";
 import { getToken } from "next-auth/jwt";
-import ServiceMacrociclo from "@/logic/services/user/ServiceMacrociclo";
+import ServiceUsersHealthInformationDescriptions from "@/logic/services/user/ServiceUsersHealthInformationDescriptions";
 const prisma = new PrismaClient();
 
 const secret = process.env.SECRET;
@@ -12,7 +12,7 @@ export default async function handler(
   res: NextApiResponse
 ) {
   const token = await getToken({ req, secret });
-  const service = new ServiceMacrociclo();
+  const service = new ServiceUsersHealthInformationDescriptions();
   // if (token?.role !== "ADMIN")
   //   return res.status(401).send("Não autorizado.");
 
@@ -20,9 +20,9 @@ export default async function handler(
 
   if (req.method === "POST") {
     try {
-      const macrociclo = await service.add(JSON.parse(req.body));
-
-      return res.status(200).send(macrociclo);
+      const description = await service.add(JSON.parse(req.body));
+      console.log(description)
+      return res.status(200).send(description);
     } catch (err: any) {
       console.log(err)
       return res.status(404).send(err["message"]);
@@ -30,8 +30,8 @@ export default async function handler(
   } else if (req.method === 'PUT' &&  req.query.id) {
     try {
       // if (req.query.id !== token?.id) return res.status(401).send("Não autorizado");
-      const macrociclo = await service.update(req.query.id, JSON.parse(req.body));
-      return res.status(200).send(macrociclo);
+      const description = await service.update(req.query.id, JSON.parse(req.body));
+      return res.status(200).send(description);
     } catch (err: any) {
       return res.status(404).send(err["message"]);
     }

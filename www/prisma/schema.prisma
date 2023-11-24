@@ -27,22 +27,46 @@ model Users {
 }
 
 model UsersHealthInformation {
-  id               String             @id @default(auto()) @map("_id") @db.ObjectId
-  owner            Users              @relation(fields: [ownerId], references: [id])
-  ownerId          String            @unique @db.ObjectId
-  objective        String?
-  weight           Float?
-  height           Float?
-  classificationEN String?
-  imc              Float?
-  fc               Float?
-  vo2max           Float?
-  pa               Float?
-  description      String?
-  frequency        Int[]
-  macrociclo       Macrociclo?
-  fcev02max        FCeVO2Max?
-  trainingSessions TrainingSessions[]
+  id                    String                               @id @default(auto()) @map("_id") @db.ObjectId
+  owner                 Users                                @relation(fields: [ownerId], references: [id])
+  ownerId               String                               @unique @db.ObjectId
+  objective             String?
+  weightAtMorning       Float?
+  weightAtNight         Float?
+  height                Float?
+  sleepHour             String?
+  awakeHour             String?
+  classificationEN      String?
+  imc                   Float?
+  fc                    Float?
+  vo2max                Float?
+  pa                    Float?
+  descriptions          UsersHealthInformationDescriptions[]
+  frequency             Int[]
+  macrociclo            Macrociclo?
+  fcev02max             FCeVO2Max?
+  trainingSessions      TrainingSessions[]
+  workoutActivity       WorkoutActivity?
+  DietMacronutrients    DietMacronutrients[]
+  FoodSupplement        FoodSupplement?
+  ErgogenicResources    ErgogenicResources?
+  Competition           Competition?
+  FoodIntolerance       FoodIntolerance?
+  WaterConsumption      WaterConsumption?
+  IntestinalHabits      IntestinalHabits?
+  PhysicalSymptoms      PhysicalSymptoms?
+  HospitalHistory       HospitalHistory?
+  HereditaryDisease     HereditaryDisease?
+  Cirurgy               Cirurgy?
+  MedicationConsumption MedicationConsumption?
+}
+
+model UsersHealthInformationDescriptions {
+  id           String                 @id @default(auto()) @map("_id") @db.ObjectId
+  healthRef    UsersHealthInformation @relation(fields: [healthInfoId], references: [id])
+  healthInfoId String                 @db.ObjectId
+  description  String
+  createdAt    DateTime               @default(now())
 }
 
 model Macrociclo {
@@ -55,24 +79,133 @@ model Macrociclo {
 }
 
 model FCeVO2Max {
-  id            String                 @id @default(auto()) @map("_id") @db.ObjectId
-  healthRef     UsersHealthInformation @relation(fields: [healthInfoId], references: [id])
-  healthInfoId   String                 @unique @db.ObjectId
-  entrenamiento Float[]
-  fct           Float[]
-  velocidade    Float[]
+  id                       String                 @id @default(auto()) @map("_id") @db.ObjectId
+  healthRef                UsersHealthInformation @relation(fields: [healthInfoId], references: [id])
+  healthInfoId             String                 @unique @db.ObjectId
+  entrenamiento            Float[]
+  fct                      Float[]
+  velocidade               Float[]
   sessaoIntervaladaMinutos Float[]
-  sessaonIntervaladaKm Float[]
+  sessaonIntervaladaKm     Float[]
 }
 
 model TrainingSessions {
-  id                 String                 @id @default(auto()) @map("_id") @db.ObjectId
-  healthRef          UsersHealthInformation @relation(fields: [healthInfoId], references: [id])
+  id           String                 @id @default(auto()) @map("_id") @db.ObjectId
+  healthRef    UsersHealthInformation @relation(fields: [healthInfoId], references: [id])
   healthInfoId String                 @unique @db.ObjectId
-  exercicio          String[]
-  series             String[]
-  repeticoes         String[]
-  cadencia           String[]
+  exercicio    String[]
+  series       String[]
+  repeticoes   String[]
+  cadencia     String[]
+}
+
+model WorkoutActivity {
+  id           String                 @id @default(auto()) @map("_id") @db.ObjectId
+  healthRef    UsersHealthInformation @relation(fields: [healthInfoId], references: [id])
+  healthInfoId String                 @unique @db.ObjectId
+  type         String?
+  practiceTime DateTime?
+  frequency    String?
+}
+
+model DietMacronutrients {
+  id            String                 @id @default(auto()) @map("_id") @db.ObjectId
+  healthRef     UsersHealthInformation @relation(fields: [healthInfoId], references: [id])
+  healthInfoId  String                 @unique @db.ObjectId
+  proteins      Float?
+  carbohidrates Float?
+  fat           Float?
+  calories      Float?
+}
+
+model FoodSupplement {
+  id           String                 @id @default(auto()) @map("_id") @db.ObjectId
+  healthRef    UsersHealthInformation @relation(fields: [healthInfoId], references: [id])
+  healthInfoId String                 @unique @db.ObjectId
+  type         String?
+  quantity     String?
+  time         String
+}
+
+model ErgogenicResources {
+  id           String                 @id @default(auto()) @map("_id") @db.ObjectId
+  healthRef    UsersHealthInformation @relation(fields: [healthInfoId], references: [id])
+  healthInfoId String                 @unique @db.ObjectId
+  type         String?
+  quantity     String?
+  frequency    String?
+}
+
+model Competition {
+  id           String                 @id @default(auto()) @map("_id") @db.ObjectId
+  healthRef    UsersHealthInformation @relation(fields: [healthInfoId], references: [id])
+  healthInfoId String                 @unique @db.ObjectId
+  date         DateTime?
+  category     String?
+}
+
+model FoodIntolerance {
+  id           String                 @id @default(auto()) @map("_id") @db.ObjectId
+  healthRef    UsersHealthInformation @relation(fields: [healthInfoId], references: [id])
+  healthInfoId String                 @unique @db.ObjectId
+  types        Float[]
+}
+
+model WaterConsumption {
+  id           String                 @id @default(auto()) @map("_id") @db.ObjectId
+  healthRef    UsersHealthInformation @relation(fields: [healthInfoId], references: [id])
+  healthInfoId String                 @unique @db.ObjectId
+  liters       Float?
+}
+
+model IntestinalHabits {
+  id           String                 @id @default(auto()) @map("_id") @db.ObjectId
+  healthRef    UsersHealthInformation @relation(fields: [healthInfoId], references: [id])
+  healthInfoId String                 @unique @db.ObjectId
+  fees         String?
+  urine        String?
+}
+
+model PhysicalSymptoms {
+  id           String                 @id @default(auto()) @map("_id") @db.ObjectId
+  healthRef    UsersHealthInformation @relation(fields: [healthInfoId], references: [id])
+  healthInfoId String                 @unique @db.ObjectId
+  headache     Boolean
+  insomnia     Boolean?
+  heartBurn    Boolean?
+  swelling     Boolean?
+  fartFreq     Boolean
+}
+
+model HospitalHistory {
+  id           String                 @id @default(auto()) @map("_id") @db.ObjectId
+  healthRef    UsersHealthInformation @relation(fields: [healthInfoId], references: [id])
+  healthInfoId String                 @unique @db.ObjectId
+  type         String[]
+  date         DateTime[]
+}
+
+model HereditaryDisease {
+  id           String                 @id @default(auto()) @map("_id") @db.ObjectId
+  healthRef    UsersHealthInformation @relation(fields: [healthInfoId], references: [id])
+  healthInfoId String                 @unique @db.ObjectId
+  type         String[]
+}
+
+model Cirurgy {
+  id           String                 @id @default(auto()) @map("_id") @db.ObjectId
+  healthRef    UsersHealthInformation @relation(fields: [healthInfoId], references: [id])
+  healthInfoId String                 @unique @db.ObjectId
+  type         String[]
+  date         String[]
+}
+
+model MedicationConsumption {
+  id           String                 @id @default(auto()) @map("_id") @db.ObjectId
+  healthRef    UsersHealthInformation @relation(fields: [healthInfoId], references: [id])
+  healthInfoId String                 @unique @db.ObjectId
+  type         String[]
+  quantity     Int[]
 }
 
 enum Role {

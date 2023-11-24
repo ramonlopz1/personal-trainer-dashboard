@@ -53,9 +53,11 @@ export default class CollectionUser implements ICollectionUser {
             ownerId: id,
           },
           include: {
+            descriptions: true,
             macrociclo: true,
             fcev02max: true,
-            trainingSessions: true
+            trainingSessions: true,
+            workoutActivity: true
           },
         },
       },
