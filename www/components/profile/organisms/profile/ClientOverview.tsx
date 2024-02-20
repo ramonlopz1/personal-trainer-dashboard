@@ -20,7 +20,7 @@ export default function ClientsOverview({
 
   const updateDataBtn = (event: any) => {
     event.preventDefault();
-    console.log(event.target)
+    console.log(event.target);
     setReadOnly(!readOnly);
   };
 
@@ -219,10 +219,13 @@ export default function ClientsOverview({
                 type="text"
                 value={user?.healthInformation?.objective}
                 onChange={(e) =>
-                  setUser({ ...user, healthInformation: {
-                    ...user?.healthInformation,
-                    objective: e.target.value
-                  } })
+                  setUser({
+                    ...user,
+                    healthInformation: {
+                      ...user?.healthInformation,
+                      objective: e.target.value,
+                    },
+                  })
                 }
               />
             </div>
@@ -661,15 +664,20 @@ export default function ClientsOverview({
                       readOnly={readOnly}
                       name="type"
                       type="text"
-                      value={user?.healthInformation?.workoutActivity?.type || ""}
+                      value={
+                        user?.healthInformation?.workoutActivity?.type || ""
+                      }
                       onChange={(e) =>
-                        setUser({ ...user, healthInformation: {
-                          ...user?.healthInformation,
-                          workoutActivity: {
-                            ...user?.healthInformation?.workoutActivity,
-                            type: e.target.value
-                          }
-                        } })
+                        setUser({
+                          ...user,
+                          healthInformation: {
+                            ...user?.healthInformation,
+                            workoutActivity: {
+                              ...user?.healthInformation?.workoutActivity,
+                              type: e.target.value,
+                            },
+                          },
+                        })
                       }
                     />
                   </div>
@@ -679,15 +687,21 @@ export default function ClientsOverview({
                       readOnly={readOnly}
                       name="practiceTime"
                       type="time"
-                      value={user?.healthInformation?.workoutActivity?.practiceTime || ""}
+                      value={
+                        user?.healthInformation?.workoutActivity
+                          ?.practiceTime || ""
+                      }
                       onChange={(e) =>
-                        setUser({ ...user, healthInformation: {
-                          ...user?.healthInformation,
-                          workoutActivity: {
-                            ...user?.healthInformation?.workoutActivity,
-                            practiceTime: e.target.value
-                          }
-                        } })
+                        setUser({
+                          ...user,
+                          healthInformation: {
+                            ...user?.healthInformation,
+                            workoutActivity: {
+                              ...user?.healthInformation?.workoutActivity,
+                              practiceTime: e.target.value,
+                            },
+                          },
+                        })
                       }
                     />
                   </div>
@@ -697,15 +711,98 @@ export default function ClientsOverview({
                       readOnly={readOnly}
                       name="frequency"
                       type="text"
-                      value={user?.healthInformation?.workoutActivity?.frequency || ""}
+                      value={
+                        user?.healthInformation?.workoutActivity?.frequency ||
+                        ""
+                      }
                       onChange={(e) =>
-                        setUser({ ...user, healthInformation: {
-                          ...user?.healthInformation,
-                          workoutActivity: {
-                            ...user?.healthInformation?.workoutActivity,
-                            frequency: e.target.value
-                          }
-                        } })
+                        setUser({
+                          ...user,
+                          healthInformation: {
+                            ...user?.healthInformation,
+                            workoutActivity: {
+                              ...user?.healthInformation?.workoutActivity,
+                              frequency: e.target.value,
+                            },
+                          },
+                        })
+                      }
+                    />
+                  </div>
+                </div>
+              </div>
+              {/* Ajustar inputs e objetos */}
+              <div className={styles.macronutrientsDietDistribution}>
+                <h5>Distribuição de Macronutrientes na Dieta</h5>
+                <div className={styles.infos}>
+                  <div className={styles.divInput}>
+                    <label htmlFor="type">Tipo</label>
+                    <input
+                      readOnly={readOnly}
+                      name="type"
+                      type="text"
+                      value={
+                        user?.healthInformation?.workoutActivity?.type || ""
+                      }
+                      onChange={(e) =>
+                        setUser({
+                          ...user,
+                          healthInformation: {
+                            ...user?.healthInformation,
+                            workoutActivity: {
+                              ...user?.healthInformation?.workoutActivity,
+                              type: e.target.value,
+                            },
+                          },
+                        })
+                      }
+                    />
+                  </div>
+                  <div className={styles.divInput}>
+                    <label htmlFor="practiceTime">Horário</label>
+                    <input
+                      readOnly={readOnly}
+                      name="practiceTime"
+                      type="time"
+                      value={
+                        user?.healthInformation?.workoutActivity
+                          ?.practiceTime || ""
+                      }
+                      onChange={(e) =>
+                        setUser({
+                          ...user,
+                          healthInformation: {
+                            ...user?.healthInformation,
+                            workoutActivity: {
+                              ...user?.healthInformation?.workoutActivity,
+                              practiceTime: e.target.value,
+                            },
+                          },
+                        })
+                      }
+                    />
+                  </div>
+                  <div className={styles.divInput}>
+                    <label htmlFor="frequency">Frequência</label>
+                    <input
+                      readOnly={readOnly}
+                      name="frequency"
+                      type="text"
+                      value={
+                        user?.healthInformation?.workoutActivity?.frequency ||
+                        ""
+                      }
+                      onChange={(e) =>
+                        setUser({
+                          ...user,
+                          healthInformation: {
+                            ...user?.healthInformation,
+                            workoutActivity: {
+                              ...user?.healthInformation?.workoutActivity,
+                              frequency: e.target.value,
+                            },
+                          },
+                        })
                       }
                     />
                   </div>

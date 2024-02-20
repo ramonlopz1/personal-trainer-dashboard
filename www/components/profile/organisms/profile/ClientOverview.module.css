@@ -294,8 +294,9 @@
 
 .anamnese .anamneseInfo {
   display: flex;
-  flex-direction: ;
+  flex-direction: column;
   justify-content: space-between;
+  gap: 10px;
   padding: 10px;
   border-radius: 6px;
   background-color: white;

@@ -1,0 +1,428 @@
+[33mcommit 728cf7d8bf9787820d11715da20e18177b496bb5[m[33m ([m[1;36mHEAD -> [m[1;32mdev[m[33m, [m[1;31morigin/dev[m[33m)[m
+Author: ramonlopz1 <davidramon123@hotmail.com>
+Date:   Sat Nov 18 13:29:36 2023 -0300
+
+    tables
+
+[33mcommit faeab0f7f2af7c6014a2242fa3d054e8efdb8a10[m
+Author: ramonlopz1 <davidramon123@hotmail.com>
+Date:   Fri Nov 17 23:40:37 2023 -0300
+
+    abcde
+
+[33mcommit 2e684fd8219e2065012bb8186ee387f5e1555859[m[33m ([m[1;31morigin/main[m[33m, [m[1;32mmain[m[33m)[m
+Author: ramonlopz1 <davidramon123@hotmail.com>
+Date:   Fri Nov 17 20:10:11 2023 -0300
+
+    api creation and tables relationship
+
+[33mcommit 6daca53902e1860d20eac80506a7e5ceedb3938f[m
+Author: ramonlopz1 <davidramon123@hotmail.com>
+Date:   Thu Aug 24 22:55:37 2023 -0300
+
+    start creation of client register
+
+[33mcommit 70606c50211ccf6a3fe0b5b766523003f39ac499[m
+Author: ramonlopz1 <davidramon123@hotmail.com>
+Date:   Thu Aug 24 20:59:19 2023 -0300
+
+    reusing components and redesign apis and services
+
+[33mcommit 24b9f92434c2b3828f67cbb8b6d01e2e86d212f8[m
+Author: ramonlopz1 <davidramon123@hotmail.com>
+Date:   Sat Aug 12 15:42:42 2023 -0300
+
+    refactoring and separate responsability of api/businessrules/collections
+
+[33mcommit 5244e4d5cb3877d41e8c60d41b16127d3a4db8e1[m
+Author: ramonlopz1 <davidramon123@hotmail.com>
+Date:   Mon Jul 31 22:17:18 2023 -0300
+
+    merge branch dev to main
+
+[33mcommit 227967aa1deefdc9f6a58f5a4b885f0f1bd597c0[m
+Author: ramonlopz1 <davidramon123@hotmail.com>
+Date:   Mon Jul 31 22:16:16 2023 -0300
+
+    API: winGift api, check if the user have at least 10 codes, then get the oldest valid codes, then update the win attribute to true
+
+[33mcommit 1ee21441cfac910d8ae07b1932ccd1ed1ee617d3[m
+Author: ramonlopz1 <davidramon123@hotmail.com>
+Date:   Tue Jul 25 19:15:51 2023 -0300
+
+    API/UI: component to get the giftCode and api to create the giftCode
+
+[33mcommit c5714fed5432c29466bd3161a1ec4280e875bf05[m
+Author: ramonlopz1 <davidramon123@hotmail.com>
+Date:   Thu Jul 20 11:52:21 2023 -0300
+
+    API: implement an endpoint to expire all the codes if the countdown ends, using the providerId and userId as where condition
+
+[33mcommit f4715383b306e4a7a63f6cf2c307025834b8f796[m
+Author: ramonlopz1 <davidramon123@hotmail.com>
+Date:   Thu Jul 20 01:10:44 2023 -0300
+
+    UI: confetti fadeout and rewardbtb styles
+
+[33mcommit f9931f7b828d23172900d9b7b7b6342720f3f0a1[m
+Author: ramonlopz1 <davidramon123@hotmail.com>
+Date:   Wed Jul 19 22:09:41 2023 -0300
+
+    react-confetti
+
+[33mcommit 7943345c08e0a5cd1244e209b83aa70f9f94ed94[m
+Author: ramonlopz1 <davidramon123@hotmail.com>
+Date:   Wed Jul 19 12:42:56 2023 -0300
+
+    bug: fix the asynchronous bug inside the forEach loop
+
+[33mcommit c96dfa558ddd93a5a4df27bf50155be42eefb48e[m
+Author: ramonlopz1 <davidramon123@hotmail.com>
+Date:   Mon Jul 17 22:53:50 2023 -0300
+
+    refactoring: create a hook to group the data transformations of the component ActivatedCodeList
+
+[33mcommit eaa5598748f9462beb25be511cd324f426a81014[m
+Author: ramonlopz1 <davidramon123@hotmail.com>
+Date:   Mon Jul 17 12:55:53 2023 -0300
+
+    header border top
+
+[33mcommit 314ecd7cc2cd6938b783b766af2b6229df2683b5[m
+Author: ramonlopz1 <davidramon123@hotmail.com>
+Date:   Fri Jul 7 14:50:06 2023 -0300
+
+    UI: adding chartjs
+
+[33mcommit 3e3216e672e5812b1263c6ccd8df2339784ac4b7[m
+Author: ramonlopz1 <davidramon123@hotmail.com>
+Date:   Thu Jul 6 14:35:24 2023 -0300
+
+    rename variable
+
+[33mcommit 216b75c47e5a71d4476c2ae003689b5a2cc85077[m
+Author: ramonlopz1 <davidramon123@hotmail.com>
+Date:   Thu Jul 6 11:51:41 2023 -0300
+
+    algorithm to group raffledCodes by provider and get each provider information, need to be refactored soon
+
+[33mcommit 1f6f8e17f18dfc8041bf057cc9547208035421b3[m
+Author: ramonlopz1 <davidramon123@hotmail.com>
+Date:   Wed Jul 5 13:45:37 2023 -0300
+
+    UI/API: adding more information on client list component | add columns on raffled codes tables and configuring api
+
+[33mcommit 1ae1471089d7f20717949bf6c43a9681e8407b7c[m
+Author: ramonlopz1 <davidramon123@hotmail.com>
+Date:   Tue Jul 4 19:22:44 2023 -0300
+
+    merge branches
+
+[33mcommit fe8e9e418f4b2b27082cadec48e61a853c314e4c[m
+Author: ramonlopz1 <davidramon123@hotmail.com>
+Date:   Tue Jul 4 19:10:27 2023 -0300
+
+    build app
+
+[33mcommit 7395d7094060cccdcc99a05c7022aa317a4771e3[m
+Author: ramonlopz1 <davidramon123@hotmail.com>
+Date:   Tue Jul 4 18:44:51 2023 -0300
+
+    DELETE SOME STUFFS
+
+[33mcommit 8288e0116abed2e155a24bc30e86f264d6ccf178[m
+Author: ramonlopz1 <davidramon123@hotmail.com>
+Date:   Tue Jul 4 14:29:16 2023 -0300
+
+    UI: styling customerList component
+
+[33mcommit c0fed18e8db08d6bc9c6010cc8132ffd116eab94[m
+Author: ramonlopz1 <davidramon123@hotmail.com>
+Date:   Tue Jul 4 13:57:17 2023 -0300
+
+    UI: creating component to show profile pic
+
+[33mcommit 126842fd49cb08c63d9e518e424de8fd0cf178db[m
+Author: ramonlopz1 <davidramon123@hotmail.com>
+Date:   Tue Jul 4 00:28:15 2023 -0300
+
+    API: creating login with google provider
+
+[33mcommit d6d64fe7d7004985dd0d5c279f9b301a40dab79b[m
+Author: ramonlopz1 <davidramon123@hotmail.com>
+Date:   Mon Jul 3 21:55:07 2023 -0300
+
+    bug: tokenId different from queryId
+
+[33mcommit ec99e090a12083bdcacd2975b91d11daf3002918[m
+Author: ramonlopz1 <davidramon123@hotmail.com>
+Date:   Mon Jul 3 17:28:03 2023 -0300
+
+    merge branche dev and homol
+
+[33mcommit 5538d2a8afcd6783356cefa75ccf90238ad63332[m
+Author: ramonlopz1 <davidramon123@hotmail.com>
+Date:   Mon Jul 3 12:05:47 2023 -0300
+
+    UI: fixing some css bugs
+
+[33mcommit 253318972a9ecb9083a073681ead024a54816358[m
+Author: ramonlopz1 <davidramon123@hotmail.com>
+Date:   Wed Jun 28 17:16:12 2023 -0300
+
+    UI: redesign layouts styles
+
+[33mcommit 1cd10bfb5f87e8c3543402fb113cf4b82db7b724[m
+Author: ramonlopz1 <davidramon123@hotmail.com>
+Date:   Mon Jun 26 16:39:13 2023 -0300
+
+    UI: creating component to upload customer profile pic
+
+[33mcommit d5ee4ee349437f43508f86a4bd726a7f0b9e5430[m
+Author: ramonlopz1 <davidramon123@hotmail.com>
+Date:   Thu Jun 22 14:53:58 2023 -0300
+
+    UI: render customers list calculations
+
+[33mcommit cbeb49b06df039529023cff6d369797dd31143d2[m
+Author: ramonlopz1 <davidramon123@hotmail.com>
+Date:   Wed Jun 21 16:27:53 2023 -0300
+
+    UI: creating a page to render all users filtered by providerId
+
+[33mcommit df7c56db2d7f6bdba736edcd90ba85e2aad272cc[m
+Author: ramonlopz1 <davidramon123@hotmail.com>
+Date:   Wed Jun 21 15:17:19 2023 -0300
+
+    UI/Utils: fixing css bugs. creating functions do sort array and format datetime
+
+[33mcommit b633079fcc73389aca5dedf7c67e095373f556a9[m
+Author: ramonlopz1 <davidramon123@hotmail.com>
+Date:   Tue Jun 20 21:16:49 2023 -0300
+
+    fix: typescript validation error
+
+[33mcommit cd79bfe8356ff7ff9d33245d533938e4dac20986[m
+Author: ramonlopz1 <davidramon123@hotmail.com>
+Date:   Tue Jun 20 15:09:18 2023 -0300
+
+    UI: provider view page
+
+[33mcommit 318d70208eb73f0583f9c8d29c96f8963ab5372f[m
+Author: ramonlopz1 <davidramon123@hotmail.com>
+Date:   Tue Jun 20 11:51:28 2023 -0300
+
+    UI/API: creating a page to the provider see the user data who activated the code and API to render only the provider raffledCodes inside user data
+
+[33mcommit 78a2cbc2605557e16aac2f33c6598e95b69f2e70[m
+Author: ramonlopz1 <davidramon123@hotmail.com>
+Date:   Thu Jun 15 11:03:22 2023 -0300
+
+    UI: list of last codes generated
+
+[33mcommit ddbcc0d7ea63ee0833876deeef4f0e524612e85a[m
+Author: ramonlopz1 <davidramon123@hotmail.com>
+Date:   Wed Jun 14 12:57:16 2023 -0300
+
+    UI/API: creating api to get codes by provider and show if they are actived. creating a component to render the codelist of in provider page.
+
+[33mcommit 684053d63e2502f498696fc99b0a97a449ce0f8c[m
+Author: ramonlopz1 <davidramon123@hotmail.com>
+Date:   Tue Jun 13 15:37:13 2023 -0300
+
+    UI: creating profile to admin and component to generate codes
+
+[33mcommit ce04381d48514f7a2d25d0695e0ca34c710b6ee7[m
+Author: ramonlopz1 <davidramon123@hotmail.com>
+Date:   Thu Jun 8 11:36:57 2023 -0300
+
+    API: creating service to delete many raffled codes
+
+[33mcommit 488aaa57747ae7b9afb694881b74bc1f4fff3afb[m
+Author: ramonlopz1 <davidramon123@hotmail.com>
+Date:   Tue Jun 6 16:30:45 2023 -0300
+
+    data: using context api
+
+[33mcommit 1c92975fe8d0277052d7f6f99f0db4710d9b01b2[m
+Author: ramonlopz1 <davidramon123@hotmail.com>
+Date:   Tue Jun 6 14:19:16 2023 -0300
+
+    UI: change layout flex-direction
+
+[33mcommit a9ba5f8b53b5e652fe8187d1093fbdf8a81821c8[m
+Author: ramonlopz1 <davidramon123@hotmail.com>
+Date:   Tue Jun 6 14:02:17 2023 -0300
+
+    UI: slide component in codelist
+
+[33mcommit 22a993641a0cc6771aa45274e0f4ef9e379ed8cd[m
+Author: ramonlopz1 <davidramon123@hotmail.com>
+Date:   Mon Jun 5 22:29:26 2023 -0300
+
+    test
+
+[33mcommit df870c84d3a0cfea5b875c45462a24fcb83bdfdd[m
+Author: ramonlopz1 <davidramon123@hotmail.com>
+Date:   Thu Jun 1 13:43:43 2023 -0300
+
+    UI: creating the countdown component
+
+[33mcommit 4e9b1b6e0cc0de1634a5db9f474b2dccff00bf51[m
+Author: ramonlopz1 <davidramon123@hotmail.com>
+Date:   Wed May 31 19:04:36 2023 -0300
+
+    utils: function to get codes grouped by the provider
+
+[33mcommit 8ccc395c53a9895e7e6a9b5c9952f242b849644c[m
+Author: ramonlopz1 <davidramon123@hotmail.com>
+Date:   Wed May 31 14:52:29 2023 -0300
+
+    UI: list code component
+
+[33mcommit 8dc66dfc8e07667b6b98dc119f4248cd826b0b15[m
+Author: ramonlopz1 <davidramon123@hotmail.com>
+Date:   Wed May 31 11:55:51 2023 -0300
+
+    UI: creating the list of activated codes
+
+[33mcommit 1a65bec169dfa84cea94e37229b7c495d6d46eb4[m
+Author: ramonlopz1 <davidramon123@hotmail.com>
+Date:   Tue May 30 14:49:53 2023 -0300
+
+    api feature: set the provider who created the raffleCode
+
+[33mcommit 8eb064aaeeeadb6ba58bc01ef7f8432912a7f979[m
+Author: ramonlopz1 <davidramon123@hotmail.com>
+Date:   Wed May 24 18:01:58 2023 -0300
+
+    auth: protecting user data
+
+[33mcommit 617d383a2529d668196a24610f125bd8da986e5b[m
+Author: ramonlopz1 <davidramon123@hotmail.com>
+Date:   Tue May 23 22:00:39 2023 -0300
+
+    fixing: bugs of validation on sign up form
+
+[33mcommit 1e1bf8b77aa0dcae65678987d897072c6bd98ade[m
+Author: ramonlopz1 <davidramon123@hotmail.com>
+Date:   Mon May 22 21:34:10 2023 -0300
+
+    bug: validation form register
+
+[33mcommit 8c087f06f34134edce688645214d64e322da609e[m
+Author: ramonlopz1 <davidramon123@hotmail.com>
+Date:   Mon May 22 14:59:25 2023 -0300
+
+    register form validations
+
+[33mcommit b9b75c178eb3a769304c4bdd09864b694f317a59[m
+Author: ramonlopz1 <davidramon123@hotmail.com>
+Date:   Sat May 20 14:07:10 2023 -0300
+
+    UI: adding form validators
+
+[33mcommit 135587f901a03452480cd9027a0e2f214802a4e2[m
+Author: ramonlopz1 <davidramon123@hotmail.com>
+Date:   Thu May 18 21:27:58 2023 -0300
+
+    feature: creating sign up component and auth logic
+
+[33mcommit b9fc5963d054646424b77095f05d607d655831cb[m
+Author: ramonlopz1 <davidramon123@hotmail.com>
+Date:   Thu May 18 16:01:17 2023 -0300
+
+    UI: creating register component
+
+[33mcommit e89215312f1d87d83df3e9688eba1d5c6f11cfb2[m
+Author: ramonlopz1 <davidramon123@hotmail.com>
+Date:   Thu May 18 13:16:34 2023 -0300
+
+    UI: creating events and animation on the login component
+
+[33mcommit 02980e0b97ff278607b4f777d66cf6f86d73cdce[m
+Author: ramonlopz1 <davidramon123@hotmail.com>
+Date:   Wed May 17 19:30:20 2023 -0300
+
+    UI: creating login page components and styles
+
+[33mcommit b97d56c13bb69f34573b52d460ee878a2181f64f[m
+Author: ramonlopz1 <davidramon123@hotmail.com>
+Date:   Wed May 17 17:28:02 2023 -0300
+
+    protecting routes
+
+[33mcommit 3f9aa8830c4c0e6a95a3f76b5227d5418d55b5fa[m
+Author: ramonlopz1 <davidramon123@hotmail.com>
+Date:   Wed May 17 16:22:11 2023 -0300
+
+    refactoring
+
+[33mcommit adabe754e771d4a39330a83314bcc638a034a510[m
+Author: ramonlopz1 <davidramon123@hotmail.com>
+Date:   Wed May 17 13:35:10 2023 -0300
+
+    changing functions to classes and separate responsabilidade in layers
+
+[33mcommit fd3b156006d29e333432031bd73447dbd8a07a41[m
+Author: ramonlopz1 <davidramon123@hotmail.com>
+Date:   Wed May 17 11:05:52 2023 -0300
+
+    auth: google, emailpass and facebook auth
+
+[33mcommit b0aff22c24cbcff1ab4b1a243693e03dfca41ba4[m
+Author: ramonlopz1 <davidramon123@hotmail.com>
+Date:   Wed May 17 00:05:19 2023 -0300
+
+    implement layer architecture
+
+[33mcommit 8beb50eb9ac4252a0f04856f573af629790be65c[m
+Merge: 15d1499 f425239
+Author: Ramon Lopes <davidramon123@hotmail.com>
+Date:   Tue May 16 17:52:44 2023 -0300
+
+    Merge pull request #1 from ramonlopz1/development
+    
+    Development
+
+[33mcommit f425239e63920c451619438df025286c08addc9d[m
+Author: ramonlopz1 <davidramon123@hotmail.com>
+Date:   Tue May 16 17:51:23 2023 -0300
+
+    migrate to nextjs
+
+[33mcommit f8e40f2b8a57df5418d819f350df11ce41ba591f[m
+Author: ramonlopz1 <davidramon123@hotmail.com>
+Date:   Tue May 16 13:56:12 2023 -0300
+
+    auth: start authentication routes
+
+[33mcommit 80709e7211b405a2f32261214eeeb7144309b5d2[m
+Author: ramonlopz1 <davidramon123@hotmail.com>
+Date:   Tue May 16 11:11:10 2023 -0300
+
+    validators and exceptions
+
+[33mcommit 72a44f6ffdd8f57c09f15e317762004950cc933e[m
+Author: ramonlopz1 <davidramon123@hotmail.com>
+Date:   Mon May 15 21:47:20 2023 -0300
+
+    feature: implementation of the raffle code generator.
+
+[33mcommit 15d1499efb2911664ad51a5fe1cd6e047396ad73[m
+Author: ramonlopz1 <davidramon123@hotmail.com>
+Date:   Mon May 15 20:52:38 2023 -0300
+
+    feature: designing the Raffled Codes API
+
+[33mcommit 5c6f1fd69c6670af79a2dcfaceeb15260a54893b[m
+Author: ramonlopz1 <davidramon123@hotmail.com>
+Date:   Mon May 15 13:45:40 2023 -0300
+
+    prisma configuration
+
+[33mcommit 93c5956fccef5b2b6cebb88715925f91c2e2324b[m
+Author: ramonlopz1 <davidramon123@hotmail.com>
+Date:   Mon May 15 13:13:23 2023 -0300
+
+    test
